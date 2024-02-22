@@ -1,0 +1,42 @@
+
+<div class="content-wrapper container-xxl p-0">
+  <div class="content-body">
+    <app-content-header [contentHeader]="contentHeader"></app-content-header>
+
+<div [ngClass]="{'nav-vertical d-flex': getWindowWidth() < 990, 'nav-horizontal d-flex': getWindowWidth() > 989}">
+    <ul ngbNav #navVertical="ngbNav" class="nav nav-pills flex-column text-nowrap">
+      <li ngbNavItem>
+        <a ngbNavLink><i class="feather icon-user mr-1 font-medium-3"></i>Information géneral</a>
+        <ng-template ngbNavContent>
+          <app-general-info></app-general-info>
+        </ng-template>
+      </li>
+
+      <li ngbNavItem>
+        <a ngbNavLink><i class="feather icon-shield mr-1 font-medium-3"></i>Droits d'accès</a>
+        <ng-template ngbNavContent>
+          <app-edit-access-rights (updated)="updateAccessRights($event)" [accessRights]="user.access_rights"></app-edit-access-rights>
+        </ng-template>
+      </li>
+
+      <li ngbNavItem *ngIf="currentUser.id == user._id">
+        <a ngbNavLink><i class="feather icon-lock mr-1 font-medium-3"></i>Modifier mot de passe</a>
+        <ng-template ngbNavContent>
+          <app-change-password></app-change-password>
+        </ng-template>
+      </li>
+
+      <li ngbNavItem *ngIf="currentUser.access_rights.users == 'write'">
+        <a ngbNavLink><i class="feather icon-mail mr-1 font-medium-3"></i>Modifier adresse email</a>
+        <ng-template ngbNavContent>
+          <app-change-email></app-change-email>
+        </ng-template>
+      </li>
+
+    </ul>
+    <div [ngbNavOutlet]="navVertical" class="ml-1"></div>
+  </div>
+
+  </div>
+</div>
+    

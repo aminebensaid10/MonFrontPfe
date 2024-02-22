@@ -1,0 +1,132 @@
+<div class="card">
+  <div class="card-body">
+    <div class="row m-0 mb-2">
+      <img
+        [src]="imageSrc ?? 'assets/images/avatars/user.png'"
+        class="rounded mr-1"
+        height="70px"
+        width="70px"
+      />
+      <div class="d-flex flex-column justify-content-center">
+        <div class="row m-0 mb-50">
+          <button
+            class="btn btn-outline-danger btn-sm mr-1"
+            (click)="resetImage()"
+          >
+            Annuler
+          </button>
+          <button
+            class="btn btn-outline-primary btn-sm"
+            for="profile-img-upload"
+            (click)="file.click()"
+          >
+            Selectionner
+          </button>
+          <input
+            type="file"
+            #file
+            id="profile-img-upload"
+            (change)="onFileSelected($event)"
+            hidden
+            accept="image/*"
+          />
+        </div>
+
+        <span class="font-small-3"
+          >Type d'image valide; PNG, JPG, JPEG avec une taille maximale de
+          800KB</span
+        >
+      </div>
+    </div>
+
+    <form class="form" [formGroup]="editUserForm" (ngSubmit)="onSubmit()">
+      <div class="row">
+        <div class="col-md-6 col-12">
+          <div class="form-group">
+            <label for="first-name-column">Nom</label>
+            <input
+              type="text"
+              id="first-name-column"
+              [ngClass]="{ 'is-invalid': submitted && f.lastname.errors }"
+              formControlName="lastname"
+              class="form-control"
+              placeholder="Nom"
+              name="fname-column"
+            />
+          </div>
+        </div>
+        <div class="col-md-6 col-12">
+          <div class="form-group">
+            <label for="last-name-column">Prenom</label>
+            <input
+              type="text"
+              id="last-name-column"
+              [ngClass]="{ 'is-invalid': submitted && f.firstname.errors }"
+              formControlName="firstname"
+              class="form-control"
+              placeholder="Prenom"
+              name="lname-column"
+            />
+          </div>
+        </div>
+        <div class="col-md-6 col-12">
+          <div class="form-group">
+            <label for="country-floating">Email</label>
+            <input
+              type="text"
+              [ngClass]="{ 'is-invalid': submitted && f.email.errors }"
+              id="country-floating"
+              (ngModelChange)="emailExist = false"
+              formControlName="email"
+              class="form-control"
+              name="country-floating"
+              placeholder="Email"
+            />
+          </div>
+        </div>
+        <div class="col-md-6 col-12">
+          <div class="form-group">
+            <label for="city-column">Télephone</label>
+            <input
+              type="number"
+              id="city-column"
+              class="form-control"
+              [ngClass]="{ 'is-invalid': submitted && f.phone_number.errors }"
+              minlength="8"
+              placeholder="Télephone"
+              formControlName="phone_number"
+              name="phonenbr"
+            />
+          </div>
+        </div>
+        <div class="col-md-6 col-12">
+          <div class="form-group">
+            <label class="form-label">Date de naissance</label>
+            <ng2-flatpickr
+              [config]="dateOptions"
+              placeholder="Date de naissance"
+              #datePicker
+              name="actDate"
+              required
+              class="is-invalid"
+            ></ng2-flatpickr>
+          </div>
+        </div>
+      </div>
+    </form>
+
+    <ngb-alert
+      [type]="'danger'"
+      [dismissible]="false"
+      *ngIf="editUserForm.invalid && submitted"
+    >
+      <div class="alert-body">
+        <p><b>Veuillez vérifier vos données!</b> il y a des champs invalides</p>
+      </div>
+    </ngb-alert>
+
+    <div class="row justify-content-end m-0">
+      <button (click)="onSubmit()" class="btn btn-success">Sauvegarder</button>
+    </div>
+  </div>
+</div>

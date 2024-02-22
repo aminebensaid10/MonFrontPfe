@@ -1,0 +1,106 @@
+<div class="auth-wrapper auth-v2">
+  <div class="auth-inner row m-0">
+    <a class="brand-logo" href="javascript:void(0);">
+      <img src="assets/images/logo/LogoSopra.png" alt="Logo" height="35" />
+      <h2 class="brand-text text-primary ml-1">FORYOU</h2></a
+    >
+   
+    <!-- Left Text-->
+    <div class="d-none d-lg-flex col-lg-8 align-items-center p-5">
+      <div class="w-100 d-lg-flex align-items-center justify-content-center px-5">
+        <img
+          class="img-fluid"
+          src="assets/images/pages/login-v2.svg"
+          alt="Login V2"
+        />
+      </div>
+    </div>
+    <!-- /Left Text-->
+    <!-- Login-->
+    <div class="d-flex col-lg-4 align-items-center auth-bg px-2 p-lg-5">
+      <div class="col-12 col-sm-8 col-md-6 col-lg-12 px-xl-2 mx-auto">
+        <h2 class="card-title font-weight-bold mb-1">Bienvenue à FORYOU!</h2>
+        <p class="card-text mb-2">Veuillez-vous connecter à fin d'accéder à votre espace</p>
+
+        <ngb-alert [type]="'danger'" [dismissible]="false" *ngIf="error">
+          <div class="alert-body">
+            <p>{{ error }}</p>
+          </div>
+        </ngb-alert>
+        
+
+        <form class="auth-login-form mt-2" [formGroup]="loginForm" (ngSubmit)="connexion()">
+          <div class="form-group">
+            <label class="form-label" for="login-email">Email</label>
+            <input
+              type="text"
+              formControlName="email"
+              class="form-control"
+              
+              [(ngModel)]="user.email"
+              placeholder="login@email.com"
+              aria-describedby="login-email"
+              autofocus=""
+              tabindex="1"
+            />
+            
+          </div>
+        
+          <div class="form-group">
+            <div class="d-flex justify-content-between">
+              <label for="login-password">Mot de passe</label>
+              <a routerLink="/auth/forgot-password"><small>Mot de passe oublié?</small></a>
+            </div>
+            <div class="input-group input-group-merge form-password-toggle">
+              <input
+                [type]="passwordTextType ? 'text' : 'password'"
+                formControlName="password"
+                class="form-control form-control-merge"
+                [(ngModel)]="user.password"
+                placeholder="············"
+                aria-describedby="login-password"
+                tabindex="2"
+              />
+              <div class="input-group-append">
+                <span class="input-group-text cursor-pointer"
+                  ><i
+                    class="feather font-small-4"
+                    [ngClass]="{
+                      'icon-eye-off': passwordTextType,
+                      'icon-eye': !passwordTextType
+                    }"
+                    (click)="togglePasswordTextType()"
+                  ></i
+                ></span>
+              </div>
+            </div>
+            <div
+              *ngIf="submitted && f.password.errors"
+              class="invalid-feedback"
+              [ngClass]="{ 'd-block': submitted && f.password.errors }"
+            >
+              
+            </div>
+          </div>
+        
+          <button type="submit" [disabled]="loading" class="btn btn-primary btn-block mt-2" tabindex="4" rippleEffect>
+            <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>Se connecter
+          </button> <br />
+          <div *ngIf="erreurLogin" class="alert alert-danger">
+            {{ erreurLogin }}
+          </div>
+        
+          <p class="text-center mt-2">
+            <span>Nouveau sur notre plateforme ?</span>
+            <a routerLink="/auth/signup">
+              <span>&nbsp;Créer un compte</span>
+            </a>
+          </p>
+          
+        </form>
+        
+      </div>
+    </div>
+    <!-- /login-v2-->
+  </div>
+</div>

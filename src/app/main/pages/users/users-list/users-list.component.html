@@ -1,0 +1,117 @@
+<div class="content-wrapper container-xxl p-0">
+    <div class="content-body">
+      <app-content-header [contentHeader]="contentHeader"></app-content-header>
+      
+
+  
+      <div class="row mb-1">
+        <div class="col-12">
+          <div class="input-group input-group-merge">
+            <input
+              class="form-control"
+              (ngModelChange)="filter($event)"
+              ngModel
+              placeholder="Recherche"
+            />
+            <div class="input-group-append">
+              <span class="input-group-text">
+                <i class="feather icon-search"></i>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <div class="row match-height">
+        <!-- Profile Card -->
+        <div
+          class="col-xxl-3 col-lg-4 col-md-6 col-12"
+          *ngFor="let user of filteredUsers"
+        >
+          <div class="card card-profile">
+            <div class="card-img-top" alt="Profile Cover Photo"></div>
+            <!-- <div style="width: 100%; height: 60px; background-color: blueviolet;">
+  
+      </div> -->
+            <div class="card-body">
+              <div class="profile-image-wrapper">
+                <div class="profile-image">
+                  <div class="avatar">
+                    <img [src]="imgPrefix + user.photo" alt="Profile Picture" />
+                  </div>
+                </div>
+              </div>
+              <div class="d-flex flex-column">
+                <span class="font-medium-4 font-weight-bolder line-height-1">{{
+                  user.lastname + " " + user.firstname
+                }}</span>
+                <span class="text-muted">{{ user.email }}</span>
+                <span class="text-muted">{{ user.phone_number || "--" }}</span>
+              </div>
+  
+              <hr class="mb-2" />
+  
+              <div class="d-flex justify-content-center align-items-center">
+                <button
+                  class="btn btn-outline-danger expandable-btn mr-1"
+                  [disabled]="changingAccountStatus"
+                  *ngIf="user.isActif && user._id != currentUser.id"
+                  (click)="toggleAccountStatus(user)"
+                >
+                  <i class="feather" class="feather icon-trash-2"></i>
+                  <span>Désactiver</span>
+                </button>
+                <button
+                  class="btn btn-outline-success expandable-btn mr-1"
+                  [disabled]="changingAccountStatus"
+                  *ngIf="!user.isActif && user._id != currentUser.id"
+                  (click)="toggleAccountStatus(user)"
+                >
+                  <i class="feather icon-rotate-cw"></i>
+                  <span>Réactiver</span>
+                </button>
+  
+                <button
+                  class="btn btn-outline-primary expandable-btn mr-1"
+                  [routerLink]="['/pages/users/profile/user-profile', user._id]"
+                >
+                  <i class="feather icon-info"></i><span>Voir détails</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--/ Profile Card -->
+      </div>
+  
+      <ngb-alert
+        type="secondary"
+        *ngIf="filteredUsers.length == 0 && !loadingUsers"
+        [dismissible]="false"
+        class="m-1"
+      >
+        <div class="alert-body">
+          <strong>Pas d'utilisateur! </strong> Pas de résultat pour cette recherche.
+        </div>
+      </ngb-alert>
+  
+      <ngb-alert
+        type="primary"
+        *ngIf="loadingUsers"
+        [dismissible]="false"
+        class="m-1"
+      >
+        <div class="alert-body">
+          <div
+            class="spinner-border text-primary mr-1 font-small-3"
+            role="status"
+          >
+            <span class="sr-only"></span>
+          </div>
+          <strong>Chargement en cours. </strong> Nous sommes en train d'apporter
+          vos données...
+        </div>
+      </ngb-alert>
+    </div>
+  </div>
+  

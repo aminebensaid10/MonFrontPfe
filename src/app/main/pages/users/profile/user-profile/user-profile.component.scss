@@ -1,0 +1,68 @@
+
+
+#profile-img {
+    background: linear-gradient(rgb(84 127 255 / 60%) 0%, #436adb 100%);
+}
+
+.app-user-view {
+    .user-info-wrapper {
+      .user-info-title {
+        width: 12.785rem;
+      }
+    }
+    .user-total-numbers {
+      margin-top: 2.428rem;
+      .color-box {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 2.714rem;
+        width: 2.714rem;
+        border-radius: .357rem;
+  
+        i,
+        svg {
+          height: 1.285rem;
+          width: 1.285rem;
+          font-size: 1.285rem;
+        }
+      }
+    }
+  }
+
+.media {
+  flex: 1;
+}
+
+.expandable-btn {
+  overflow: hidden;
+  max-width: 50px;
+  transition: 350ms ease-in-out;
+  text-align: center;
+  padding: 0.786rem 1.2rem;
+  white-space: nowrap;
+  span {
+      opacity: 0;
+      margin-left: 10px;
+      transition: 400ms;
+  }
+}
+
+.expandable-btn:hover {
+  max-width: 140px;
+  
+  span {
+      opacity: 1;
+  }
+}
+
+.spinner-border {
+  height: 15px;
+  width: 15px;
+  border-right-color: transparent;
+}
+
+.white-spinner {
+  border: .2rem solid white;
+  border-right-color: transparent;
+}

@@ -1,0 +1,85 @@
+<li ngbDropdown #myDrop="ngbDropdown" (openChange)="onNgbDropdownToggle($event)" class="nav-item dropdown-notification mr-25">
+  <a class="nav-link" ngbDropdownToggle id="navbarNotificationDropdown"
+    ><i class="ficon" data-feather="bell"></i
+    ><span *ngIf="unreadNotifsCount > 0" class="badge badge-pill badge-danger badge-up">{{
+      unreadNotifsCount
+    }}</span></a
+  >
+  <ul
+    ngbDropdownMenu
+    aria-labelledby="navbarNotificationDropdown"
+    class="dropdown-menu dropdown-menu-media dropdown-menu-right"
+  >
+    <!-- Notifications header -->
+    <li class="dropdown-menu-header">
+      <div class="dropdown-header d-flex">
+        <h4 class="notification-title mb-0 mr-auto">Notifications</h4>
+        <div class="badge badge-pill badge-light-primary">
+          {{ unreadNotifsCount }} Nouvelle(s) notification(s)
+        </div>
+      </div>
+    </li>
+    <!--/ Notifications header -->
+
+    <!-- Notifications content -->
+    <li class="scrollable-container media-list" [perfectScrollbar]>
+
+      <!-- rgb(244 247 255) unseen bg -->
+      <a class="d-flex" href="javascript:void(0)" [ngStyle]="{'background-color': !notification.seen ? '#f2f8ff' : 'white'}" *ngFor="let notification of notifications">
+        <div class="media d-flex align-items-start">
+          <div class="media-left">
+            <div class="avatar">
+              <img [src]="imgPrefix + notification.sender.photo" alt="avatar" width="32" height="32" />
+            </div>
+          </div>
+          <div class="media-body">
+            <p class="media-heading">
+              <b>{{notification.sender.lastname + ' ' + notification.sender.firstname}}</b>
+              {{notification.message}}
+            </p>
+            <small class="notification-text">{{ notification.creation_date | date: 'dd/MM/yyyy à HH:mm' }}</small>
+          </div>
+        </div></a
+      >
+    </li>
+    <!--/ Notifications content -->
+
+    <!-- Notifications footer -->
+    <li class="dropdown-menu-footer">
+      <a class="btn btn-primary btn-block" (click)="myDrop.close(); toggleNotification()" href="javascript:void(0)">Voir toutes les notifications</a>
+    </li>
+    <!--/ Notifications footer -->
+  </ul>
+</li>
+
+<div class="notif-container" [ngStyle]="{'width': showAll ? '350px' : '0px'}">
+  <div class="row flex-nowrap mt-1 mb-1 ml-2 mr-2 align-items-center justify-content-between" style="width: 308px;">
+    <h3 class="mb-0">Notifications</h3>
+    <a class="nav-link" (click)="toggleNotification()">
+      <i class="feather icon-x font-medium-5"></i>
+    </a>
+  </div>
+  <hr class="solid m-0"/>
+  <!-- Notifications content -->
+  <div class="notifications-list">
+
+    <div class="row align-items-start notif-item" [ngStyle]="{'background-color': !notif.seen ? '#f2f8ff' : 'white'}" *ngFor="let notif of notifications">
+      <img [src]="imgPrefix + notif.sender.photo" class="avatar mr-75" width="35px" height="35px" alt="avatar"/>
+      <div class="d-flex flex-column">
+        <p class="mb-0">
+          <b>{{notif.sender.lastname + ' ' + notif.sender.firstname}}</b>
+          {{notif.message}}
+        </p>
+        <small class="text-muted">{{ notif.creation_date | date: 'dd/MM/yyyy à HH:mm' }}</small>
+      </div>
+    </div>
+
+    <button class="btn btn-flat-primary mt-2"  style="margin-left: 130px;" [disabled]="loadingNotifs" *ngIf="canShowMore" (click)="showMoreNotifications()">
+      <div *ngIf="loadingNotifs" class="spinner-border text-primary mr-25">
+        <span class="sr-only"></span>
+      </div>
+      Voir plus
+    </button>
+    </div>
+  <!--/ Notifications content -->
+</div>

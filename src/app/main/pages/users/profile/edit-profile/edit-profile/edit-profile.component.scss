@@ -1,0 +1,11 @@
+a {
+    width: 280px;
+    font-weight: 500;
+    display: flex !important;
+    justify-content: flex-start !important;
+    margin-right: 20px;
+}
+
+.tab-content {
+    flex-grow: 1;
+}

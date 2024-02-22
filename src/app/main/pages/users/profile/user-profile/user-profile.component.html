@@ -1,0 +1,197 @@
+<div class="content-wrapper container-xxl p-0">
+  <div class="content-body">
+    <!-- page users view start -->
+    <section class="app-user-view">
+      <!-- User Card & Plan Starts -->
+      <div class="row">
+        <!-- User Card starts-->
+        <!-- <div class="col-xl-9 col-lg-8 col-md-7"> --> <div class="col">
+          <div class="card user-card">
+            <div class="card-body">
+              <div class="row">
+                <div
+                  class="col-xl-6 col-lg-12 d-flex flex-column justify-content-between border-container-lg"
+                >
+                  <div class="user-avatar-section">
+                    <div class="d-flex justify-content-start">
+                      <img
+                      class="img-fluid rounded"
+                      id="profile-img"
+                      [src]="'http://localhost:8080' + users.imagePath"           
+                      height="104"
+                      width="104"
+                      alt="User photo"
+                  />
+                  
+                      <div class="d-flex flex-column ml-1">
+                        <div class="user-info mb-1">
+                          <h4 class="mb-0">
+                            {{
+                              (users.nom) +
+                                " " +
+                                (users.prenom)
+                            }}
+                          </h4>
+                          <span class="card-text">{{
+                            users.email 
+                          }}</span>
+                        </div>
+                        <div class="d-flex flex-wrap">
+                          <button
+                            (click)="toggleAccountStatus(false)"
+                            [disabled]="changingAccountStatus"
+                            *ngIf="user.isActif && !isMyProfile"
+                            class="btn btn-outline-danger expandable-btn mr-1"
+                            rippleEffect
+                          >
+                            <div
+                              *ngIf="changingAccountStatus"
+                              class="spinner-border text-danger mr-25"
+                              role="status"
+                            >
+                              <span class="sr-only"></span>
+                            </div>
+                            <i class="feather icon-trash-2 mr-1"></i
+                              ><span>Désactiver</span>
+                          </button>
+                          <button
+                            (click)="toggleAccountStatus(true)"
+                            [disabled]="changingAccountStatus"
+                            *ngIf="!user.isActif && !isMyProfile"
+                            class="btn btn-outline-success expandable-btn mr-1"
+                            rippleEffect
+                          >
+                            <div
+                              *ngIf="changingAccountStatus"
+                              class="spinner-border text-success mr-25"
+                              role="status"
+                            >
+                              <span class="sr-only"></span>
+                            </div>
+                            <i class="feather icon-rotate-cw mr-1"></i
+                              ><span>Réactiver</span>
+                          </button>
+
+                          <button
+                            [routerLink]="'../../edit-profile/' + user._id"
+                            class="btn btn-outline-primary expandable-btn"
+                          >
+                            <i class="feather icon-edit-2 mr-1"></i
+                            ><span>Modifier</span>
+                          </button>
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- <div class="d-flex align-items-center user-total-numbers">
+                    <div class="d-flex align-items-center mr-2">
+                      <div class="color-box bg-light-warning">
+                        <i
+                          [data-feather]="'dollar-sign'"
+                          [class]="'text-warning'"
+                        ></i>
+                      </div>
+                      <div class="ml-1">
+                        <h5 class="mb-0">148</h5>
+                        <small>Contrat prévileges</small>
+                      </div>
+                    </div>
+                    <div class="d-flex align-items-center">
+                      <div class="color-box bg-light-success">
+                        <i
+                          [data-feather]="'trending-up'"
+                          [class]="'text-success'"
+                        ></i>
+                      </div>
+                      <div class="ml-1">
+                        <h5 class="mb-0">147%</h5>
+                        <small>Meilleure réalisation</small>
+                      </div>
+                    </div>
+                  </div> -->
+                </div>
+                <div class="col-xl-6 col-lg-12 mt-2 mt-xl-0">
+                  <div class="user-info-wrapper">
+                    <div class="d-flex flex-wrap">
+                      <div class="user-info-title">
+                        <!-- <i data-feather="user-check" class="mr-1"></i> -->
+                        <!-- <span
+                          class="card-text user-info-title font-weight-bold mb-0"
+                          >Statut</span
+                        > -->
+                      </div>
+                      <!-- <div
+                        *ngIf="user.isActif"
+                        class="badge badge-light-success"
+                      >
+                        Compte actif
+                      </div> -->
+                      <!-- <div
+                        *ngIf="!user.isActif"
+                        class="badge badge-light-danger"
+                      >
+                        Compte inactif
+                      </div> -->
+                    </div>
+                    <div class="d-flex flex-wrap my-50">
+                      <div class="user-info-title">
+                        <i data-feather="flag" class="mr-1"></i>
+                        <span class="card-text font-weight-bold mb-0">Type de compte :</span>
+
+                      </div>
+                      <span class="card-text">
+                        {{ users.role ? ' ' + users.role : " Non spécifié" }}
+                      </span>
+                      <!-- <div
+                        *ngIf="user.access_rights.isAdmin"
+                        class="badge badge-light-primary"
+                      >
+                        Administrateur
+                      </div> -->
+                      <!-- <div
+                        *ngIf="!user.access_rights.isAdmin"
+                        class="badge badge-light-primary"
+                      >
+                        Utilisateur
+                      </div> -->
+                    </div>
+                    <div class="d-flex flex-wrap my-50">
+                      <div class="user-info-title">
+                        <i data-feather="phone" class="mr-1"></i>
+                        <span
+                          class="card-text user-info-title font-weight-bold mb-0"
+                          >Télephone :</span
+                        >
+                      </div>
+                      <p class="card-text mb-0">
+                        {{ users.numeroTelephone || " -- --- ---" }}
+                      </p>
+                    </div>
+                    <div class="d-flex flex-wrap my-50">
+                      <div class="user-info-title">
+                        <i data-feather="gift" class="mr-1"></i>
+                        <span
+                          class="card-text user-info-title font-weight-bold mb-0"
+                          >Date de naissance :</span
+                        >
+                      </div>
+                      <p class="card-text mb-0">
+                        {{ (users.dateNaissance | date: "dd/MM/yyyy") || "------" }}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- /User Card Ends-->
+
+      </div>
+      <!-- User Card & Plan Ends -->
+
+    </section>
+    <!-- page users view end -->
+  </div>
+</div>
