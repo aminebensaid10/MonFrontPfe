@@ -7,6 +7,7 @@ import { InvitationCard } from '../../models/invitations-list-model';
 import { Observable, throwError } from 'rxjs';
 import { error } from 'console';
 import { of } from 'rxjs';
+import { CoreMenu } from '@core/types';
 
 
 @Injectable()
@@ -14,6 +15,38 @@ export class InvitationsService {
 
   private apiUrl = 'http://localhost:8080/api/v1/collaborateur/membres';
   constructor(private http: HttpClient) { }
+  private menu: CoreMenu[] = [
+    {
+      id: 'users',
+      title: 'Ma Composition Familiale',
+      type: 'collapsible',
+      icon: 'users',
+      children: [
+        {
+          id: 'users-list',
+          icon: 'circle',
+          title: 'Mes demandes',
+          type: 'item',
+          url: 'users/users-list'
+        },
+        {
+          id: 'invitation-user',
+          icon: 'circle',
+          title: 'Ma famille',
+          type: 'item',
+          url: 'users/invitations/invitations-list'
+        },
+        {
+          id: 'add-user',
+          icon: 'circle',
+          title: 'Ajouter un membre',
+          type: 'item',
+          url: 'users/invitations/invite-user'
+        },
+      ],
+    }
+  ]
+  
   creerDemandeCompositionFamiliale(demande: any): Observable<HttpResponse<any>> {
     const token = localStorage.getItem('token');
   
@@ -44,7 +77,34 @@ export class InvitationsService {
 
     return this.http.get<any>(this.apiUrl, { headers });
   }
+  getMembreParId(membreId: number): Observable<any> {
+    const token = localStorage.getItem('token');
 
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + token,
+    });
+
+    return this.http.get<any>(`${this.apiUrl}/${membreId}`, { headers });
+  }
+  modifierMembreEtCreerDemandeModification(membreId: number, demande: any): Observable<HttpResponse<any>> {
+    const token = localStorage.getItem('token');
+  
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + token,
+    });
+  
+    const apiUrl = `http://localhost:8080/api/v1/collaborateur/modifier-membre-et-creer-demande-modification/${membreId}`;
+  
+    return this.http.post<any>(apiUrl, demande, { headers, observe: 'response' }).pipe(
+      map(response => {
+        // Personnalisez la désérialisation ici si nécessaire
+        return response;
+      })
+    );
+  }
+  
   //
   resendInvitation(user: InvitationCard) {
     return this.http.post(environment.apiUrl + '/api/invitations/resendInvitation', {

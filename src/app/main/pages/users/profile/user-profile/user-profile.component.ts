@@ -40,12 +40,9 @@ export class UserProfileComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // Obtenez le token depuis le service d'authentification
     const token = this.authService.getToken();
 
-    // Vérifiez si le token est disponible
     if (token) {
-      // Appeler la méthode pour obtenir le profil utilisateur en incluant le token dans l'en-tête
       this.usersService.getUserProfile(token).subscribe(
         (users : User) => {
           this.users = users;

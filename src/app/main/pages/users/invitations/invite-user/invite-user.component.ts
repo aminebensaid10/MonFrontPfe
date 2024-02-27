@@ -60,7 +60,7 @@ export class InviteUserComponent {
         dateNaissance: ['', Validators.required],
         lienParente: ['', Validators.required],
         justificatif: ['', Validators.required],
-        commentaire: ['', Validators.required],
+        // commentaire: ['', Validators.required],
       });
   }
 

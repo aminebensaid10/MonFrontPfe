@@ -4,7 +4,7 @@
     <li class="nav-item">
       <a class="navbar-brand" [routerLink]="['/']">
         <span class="brand-logo">
-          <img src="{{ coreConfig.app.appLogoImage }}" alt="brand-logo" width="36" />
+          <!-- <img src="{{ coreConfig.app.appLogoImage }}" alt="brand-logo" width="36" /> -->
         </span>
         <h2 class="brand-text mb-0">{{ coreConfig.app.appName }}</h2>
       </a>
@@ -63,12 +63,12 @@
       >
       <ng-container>
         <div class="user-nav d-sm-flex d-none">
-          <span class="user-name font-weight-bolder">{{users.nom + ' ' + users.prenom}}</span>
+          <span class="user-name font-weight-bolder">{{users?.nom + ' ' + users?.prenom}}</span>
         </div>
         <span class="avatar"
           ><img
             class="round"
-            [src]="'http://localhost:8080' + users.imagePath"
+            [src]="'http://localhost:8080' + users?.imagePath"
             alt="avatar"
             height="50"
             width="50" /><span class="avatar-status-online"></span

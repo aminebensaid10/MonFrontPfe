@@ -61,7 +61,7 @@ export class SignUpComponent implements OnInit {
 
   // error component inputs
   header = "Ce lien n'est plus valide";
-  message = "Cette pre-inscription a été annulée par un administrateur ou bien finalisée par l'utilisateur";
+  // message = "Cette pre-inscription a été annulée par un administrateur ou bien finalisée par l'utilisateur";
   link = "/auth/login";
   btnText = "Connexion";
   // user: User = new User();
@@ -105,13 +105,13 @@ export class SignUpComponent implements OnInit {
   //   this.imageSrc = null;
   // }
 
-  onPwdChange() {
-    if (this.userToAdd.password.length < 6 || this.confirmPassword != this.userToAdd.password || this.userToAdd.password == '') {
-      this.invalidPwd = true;
-    } else {
-      this.invalidPwd = false;
-    }
-  }
+  // onPwdChange() {
+  //   if (this.userToAdd.password.length < 6 || this.confirmPassword != this.userToAdd.password || this.userToAdd.password == '') {
+  //     this.invalidPwd = true;
+  //   } else {
+  //     this.invalidPwd = false;
+  //   }
+  // }
 
   capitalizeFirstLetter(string) {
     return string[0].toUpperCase() + string.slice(1);
@@ -132,15 +132,15 @@ signup() {
   this.authServices.signUp(formData).subscribe(
     (result) => {
       if (result) {
-        console.log('Inscription réussie !');
+        this.toastr.success('Inscription réussie !', 'Succès');
         this.router.navigate(['/auth/login']);
-
       } else {
-        console.error('Échec de l\'inscription.');
+        this.toastr.error('Échec de l\'inscription.', 'Erreur');
       }
     },
     (error) => {
-      console.error('Erreur lors de l\'appel à l\'API :', error);
+      this.toastr.error('Échec de l\'inscription', 'Erreur');
+      console.error('Échec de l\'inscription :', error);
     }
   );
 }

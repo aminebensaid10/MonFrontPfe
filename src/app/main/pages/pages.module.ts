@@ -18,7 +18,18 @@ const appRoutes: Routes = [
           page: 'users',
         }
       },
+    },
+    {
+      path: 'demandes',
+      loadChildren: () => import('../pages/classes/classes.module').then(m => m.ClassesModule),
+      data: {
+        role: {
+          page: 'classes',
+        }
+      },
+      
     }
+    
     ]
   }
   
@@ -27,6 +38,7 @@ const appRoutes: Routes = [
 @NgModule({
   declarations: [
     MainLayoutPageComponent
+    
   ],
   imports: [
     SharedModule,SignUpModule,

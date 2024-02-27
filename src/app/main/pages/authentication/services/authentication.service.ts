@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { HttpClient, HttpRequest } from '@angular/common/http';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -8,14 +8,16 @@ import { Router } from '@angular/router';
 import { CoreMenu } from '@core/types';
 import { CurrentUser, UserInscription } from 'app/main/models/users';
 import { User } from '../../users/models/user.model';
+import { UsersService } from '../../users/services/users-service.service';
 
 @Injectable({ providedIn: 'root' })
-export class AuthenticationService {
+export class AuthenticationService   {
 
   public currentUser: Observable<CurrentUser>;
 
   currentUserSubject: BehaviorSubject<CurrentUser>;
   private apiUrl = 'http://localhost:8080/api/v1/auth';
+  users:User
 
   private menu: CoreMenu[] = [
     {
@@ -24,13 +26,13 @@ export class AuthenticationService {
       type: 'collapsible',
       icon: 'users',
       children: [
-        // {
-        //   id: 'users-list',
-        //   icon: 'circle',
-        //   title: 'Liste des utilisateurs',
-        //   type: 'item',
-        //   url: 'users/users-list'
-        // },
+        {
+          id: 'users-list',
+          icon: 'circle',
+          title: 'Mes demandes',
+          type: 'item',
+          url: 'users/users-list'
+        },
         {
           id: 'invitation-user',
           icon: 'circle',
@@ -46,11 +48,29 @@ export class AuthenticationService {
           url: 'users/invitations/invite-user'
         },
       ],
-    }
-  ]
-  constructor(private http: HttpClient, private router: Router) {
+    },
+    {
+      id: 'family-requests',
+      title: 'Gérer Les Demandes de Composition Familiale',
+      type: 'collapsible',
+      icon: 'file-text', 
+      children: [
+        {
+          id: 'pending-requests',
+          icon: 'circle',
+          title: 'Mes Demandes',
+          type: 'item',
+          url: 'demandes/demandes-list'
+        },
+        
+      ],
+    },
+  ];
+  
+  constructor(private http: HttpClient, private router: Router,  private usersService: UsersService) {
     this.currentUserSubject = new BehaviorSubject<CurrentUser>(JSON.parse(localStorage.getItem('currentUser')));
     this.currentUser = this.currentUserSubject.asObservable();
+    
   }
 
   // getter: currentUserValue
@@ -58,7 +78,24 @@ export class AuthenticationService {
     return this.currentUserSubject.value;
   }
 
+  test(): void {
+    const token = localStorage.getItem('token'); 
 
+    if (token) {
+      this.usersService.getUserProfile(token).subscribe(
+        (users : User) => {
+          this.users = users;
+          this.users.role
+          console.log('Profil utilisateur récupéré avec succès. Role:', this.users.role);
+        },
+        (error) => {
+          console.error('Erreur lors de la récupération du rol utilisateur :', error);
+        }
+      );
+    } else {
+      console.error('Token d\'ee non disponible.');
+    }
+  }
   public get currentMenu(): CoreMenu[] {
     this.menu.forEach(x => {
       // if (this.currentUserValue.access_rights[x.id] != 'none') {

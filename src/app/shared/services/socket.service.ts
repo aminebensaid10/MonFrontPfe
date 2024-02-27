@@ -12,27 +12,27 @@ import { io, Socket } from 'socket.io-client';
 export class SocketService {
   private socket: Socket;
 
-  constructor(private authService: AuthenticationService) {
-    this.socket = io(environment.apiUrl, {
-      auth: {
-        token: this.authService.currentUserValue.token
-      }
-    });
-  }
+  // constructor(private authService: AuthenticationService) {
+  //   this.socket = io(environment.apiUrl, {
+  //     auth: {
+  //       token: this.authService.currentUserValue.token
+  //     }
+  //   });
+  // }
 
-  onNotificationReceived() {
-    return new Observable<Notification>(observer => {
-      this.socket.on('order-notifications', notif => {
-        observer.next(notif);
-      });
-    });
-  }
+  // onNotificationReceived() {
+  //   return new Observable<Notification>(observer => {
+  //     this.socket.on('order-notifications', notif => {
+  //       observer.next(notif);
+  //     });
+  //   });
+  // }
 
-  onAccountBlock() {
-    return new Observable(observer => {
-      this.socket.on('account-block', data => {
-        observer.next();
-      });
-    });
-  }
+  // onAccountBlock() {
+  //   return new Observable(observer => {
+  //     this.socket.on('account-block', data => {
+  //       observer.next();
+  //     });
+  //   });
+  // }
 }

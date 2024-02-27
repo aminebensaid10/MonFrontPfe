@@ -1,0 +1,67 @@
+<div class="content-wrapper container-xxl p-0">
+  <div class="content-body">
+    <app-content-header [contentHeader]="contentHeader"></app-content-header>
+    
+  <div class="card">
+    <div class="card-header">
+        <div class="card-title">
+            <h4>Ajouter un nouveau membre de famille</h4>
+        </div>
+    </div>
+  
+    <form #membreForm="ngForm" (ngSubmit)="onSubmit()" enctype="application/json">
+
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-6 col-12">
+            <div class="form-group">
+              <label for="nomMembre" class="col-form-label">Nom:</label>
+              <input type="text" id="nomMembre" name="nomMembre" [(ngModel)]="formulaireMembre.nomMembre" class="form-control" required placeholder="Entrez le nom du membre">
+            </div>
+          </div>
+    
+          <div class="col-md-6 col-12">
+            <div class="form-group">
+              <label for="prenomMembre" class="col-form-label">Prénom:</label>
+              <input type="text" id="prenomMembre" name="prenomMembre" [(ngModel)]="formulaireMembre.prenomMembre" class="form-control" required placeholder="Entrez le prénom du membre">
+            </div>
+          </div>
+    
+          <div class="col-md-6 col-12">
+            <div class="form-group">
+              <label for="sexe" class="col-form-label">Sexe:</label>
+              <select id="sexe" name="sexe" [(ngModel)]="formulaireMembre.sexe" class="form-control" required>
+                <option value="Homme">Homme</option>
+                <option value="Femme">Femme</option>
+              </select>
+            </div>
+          </div>
+    
+          <div class="col-md-6 col-12">
+            <div class="form-group">
+              <label for="dateNaissance" class="col-form-label">Date de Naissance:</label>
+              <input type="date" id="dateNaissance" name="dateNaissance" [ngModel]="formulaireMembre.dateNaissance | date:'yyyy-MM-dd'" (ngModelChange)="formulaireMembre.dateNaissance = $event" class="form-control" required>
+            </div>
+          </div>
+    
+          <div class="col-md-6 col-12">
+            <div class="form-group">
+              <label for="lienParente" class="col-form-label">Lien de Parenté:</label>
+              <input type="text" id="lienParente" name="lienParente" [(ngModel)]="formulaireMembre.lienParente" class="form-control" required>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+      <div class="row d-flex m-2 justify-content-end">
+        <!-- <button class="btn btn-outline-secondary" (click)="resetForm()">Réinitialiser</button> -->
+    
+        <button class="btn btn-primary ml-1" type="submit" [disabled]="!membreForm.valid">
+          Enregistrer les modifications
+        </button>
+      </div>
+    </form>
+    
+</div>
+</div>
+</div>

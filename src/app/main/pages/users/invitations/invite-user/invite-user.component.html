@@ -10,25 +10,29 @@
       </div>
       <!-- invite-user.component.html -->
 
-<form    >
+<form  [formGroup]="demandeForm"   >
   <div class="card-body">
     <div class="row">
       <div class="col-md-6 col-12">
         <div class="form-group">
           <label for="nomMembre">Nom du membre :</label>
-          <input type="text" id="nomMembre" name="nomMembre" [(ngModel)]="demandeDTO.nomMembre" class="form-control" required placeholder="Entrez le nom du membre">
+          <input type="text" id="nomMembre" formControlName="nomMembre" [(ngModel)]="demandeDTO.nomMembre"class="form-control" required placeholder="Entrez le nom du membre">
         </div>
+        
+        
       </div>
       <div class="col-md-6 col-12">
         <div class="form-group">
-          <label for="prenomMembre">Prénom du membre :</label>
-          <input type="text" id="prenomMembre" name="prenomMembre" [(ngModel)]="demandeDTO.prenomMembre" class="form-control" required placeholder="Entrez le prénom du membre">
+          <label for="prenomMembre">Prenom du membre :</label>
+          <input type="text" id="prenom" formControlName="prenomMembre" [(ngModel)]="demandeDTO.prenomMembre"class="form-control" required placeholder="Entrez le prenom du membre">
         </div>
+       
+        
       </div>
       <div class="col-md-6 col-12">
         <div class="form-group">
           <label for="sexe">Sexe :</label>
-          <select id="sexe" name="sexe" [(ngModel)]="demandeDTO.sexe" class="form-control" required>
+          <select id="sexe" formControlName="sexe" [(ngModel)]="demandeDTO.sexe" class="form-control" required>
             <option value="" disabled selected>Choisissez le sexe</option>
             <option value="Homme">Homme</option>
             <option value="Femme">Femme</option>
@@ -38,13 +42,13 @@
       <div class="col-md-6 col-12">
         <div class="form-group">
           <label for="dateNaissance">Date de naissance :</label>
-          <input type="date" id="dateNaissance" name="dateNaissance" [(ngModel)]="demandeDTO.dateNaissance" class="form-control" required>
+          <input type="date" id="dateNaissance" formControlName="dateNaissance" name="dateNaissance" [(ngModel)]="demandeDTO.dateNaissance" class="form-control" required>
         </div>
       </div>
       <div class="col-md-6 col-12">
         <div class="form-group">
           <label for="lienParente">Lien de parenté :</label>
-          <select id="lienParente" name="lienParente" [(ngModel)]="demandeDTO.lienParente" class="form-control" required>
+          <select id="lienParente" formControlName="lienParente" [(ngModel)]="demandeDTO.lienParente" class="form-control" required>
             <option value="" disabled selected>Choisissez le lien de parenté</option>
             <option value="Frère">Frère</option>
             <option value="Sœur">Sœur</option>
@@ -52,21 +56,23 @@
             <option value="Mère">Mère</option>
             <option value="Grand-père">Grand-père</option>
             <option value="Grand-mère">Grand-mère</option>
-            <!-- Ajoutez d'autres options selon vos besoins -->
           </select>
         </div>
+        
       </div>
       <div class="col-md-6 col-12">
         <div class="form-group">
-          <label for="justificatif">Justificatif :</label>
-          <input type="text" id="justificatif" name="justificatif" [(ngModel)]="demandeDTO.justificatif" class="form-control" required placeholder="Entrez le justificatif">
+          <label for="justificatif" >Justificatif :</label>
+          <input type="text" formControlName="justificatif" id="justificatif" name="justificatif" [(ngModel)]="demandeDTO.justificatif" class="form-control" required placeholder="Entrez le justificatif">
         </div>
       </div>
       <div class="col-md-6 col-12">
         <div class="form-group">
           <label for="commentaire">Commentaire :</label>
-          <textarea id="commentaire" name="commentaire" [(ngModel)]="demandeDTO.commentaire" class="form-control" required placeholder="Ajoutez un commentaire"></textarea>
+          <textarea id="commentaire" formControlName="commentaire" [(ngModel)]="demandeDTO.commentaire" class="form-control" placeholder="Ajoutez un commentaire"></textarea>
+          <small class="text-muted">Optionnel</small>
         </div>
+        
       </div>
     </div>
   </div>
@@ -75,7 +81,7 @@
   <div class="row d-flex m-2 justify-content-end">
     <button class="btn btn-outline-secondary" (click)="resetForm()" >Réinitialiser</button>
 
-    <button class="btn btn-primary ml-1" type="submit" (click)="onSubmit()" >
+    <button class="btn btn-primary ml-1" type="submit" (click)="onSubmit()" [disabled]="!demandeForm.valid" >
       Soumettre une demande
     </button>
     

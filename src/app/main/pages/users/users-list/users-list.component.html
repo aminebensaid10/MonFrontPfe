@@ -9,9 +9,7 @@
           <div class="input-group input-group-merge">
             <input
               class="form-control"
-              (ngModelChange)="filter($event)"
-              ngModel
-              placeholder="Recherche"
+              [(ngModel)]="searchQuery" (input)="filter(searchQuery)"              placeholder="Recherche"
             />
             <div class="input-group-append">
               <span class="input-group-text">
@@ -22,96 +20,58 @@
         </div>
       </div>
   
-      <div class="row match-height">
-        <!-- Profile Card -->
-        <div
-          class="col-xxl-3 col-lg-4 col-md-6 col-12"
-          *ngFor="let user of filteredUsers"
-        >
-          <div class="card card-profile">
-            <div class="card-img-top" alt="Profile Cover Photo"></div>
-            <!-- <div style="width: 100%; height: 60px; background-color: blueviolet;">
-  
-      </div> -->
-            <div class="card-body">
-              <div class="profile-image-wrapper">
-                <div class="profile-image">
-                  <div class="avatar">
-                    <img [src]="imgPrefix + user.photo" alt="Profile Picture" />
-                  </div>
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <!-- <div class="card-header">
+              <h4 class="card-title">Liste des Demandes</h4>
+            </div> -->
+            <div class="card-content">
+              <div class="card-body">
+                <div class="table-responsive">
+                  <table class="table table-striped">
+                    <thead>
+                      <tr>
+                        <th>Nom</th>
+                        <th>Prénom</th>
+                        <th>Type de demande</th>
+                        <th>État</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let demande of demandes">
+                        <td>{{ demande.membreFamille.nomMembre }}</td>
+                        <td>{{ demande.membreFamille.prenomMembre }}</td>
+                        <td>{{ demande.typeDemande }}</td>
+                        <td [ngClass]="{'text-success': demande.etat === 'Valide', 'text-warning': demande.etat === 'En cours', 'text-danger': demande.etat === 'Invalide'}">
+                          {{ demande.etat }}
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
                 </div>
               </div>
-              <div class="d-flex flex-column">
-                <span class="font-medium-4 font-weight-bolder line-height-1">{{
-                  user.lastname + " " + user.firstname
-                }}</span>
-                <span class="text-muted">{{ user.email }}</span>
-                <span class="text-muted">{{ user.phone_number || "--" }}</span>
-              </div>
-  
-              <hr class="mb-2" />
-  
-              <div class="d-flex justify-content-center align-items-center">
-                <button
-                  class="btn btn-outline-danger expandable-btn mr-1"
-                  [disabled]="changingAccountStatus"
-                  *ngIf="user.isActif && user._id != currentUser.id"
-                  (click)="toggleAccountStatus(user)"
-                >
-                  <i class="feather" class="feather icon-trash-2"></i>
-                  <span>Désactiver</span>
-                </button>
-                <button
-                  class="btn btn-outline-success expandable-btn mr-1"
-                  [disabled]="changingAccountStatus"
-                  *ngIf="!user.isActif && user._id != currentUser.id"
-                  (click)="toggleAccountStatus(user)"
-                >
-                  <i class="feather icon-rotate-cw"></i>
-                  <span>Réactiver</span>
-                </button>
-  
-                <button
-                  class="btn btn-outline-primary expandable-btn mr-1"
-                  [routerLink]="['/pages/users/profile/user-profile', user._id]"
-                >
-                  <i class="feather icon-info"></i><span>Voir détails</span>
-                </button>
-              </div>
+              <ngb-alert type="secondary" *ngIf="demandes.length == 0">
+                <div class="alert-body">
+                  <strong>Pas de demandes! </strong> Il n'y a aucune demande à afficher pour le moment.
+                </div>
+              </ngb-alert>
             </div>
           </div>
         </div>
-        <!--/ Profile Card -->
       </div>
+      
+  
   
       <ngb-alert
         type="secondary"
-        *ngIf="filteredUsers.length == 0 && !loadingUsers"
         [dismissible]="false"
         class="m-1"
       >
-        <div class="alert-body">
-          <strong>Pas d'utilisateur! </strong> Pas de résultat pour cette recherche.
-        </div>
+       
       </ngb-alert>
   
-      <ngb-alert
-        type="primary"
-        *ngIf="loadingUsers"
-        [dismissible]="false"
-        class="m-1"
-      >
-        <div class="alert-body">
-          <div
-            class="spinner-border text-primary mr-1 font-small-3"
-            role="status"
-          >
-            <span class="sr-only"></span>
-          </div>
-          <strong>Chargement en cours. </strong> Nous sommes en train d'apporter
-          vos données...
-        </div>
-      </ngb-alert>
+   
     </div>
   </div>
   

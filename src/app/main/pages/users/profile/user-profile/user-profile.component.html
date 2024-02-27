@@ -17,7 +17,7 @@
                       <img
                       class="img-fluid rounded"
                       id="profile-img"
-                      [src]="'http://localhost:8080' + users.imagePath"           
+                      [src]="'http://localhost:8080' + users?.imagePath"           
                       height="104"
                       width="104"
                       alt="User photo"
@@ -27,13 +27,13 @@
                         <div class="user-info mb-1">
                           <h4 class="mb-0">
                             {{
-                              (users.nom) +
+                              (users?.nom) +
                                 " " +
-                                (users.prenom)
+                                (users?.prenom)
                             }}
                           </h4>
                           <span class="card-text">{{
-                            users.email 
+                            users?.email 
                           }}</span>
                         </div>
                         <div class="d-flex flex-wrap">
@@ -73,7 +73,7 @@
                           </button>
 
                           <button
-                            [routerLink]="'../../edit-profile/' + user._id"
+                            [routerLink]="'../../edit-profile/' + user?._id"
                             class="btn btn-outline-primary expandable-btn"
                           >
                             <i class="feather icon-edit-2 mr-1"></i
@@ -141,7 +141,7 @@
 
                       </div>
                       <span class="card-text">
-                        {{ users.role ? ' ' + users.role : " Non spécifié" }}
+                        {{ users?.role ? ' ' + users?.role : " Non spécifié" }}
                       </span>
                       <!-- <div
                         *ngIf="user.access_rights.isAdmin"
@@ -165,7 +165,7 @@
                         >
                       </div>
                       <p class="card-text mb-0">
-                        {{ users.numeroTelephone || " -- --- ---" }}
+                        {{ users?.numeroTelephone || " -- --- ---" }}
                       </p>
                     </div>
                     <div class="d-flex flex-wrap my-50">
@@ -177,7 +177,7 @@
                         >
                       </div>
                       <p class="card-text mb-0">
-                        {{ (users.dateNaissance | date: "dd/MM/yyyy") || "------" }}
+                        {{ (users?.dateNaissance | date: "dd/MM/yyyy") || "------" }}
                       </p>
                     </div>
                   </div>

@@ -27,12 +27,12 @@ export class NavbarNotificationComponent implements OnInit, OnDestroy {
   constructor(private socketService: SocketService, private notificationsService: NotificationsService) {}
 
   ngOnInit(): void {
-    this.getNotifications();
-    let sub = this.socketService.onNotificationReceived().subscribe(notif => {
-      this.unreadNotifsCount++;
-      this.notifications.unshift(notif);
-    });
-    this.subscriptions.add(sub);
+    // this.getNotifications();
+    // let sub = this.socketService.onNotificationReceived().subscribe(notif => {
+    //   this.unreadNotifsCount++;
+    //   this.notifications.unshift(notif);
+    // });
+    // this.subscriptions.add(sub);
   }
 
   getNotifications() {

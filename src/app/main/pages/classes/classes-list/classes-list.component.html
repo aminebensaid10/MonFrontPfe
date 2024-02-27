@@ -1,1 +1,60 @@
-<p>classes-list works!</p>
+<div class="content-wrapper container-xxl p-0">
+    <div class="content-body">
+      <app-content-header [contentHeader]="contentHeader"></app-content-header>
+  
+      <div class="row mb-3">
+        <div class="col-12">
+          <div class="input-group input-group-merge">
+            <input class="form-control" [(ngModel)]="searchQuery" (input)="searchDemandes()" placeholder="Recherche" />
+            <div class="input-group-append">
+              <span class="input-group-text"><i class="feather icon-search"></i></span>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+<div *ngIf="demandes.length > 0; else noData">
+    <div class="table-responsive">
+      <table class="table table-bordered">
+        <thead class="thead-dark">
+          <tr>
+            <th>Nom collaborateur</th>
+            <th>Prénom collaboateur</th>
+            <th>Type de Demande</th>
+            <th>État de Demande</th>
+            <th>Action</th>
+            <th>Détails</th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container *ngFor="let demandeGroup of demandes">
+            <tr *ngFor="let demande of demandeGroup">
+              <td>{{ demande.collaborateur.nom }}</td>
+              <td>{{ demande.collaborateur.prenom }}</td>
+              <td>{{ demande.typeDemande }}</td>
+              <td [ngClass]="{'text-success': demande.etat === 'Valide', 'text-danger': demande.etat === 'Invalide', 'text-warning': demande.etat === 'En cours'}">{{ demande.etat }}</td>
+              <td>
+                <ng-container *ngIf="demande.etat === 'En cours'; else otherContent">
+                  <button class="btn btn-success" (click)="validateRequest(demande.id)">Valider</button>
+                  <button class="btn btn-danger" (click)="rejectRequest(demande.id)">Rejeter</button>
+                </ng-container>
+                <ng-template #otherContent>
+                  <span *ngIf="demande.etat === 'Valide'" class="text-success">La demande est déjà valide.</span>
+                  <span *ngIf="demande.etat === 'Invalide'" class="text-danger">La demande est déjà invalide.</span>
+                </ng-template>
+              </td>
+              <td>
+                <a class="btn btn-info" [routerLink]="['../../demandes/demandes-detail', demande.id]">Détails</a>
+              </td>
+            </tr>
+          </ng-container>
+        </tbody>
+      </table>
+      
+    </div>
+  </div>
+  
+  <ng-template #noData>
+    <p>Aucune demande disponible.</p>
+  </ng-template>
+  

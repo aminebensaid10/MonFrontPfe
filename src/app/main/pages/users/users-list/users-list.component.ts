@@ -17,8 +17,15 @@ import { UsersService } from '../services/users-service.service';
 export class UsersListComponent implements OnInit {
 
   users: UserCard[] = [];
-  filteredUsers: UserCard[] = [];
+  filteredDemandes: any[] = [];
   currentUser = new CurrentUser();
+  demandesInitiales: any[] = [];
+
+  demandes: any[] = [];
+  private userProfile: any;
+  searchQuery: string = '';
+
+
 
   loadingUsers = true;
   changingAccountStatus = false;
@@ -26,12 +33,12 @@ export class UsersListComponent implements OnInit {
   subscriptions = new Subscription();
   imgPrefix = environment.apiUrl + '/avatars/';
   contentHeader: ContentHeader = {
-    headerTitle: 'Utilisateurs',
+    headerTitle: 'Composition Familiale',
     actionButton: false,
     breadcrumb: {
       links: [
         {
-          name: 'Liste des utilisateurs'
+          name: 'Mes Demandes'
         }
       ]
     }
@@ -42,66 +49,82 @@ export class UsersListComponent implements OnInit {
     }
 
   ngOnInit(): void {
-    this.getUsers();
+    this.loadDemandes();
+
   }
 
-  getUsers() {
-    this.usersService.getUsers().subscribe(data => {
-      this.users = data;
-      this.filteredUsers = data;
-      this.loadingUsers = false;
-    },
-    (error) => {
-      this.loadingUsers = false;
-    });
-  }
+  // getUsers() {
+  //   this.usersService.getUsers().subscribe(data => {
+  //     this.users = data;
+  //     this.filteredUsers = data;
+  //     this.loadingUsers = false;
+  //   },
+  //   (error) => {
+  //     this.loadingUsers = false;
+  //   });
+  // }
 
-  filter($event) {
-    this.filteredUsers = this.users;
-    if($event != '') {
-      this.filteredUsers = this.users.filter(x => (x.email + x.lastname + ' ' + x.firstname).toLowerCase().includes($event.toLowerCase()));
+  filter($event: string): void {
+  
+    if ($event !== '') {
+      this.demandes = this.demandes.filter(demande =>
+        (demande.membreFamille.nomMembre + ' ' + demande.membreFamille.prenomMembre + ' ' + demande.typeDemande + ' ' + demande.etat)
+          .toLowerCase().includes($event.toLowerCase())
+      );
     }
   }
+  
 
 
-  toggleAccountStatus(user) {
-    let modalMessage;
-    let modalButton;
-    let modalClass;
-    if (!user.isActif) {
-      modalMessage = 'Voulez-vous réactiver ce compte?';
-      modalButton = 'Réactiver';
-      modalClass = 'success'
-    } else {
-      modalMessage = 'Voulez-vous désactiver ce compte?';
-      modalButton = 'Désactiver';
-      modalClass = "danger"
-    }
-    this.sharedModals.openConfirmationModal(modalMessage, modalClass ,modalButton).then(data => {
-      if (data == 'confirmed') {
-    this.changingAccountStatus = true;
-    this.usersService.toggleAccountStatus(user._id, !user.isActif).subscribe(data => {
-      if(data) {
-        if (!user.isActif) {
-          this.toastr.success("Compte réactivé", 'Succès');
-          user.isActif = true;
-        } else {
-          this.toastr.success("Compte désactivé", 'Succès');
-          user.isActif = false;
-          if (user._id == this.authService.currentUserValue.id) {
-            this.authService.logout();
-          }
-        }
+//   toggleAccountStatus(user) {
+//     let modalMessage;
+//     let modalButton;
+//     let modalClass;
+//     if (!user.isActif) {
+//       modalMessage = 'Voulez-vous réactiver ce compte?';
+//       modalButton = 'Réactiver';
+//       modalClass = 'success'
+//     } else {
+//       modalMessage = 'Voulez-vous désactiver ce compte?';
+//       modalButton = 'Désactiver';
+//       modalClass = "danger"
+//     }
+//     this.sharedModals.openConfirmationModal(modalMessage, modalClass ,modalButton).then(data => {
+//       if (data == 'confirmed') {
+//     this.changingAccountStatus = true;
+//     this.usersService.toggleAccountStatus(user._id, !user.isActif).subscribe(data => {
+//       if(data) {
+//         if (!user.isActif) {
+//           this.toastr.success("Compte réactivé", 'Succès');
+//           user.isActif = true;
+//         } else {
+//           this.toastr.success("Compte désactivé", 'Succès');
+//           user.isActif = false;
+//           if (user._id == this.authService.currentUserValue.id) {
+//             this.authService.logout();
+//           }
+//         }
         
-      }
-      this.changingAccountStatus = false;
+//       }
+//       this.changingAccountStatus = false;
+//     },
+//     (error) => {
+//       this.toastr.success("Opération échouée", 'Échec');
+//       this.changingAccountStatus = false;
+//     });
+//   }
+//   });
+// }
+loadDemandes(): void {
+  this.usersService.getDemandes().subscribe(
+    (data: any[]) => {
+      this.demandes = data;
+
     },
-    (error) => {
-      this.toastr.success("Opération échouée", 'Échec');
-      this.changingAccountStatus = false;
-    });
-  }
-  });
+    error => {
+      console.error('erreur:', error);
+    }
+  );
 }
 
 }

@@ -27,7 +27,7 @@
 
           </div>
           <div class="card-footer d-flex justify-content-between">
-            <button class="btn btn-primary btn-sm">
+            <button class="btn btn-primary btn-sm" [routerLink]="['../update-member', membre.id]">
               Modifier
             </button>
             <button class="btn btn-outline-danger btn-sm">
@@ -38,7 +38,7 @@
       </div>
     </div>
 
-    <ngb-alert type="secondary" *ngIf="membres.length == 0">
+    <ngb-alert type="secondary" *ngIf="membres?.length == 0">
       <div class="alert-body">
         <strong>Pas de membres! </strong> Il n'y a aucun membre à afficher pour le moment.
       </div>

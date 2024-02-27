@@ -10,14 +10,23 @@ import { Observable } from 'rxjs';
 export class UsersService {
 
   private apiUrl = 'http://localhost:8080/api/v1/auth';
+  private apiURL = 'http://localhost:8080/api/v1/collaborateur';
 
   constructor(private http: HttpClient) { }
   
-
-  // get all users on the plateform
-  getUsers() {
-    return this.http.get<UserCard[]>(environment.apiUrl + '/api/users/getUsers');
+  getDemandes(): Observable<any[]> {
+    const token = localStorage.getItem('token');
+  
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + token,
+    });
+    return this.http.get<any[]>(`${this.apiURL}/demandes`, { headers});
   }
+  // get all users on the plateform
+  // getUsers() {
+  //   return this.http.get<UserCard[]>(environment.apiUrl + '/api/users/getUsers');
+  // }
   getUserProfile(token: string): Observable<any> {
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`

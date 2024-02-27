@@ -89,9 +89,9 @@ export class NavbarComponent implements OnInit, OnDestroy {
     public _translateService: TranslateService,
     private socketService: SocketService
   ) {
-    this.socketService.onNotificationReceived().subscribe(notif => {
-      this.notifsCount = this.notifications.unshift(notif);
-    });
+    // this.socketService.onNotificationReceived().subscribe(notif => {
+    //   this.notifsCount = this.notifications.unshift(notif);
+    // });
 
     // this._authenticationService.currentUser.subscribe(x => {
     //   this.currentUser = x;
