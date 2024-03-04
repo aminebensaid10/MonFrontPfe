@@ -30,7 +30,7 @@
             <button class="btn btn-primary btn-sm" [routerLink]="['../update-member', membre.id]">
               Modifier
             </button>
-            <button class="btn btn-outline-danger btn-sm">
+            <button class="btn btn-outline-danger btn-sm" (click)="creerDemandeSuppression(membre.id)">
               Supprimer
             </button>
           </div>

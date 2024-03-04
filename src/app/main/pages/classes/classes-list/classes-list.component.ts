@@ -55,7 +55,7 @@ export class ClassesListComponent implements OnInit {
     );
   }
   validateRequest(demandeId: number): void {
-    const confirmation = window.confirm('Êtes-vous sûr de vouloir rejeter cette demande ?');
+    const confirmation = window.confirm('Êtes-vous sûr de vouloir valider cette demande ?');
   
     if (confirmation) {
       this.classService.validateRequest(demandeId).subscribe(
@@ -73,7 +73,7 @@ export class ClassesListComponent implements OnInit {
   }
   
   rejectRequest(demandeId: number): void {
-    const confirmation = window.confirm('Êtes-vous sûr de vouloir valider cette demande ?');
+    const confirmation = window.confirm('Êtes-vous sûr de vouloir rejeter cette demande ?');
     if (confirmation) {
     this.classService.rejectRequest(demandeId).subscribe(
       response => {

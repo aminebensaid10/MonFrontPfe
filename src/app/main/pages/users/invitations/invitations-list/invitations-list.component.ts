@@ -32,13 +32,29 @@ export class InvitationsListComponent implements OnInit {
   ngOnInit(): void {
     this.invitationsService.getMembres().subscribe(
       (response) => {
-        this.membres = response; // En supposant que votre API renvoie un tableau de membres
+        this.membres = response; 
       },
       (error) => {
         console.error('Erreur lors de la récupération des membres :', error);
       }
     );
   }
+  creerDemandeSuppression(membreId: number) {
+    const confirmation = window.confirm("Êtes-vous sûr de vouloir créer une demande de suppression ?");
+  
+    if (confirmation) {
+      this.invitationsService.creerDemandeSuppression(membreId).subscribe(
+        (response) => {
+          this.toastr.success('La demande de suppression a été créée avec succès', 'Succès');
+        },
+        (error) => {
+          this.toastr.error('Erreur lors de la création de la demande de suppression', 'Erreur');
+        }
+      );
+    }
+  }
+  
+  
 
   // filter($event) {
   //   this.filteredInvitations = this.invitations;

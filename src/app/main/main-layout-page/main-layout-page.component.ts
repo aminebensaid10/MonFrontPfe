@@ -45,14 +45,11 @@ export class MainLayoutPageComponent implements OnInit {
     private _translateService: TranslateService,
     private authService: AuthenticationService
   ) {
-    // Get the application main menu
     this.menu = authService.currentMenu;
    
 
-    // Register the menu to the menu service
     this._coreMenuService.register('main', this.menu);
 
-    // Set the main menu as our current menu
     this._coreMenuService.setCurrentMenu('main');
 
     // Add languages to the translation service

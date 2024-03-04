@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { InvitationsService } from '../services/invitations.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { formatDate } from '@angular/common';
 import { ContentHeader } from 'app/layout/components/content-header/content-header.component';
@@ -24,7 +24,7 @@ export class UpdateUserComponent implements OnInit {
       ]
     }
   };
-  constructor(private invitationService : InvitationsService , private route: ActivatedRoute,private toastr: ToastrService) { }
+  constructor(private invitationService : InvitationsService , private route: ActivatedRoute,private toastr: ToastrService, private router: Router) { }
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
@@ -60,6 +60,8 @@ export class UpdateUserComponent implements OnInit {
           this.toastr.success('Demande de modification créée avec succès', 'Succès');
 
           console.log('Membre mis à jour avec succès', response);
+          this.router.navigate(['/pages/users/users-list']);
+
          
         },
         error => {

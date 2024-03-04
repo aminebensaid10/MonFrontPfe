@@ -21,7 +21,7 @@ export class AuthenticationService   {
 
   private menu: CoreMenu[] = [
     {
-      id: 'users',
+      id: 'collaborateur',
       title: 'Ma Composition Familiale',
       type: 'collapsible',
       icon: 'users',
@@ -78,35 +78,58 @@ export class AuthenticationService   {
     return this.currentUserSubject.value;
   }
 
-  test(): void {
-    const token = localStorage.getItem('token'); 
+  // test(): void {
+  //   const token = localStorage.getItem('token'); 
 
+  //   if (token) {
+  //     this.usersService.getUserProfile(token).subscribe(
+  //       (users : User) => {
+  //         this.users = users;
+  //         this.users.role
+  //         console.log('Profil utilisateur récupéré avec succès. Role:', this.users.role);
+  //       },
+  //       (error) => {
+  //         console.error('Erreur lors de la récupération du rol utilisateur :', error);
+  //       }
+  //     );
+  //   } else {
+  //     console.error('Token d\'ee non disponible.');
+  //   }
+  // }
+  public get currentMenu(): CoreMenu[] {
+    const token = localStorage.getItem('token');
+    
     if (token) {
       this.usersService.getUserProfile(token).subscribe(
-        (users : User) => {
+        (users: User) => {
           this.users = users;
-          this.users.role
-          console.log('Profil utilisateur récupéré avec succès. Role:', this.users.role);
+          const userRole = this.users ? this.users.role : null;
+          console.log('Profil utilisateur récupéré avec succès. Role:', userRole);
+    
+          this.menu.forEach(x => {
+            if (x.id === 'collaborateur' && userRole === 'COLLABORATEUR') {
+              x.hidden = false;
+              x.children.forEach(child => (child.hidden = false));
+            } else if (x.id === 'family-requests' && userRole === 'GESTIONNAIRERH') {
+              x.hidden = false;
+              x.children.forEach(child => (child.hidden = false));
+            } else {
+              x.hidden = true;
+            }
+          });
         },
         (error) => {
-          console.error('Erreur lors de la récupération du rol utilisateur :', error);
+          console.error('Erreur lors de la récupération du rôle utilisateur :', error);
         }
       );
     } else {
-      console.error('Token d\'ee non disponible.');
+      console.error('Token non disponible.');
     }
-  }
-  public get currentMenu(): CoreMenu[] {
-    this.menu.forEach(x => {
-      // if (this.currentUserValue.access_rights[x.id] != 'none') {
-      //   x.hidden = false;
-      // } else {
-      //   x.hidden = true;
-      // }
-      x.hidden = false;
-    });
+  
     return this.menu;
   }
+  
+  
   isTokenPresent(): boolean {
     const token = localStorage.getItem('token'); 
     return !!token; 

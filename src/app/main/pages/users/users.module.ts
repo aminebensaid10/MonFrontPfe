@@ -10,7 +10,7 @@ import { NavbarComponent } from 'app/layout/components/navbar/navbar.component';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'users-list',
+    redirectTo: 'profile/user-profile/null',
     pathMatch: 'full'
   },
   {

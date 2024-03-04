@@ -21,6 +21,7 @@ export class InvitationsService {
       title: 'Ma Composition Familiale',
       type: 'collapsible',
       icon: 'users',
+      role: ["GESTIONNAIRERH"],
       children: [
         {
           id: 'users-list',
@@ -101,6 +102,21 @@ export class InvitationsService {
       map(response => {
         // Personnalisez la désérialisation ici si nécessaire
         return response;
+      })
+    );
+  }
+  creerDemandeSuppression(membreId: number): Observable<HttpResponse<any>> {
+    const token = localStorage.getItem('token');
+    const apiUrl = `http://localhost:8080/api/v1/collaborateur/creer-demande-suppression/${membreId}`;
+  
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + token,
+    });
+  
+    return this.http.post<any>(apiUrl, null, { headers, observe: 'response' }).pipe(
+      catchError((error: HttpErrorResponse) => {
+        return throwError(error);
       })
     );
   }
