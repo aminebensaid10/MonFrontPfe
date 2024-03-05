@@ -102,9 +102,7 @@ export class AuthLoginV2Component implements OnInit {
         :
         "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjM3NDFlNjA0MjZiZDdlMTg1ZTJlZmQ0IiwiYWNjZXNzX3JpZ2h0cyI6eyJzdG9jayI6IndyaXRlIiwib3JkZXJzIjoicmVhZF9hbGwiLCJpbnZlbnRvcnkiOiJ3cml0ZSIsImRhc2hib2FyZEIyYyI6InJlYWRfYWxsIiwiYjJiIjoid3JpdGUiLCJidXNpbmVzc0ludGVsbGlnZW5jZSI6IndyaXRlIiwib2JqZWN0aXZlIjoid3JpdGUiLCJkZXBvc2l0U2FsZXMiOiJyZWFkX2FsbCIsInVzZXJzIjoid3JpdGUiLCJyaXNrTWFuYWdlbWVudCI6IndyaXRlIiwiYWRtaW5GbG93TWFuYWdlciI6IndyaXRlIiwiaXNBZG1pbiI6dHJ1ZX0sImlhdCI6MTY2ODg1NzQwNSwiZXhwIjoxNjY4ODcxODA1fQ.sURjH1NkYv76Qa4NSJFVi5v3Gj7VlsM4uhSdRaNM0NE"
     }
-    // store user details and jwt token in local storage to keep user logged in between page refreshes
     localStorage.setItem('currentUser', JSON.stringify(fake));
-    // this.authService.currentUserSubject.next(fake);
     this.router.navigate(['/pages/users']);          
 
     this.authService.login(

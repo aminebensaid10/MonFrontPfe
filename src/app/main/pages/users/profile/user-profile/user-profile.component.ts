@@ -40,6 +40,7 @@ export class UserProfileComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.user = new UserInscription();
     const token = this.authService.getToken();
 
     if (token) {

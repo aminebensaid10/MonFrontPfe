@@ -29,12 +29,13 @@
         <div class="media d-flex align-items-start">
           <div class="media-left">
             <div class="avatar">
-              <img [src]="imgPrefix + notification.sender.photo" alt="avatar" width="32" height="32" />
+              <img [src]="'http://localhost:8080' + notification?.collaborateur.imagePath" alt="avatar" width="32" height="32" />
             </div>
           </div>
+          
           <div class="media-body">
             <p class="media-heading">
-              <b>{{notification.sender.lastname + ' ' + notification.sender.firstname}}</b>
+              <b>{{notification.collaborateur.nom + ' ' + notification.collaborateur.prenom}} :</b>
               {{notification.message}}
             </p>
             <small class="notification-text">{{ notification.creation_date | date: 'dd/MM/yyyy à HH:mm' }}</small>
@@ -46,7 +47,7 @@
 
     <!-- Notifications footer -->
     <li class="dropdown-menu-footer">
-      <a class="btn btn-primary btn-block" (click)="myDrop.close(); toggleNotification()" href="javascript:void(0)">Voir toutes les notifications</a>
+      <a class="btn btn-primary btn-block" (click)="myDrop.close(); toggleNotification()" href="javascript:void(0)"  (click)="getNotifications()" >Voir toutes les notifications</a>
     </li>
     <!--/ Notifications footer -->
   </ul>
@@ -64,22 +65,22 @@
   <div class="notifications-list">
 
     <div class="row align-items-start notif-item" [ngStyle]="{'background-color': !notif.seen ? '#f2f8ff' : 'white'}" *ngFor="let notif of notifications">
-      <img [src]="imgPrefix + notif.sender.photo" class="avatar mr-75" width="35px" height="35px" alt="avatar"/>
+      <img [src]="'http://localhost:8080' + notif?.collaborateur.imagePath" alt="avatar" width="32" height="32" />
       <div class="d-flex flex-column">
         <p class="mb-0">
-          <b>{{notif.sender.lastname + ' ' + notif.sender.firstname}}</b>
+          <b>{{notif.collaborateur.nom + ' ' + notif.collaborateur.prenom}} :</b>
           {{notif.message}}
         </p>
         <small class="text-muted">{{ notif.creation_date | date: 'dd/MM/yyyy à HH:mm' }}</small>
       </div>
     </div>
 
-    <button class="btn btn-flat-primary mt-2"  style="margin-left: 130px;" [disabled]="loadingNotifs" *ngIf="canShowMore" (click)="showMoreNotifications()">
-      <div *ngIf="loadingNotifs" class="spinner-border text-primary mr-25">
+    <!-- <button class="btn btn-flat-primary mt-2"  style="margin-left: 130px;" >
+      <div  class="spinner-border text-primary mr-25">
         <span class="sr-only"></span>
       </div>
       Voir plus
     </button>
-    </div>
+    </div> -->
   <!--/ Notifications content -->
 </div>
