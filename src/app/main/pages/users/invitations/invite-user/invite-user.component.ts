@@ -5,7 +5,7 @@ import { UserInscription } from 'app/main/models/users';
 import { ToastrService } from 'ngx-toastr';
 import French from 'flatpickr/dist/l10n/fr.js';
 import { FlatpickrOptions } from 'ng2-flatpickr';
-import { InvitationsService } from '../services/invitations.service';
+import { InvitationsService } from '../services/membrefamille.service';
 import { UsersService } from '../../services/users-service.service';
 
 @Component({
@@ -23,7 +23,8 @@ export class InviteUserComponent {
     dateNaissance: '',
     lienParente: '',
     justificatif: '',
-    commentaire: ''
+    commentaire: '',
+    justificatifFile: null  
   };
   isFormInvalid = false;
 
@@ -59,9 +60,8 @@ export class InviteUserComponent {
         sexe: ['', Validators.required],
         dateNaissance: ['', Validators.required],
         lienParente: ['', Validators.required],
-        justificatif: ['', Validators.required],
-        // commentaire: ['', Validators.required],
-      });
+        justificatifFile: ['', Validators.required],
+        commentaire: [''],      });
   }
 
 
@@ -73,8 +73,15 @@ export class InviteUserComponent {
     return string[0].toUpperCase() + string.slice(1);
   }
 
-
+  onFileChange(event: any) {
+    const file = (event.target as HTMLInputElement).files?.[0];
+  
+    if (file) {
+      this.demandeDTO.justificatifFile = file;
+    }
+  }
   onSubmit() {
+  
     this.invitationsService.creerDemandeCompositionFamiliale(this.demandeDTO).subscribe(
       (response: any) => {
         console.log('Réponse de l\'API:', response);
@@ -108,7 +115,23 @@ export class InviteUserComponent {
   }
   
   
+  // onFileChange(event: any) {
+  //   const file = (event.target as HTMLInputElement).files?.[0];
   
+  //   if (file) {
+  //     this.demandeForm.patchValue({
+  //       justificatifFile: file
+  //     });
+  
+  //     const justificatifFileControl = this.demandeForm.get('justificatifFile');
+  
+  //     if (justificatifFileControl) {
+  //       justificatifFileControl.updateValueAndValidity();
+  //     } else {
+  //       console.error('Le contrôle justificatifFile est null.');
+  //     }
+  //   }
+  // }
   
   
   
@@ -126,7 +149,9 @@ resetForm() {
     dateNaissance: '',
     lienParente: '',
     justificatif: '',
-    commentaire: ''
+    commentaire: '',
+    justificatifFile: null  // Ajout de la propriété justificatifFile
+
   };
 }
 

@@ -3,12 +3,12 @@ import { ContentHeader } from 'app/layout/components/content-header/content-head
 import { SharedModalsService } from 'app/shared/services/shared-modals.service';
 import { ToastrService } from 'ngx-toastr';
 import { InvitationCard } from '../../models/invitations-list-model';
-import { InvitationsService } from '../services/invitations.service';
+import { InvitationsService } from '../services/membrefamille.service';
 
 @Component({
   selector: 'app-invitations-list',
-  templateUrl: './invitations-list.component.html',
-  styleUrls: ['./invitations-list.component.scss']
+  templateUrl: './membrefamille-list.component.html',
+  styleUrls: ['./membrefamille-list.component.scss']
 })
 export class InvitationsListComponent implements OnInit {
 

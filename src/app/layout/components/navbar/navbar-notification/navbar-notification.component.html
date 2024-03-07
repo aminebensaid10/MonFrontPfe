@@ -1,4 +1,4 @@
-<li ngbDropdown #myDrop="ngbDropdown" (openChange)="onNgbDropdownToggle($event)" class="nav-item dropdown-notification mr-25">
+<li ngbDropdown #myDrop="ngbDropdown"  class="nav-item dropdown-notification mr-25">
   <a class="nav-link" ngbDropdownToggle id="navbarNotificationDropdown"
     ><i class="ficon" data-feather="bell"></i
     ><span *ngIf="unreadNotifsCount > 0" class="badge badge-pill badge-danger badge-up">{{
@@ -29,10 +29,10 @@
         <div class="media d-flex align-items-start">
           <div class="media-left">
             <div class="avatar">
-              <img [src]="'http://localhost:8080' + notification?.collaborateur.imagePath" alt="avatar" width="32" height="32" />
+              <img [src]="'http://localhost:8080/fichiers/' + notification?.collaborateur.imagePath" alt="avatar" width="32" height="32" />
             </div>
           </div>
-          
+
           <div class="media-body">
             <p class="media-heading">
               <b>{{notification.collaborateur.nom + ' ' + notification.collaborateur.prenom}} :</b>
@@ -65,7 +65,12 @@
   <div class="notifications-list">
 
     <div class="row align-items-start notif-item" [ngStyle]="{'background-color': !notif.seen ? '#f2f8ff' : 'white'}" *ngFor="let notif of notifications">
-      <img [src]="'http://localhost:8080' + notif?.collaborateur.imagePath" alt="avatar" width="32" height="32" />
+      <div class="media-left">
+        <div class="avatar">
+          <img [src]="'http://localhost:8080/fichiers/' + notif?.collaborateur.imagePath" alt="avatar" width="32" height="32" />
+        </div>
+      </div>
+      <!-- <img [src]="'http://localhost:8080/fichiers/' + notif?.collaborateur.imagePath" alt="avatar" width="32" height="32" /> -->
       <div class="d-flex flex-column">
         <p class="mb-0">
           <b>{{notif.collaborateur.nom + ' ' + notif.collaborateur.prenom}} :</b>

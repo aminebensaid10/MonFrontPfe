@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { InvitationsService } from '../services/invitations.service';
+import { InvitationsService } from '../services/membrefamille.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { formatDate } from '@angular/common';

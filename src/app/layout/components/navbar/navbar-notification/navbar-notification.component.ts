@@ -65,23 +65,23 @@ export class NavbarNotificationComponent implements OnInit, OnDestroy {
   //   });
   // }
 
-  markAsRead() {
-      this.notificationsService.markAsRed().subscribe(data => {
-      });
-  }
+  // markAsRead() {
+  //     this.notificationsService.markAsRed().subscribe(data => {
+  //     });
+  // }
 
-  onNgbDropdownToggle($event) {
-    if ($event == false) {
-      if (this.unreadNotifsCount > 0) {
-        this.markAsRead();
-        this.unreadNotifsCount = 0;
-        this.notifications.map(x => {
-          x.seen = true;
-          return x;
-        });
-      }
-    }
-  }
+  // onNgbDropdownToggle($event) {
+  //   if ($event == false) {
+  //     if (this.unreadNotifsCount > 0) {
+  //       this.markAsRead();
+  //       this.unreadNotifsCount = 0;
+  //       this.notifications.map(x => {
+  //         x.seen = true;
+  //         return x;
+  //       });
+  //     }
+  //   }
+  // }
 
   toggleNotification() {
     this.showAll = !this.showAll;

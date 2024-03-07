@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { InvitationsListComponent } from './invitations-list/invitations-list.component';
+import { InvitationsListComponent } from './membrefamille-list/membrefamille-list.component';
 import { InviteUserComponent } from './invite-user/invite-user.component';
 import { SharedModule } from 'app/shared/shared.module';
-import { InvitationsService } from './services/invitations.service';
+import { InvitationsService } from './services/membrefamille.service';
 import { Ng2FlatpickrModule } from 'ng2-flatpickr';
 import { UpdateUserComponent } from './update-user/update-user.component';
 

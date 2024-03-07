@@ -5,8 +5,8 @@ import { ContentHeader } from 'app/layout/components/content-header/content-head
 
 @Component({
   selector: 'app-classes-list',
-  templateUrl: './classes-list.component.html',
-  styleUrls: ['./classes-list.component.scss']
+  templateUrl: './demande-list.component.html',
+  styleUrls: ['./demande-list.component.scss']
 })
 export class ClassesListComponent implements OnInit {
   demandes: any[] = [];

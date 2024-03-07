@@ -51,12 +51,19 @@ export class InvitationsService {
   creerDemandeCompositionFamiliale(demande: any): Observable<HttpResponse<any>> {
     const token = localStorage.getItem('token');
   
+    const formData = new FormData();
+  
+    for (const key in demande) {
+      if (demande.hasOwnProperty(key)) {
+        formData.append(key, demande[key]);
+      }
+    }
+  
     const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + token,
     });
   
-    return this.http.post<any>('http://localhost:8080/api/v1/collaborateur/creer-demande-composition-familiale', demande, { headers, observe: 'response' });
+    return this.http.post<any>('http://localhost:8080/api/v1/collaborateur/creer-demande-composition-familiale', formData, { headers, observe: 'response' });
   }
   
   

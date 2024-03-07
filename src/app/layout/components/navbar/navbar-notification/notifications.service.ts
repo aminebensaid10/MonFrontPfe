@@ -24,7 +24,7 @@ export class NotificationsService {
   //   return this.http.get<Notification[]>(environment.apiUrl + '/api/notifications/getNotifications?page=' + page + '&pageSize=' + pageSize);
   // }
 
-  markAsRed () {
-    return this.http.put(environment.apiUrl + '/api/notifications/markAsRead', {});
-  }
+  // markAsRed () {
+  //   return this.http.put(environment.apiUrl + '/api/notifications/markAsRead', {});
+  // }
 }

@@ -11,13 +11,13 @@ export class DetailComponent implements OnInit {
   demandeId: string;
   demande: any;
   constructor(private classService: ClassesService, private route : ActivatedRoute) { }
-
+  getPdfUrl(fileName: string): string {
+    return 'http://localhost:8080/upload/' + fileName;
+  }
   ngOnInit() {
-    // Récupérer les paramètres de l'URL, notamment l'ID de la demande
     this.route.params.subscribe(params => {
       this.demandeId = params['id'];
 
-      // Utiliser l'ID pour récupérer la demande spécifique
       this.classService.getDemandeById(this.demandeId).subscribe(
         (data) => {
           this.demande = data;

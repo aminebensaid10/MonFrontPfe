@@ -38,7 +38,12 @@
         <dd class="col-sm-8">{{ demande.membreFamille.lienParente }}</dd>
   
         <dt class="col-sm-4">Justificatif :</dt>
-        <dd class="col-sm-8">{{ demande.membreFamille.justificatif }}</dd>
+<dd class="col-sm-8">
+  <ng-container *ngIf="demande.membreFamille.justificatifPath">
+    <a [href]="'http://localhost:8080/fichiers/'+demande.membreFamille.justificatifPath" target="_blank">Voir le fichier PDF</a>
+  </ng-container>
+</dd>
+
   
         <dt class="col-sm-4">Commentaire :</dt>
         <dd class="col-sm-8">{{ demande.membreFamille.commentaire }}</dd>

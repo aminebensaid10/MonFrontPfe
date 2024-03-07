@@ -4,7 +4,7 @@ import { AuthGuard } from 'app/auth/helpers/auth.guards';
 import { SharedModule } from 'app/shared/shared.module';
 import { Ng2FlatpickrModule } from 'ng2-flatpickr';
 import { UsersService } from './services/users-service.service';
-import { UsersListComponent } from './users-list/users-list.component';
+import { UsersListComponent } from './mes-demandes/demandes-list.component';
 import { NavbarComponent } from 'app/layout/components/navbar/navbar.component';
 
 const routes: Routes = [
@@ -20,7 +20,7 @@ const routes: Routes = [
   },
   {
     path: 'invitations',
-    loadChildren: () => import('./invitations/invitations.module').then(m => m.InvitationsModule),
+    loadChildren: () => import('./invitations/membrefamille.module').then(m => m.InvitationsModule),
   },
   {
     path: 'profile',

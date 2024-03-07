@@ -18,7 +18,11 @@
           <label for="nomMembre">Nom du membre :</label>
           <input type="text" id="nomMembre" formControlName="nomMembre" [(ngModel)]="demandeDTO.nomMembre"class="form-control" required placeholder="Entrez le nom du membre">
         </div>
-        
+        <!-- <div class="col-md-6 col-12">
+          <div class="form-group">
+            <label for="nomMembre">test commentaire</label>
+            <input type="text" id="commentaire" formControlName="commentaire" [(ngModel)]="demandeDTO.commentaire"class="form-control" required placeholder="commentaire">
+          </div> -->
         
       </div>
       <div class="col-md-6 col-12">
@@ -50,20 +54,26 @@
           <label for="lienParente">Lien de parenté :</label>
           <select id="lienParente" formControlName="lienParente" [(ngModel)]="demandeDTO.lienParente" class="form-control" required>
             <option value="" disabled selected>Choisissez le lien de parenté</option>
-            <option value="Frère">Frère</option>
-            <option value="Sœur">Sœur</option>
             <option value="Père">Père</option>
             <option value="Mère">Mère</option>
-            <option value="Grand-père">Grand-père</option>
-            <option value="Grand-mère">Grand-mère</option>
+            <option value="Frère">Frère</option>
+            <option value="Sœur">Sœur</option>
+            <option value="Mari">Mari</option>
+            <option value="Femme">Femme</option>
+
+            <option value="Fils">Fils</option>
+            <option value="Fille">Fille</option>
+           
           </select>
         </div>
         
+        
       </div>
+     
       <div class="col-md-6 col-12">
         <div class="form-group">
-          <label for="justificatif" >Justificatif :</label>
-          <input type="text" formControlName="justificatif" id="justificatif" name="justificatif" [(ngModel)]="demandeDTO.justificatif" class="form-control" required placeholder="Entrez le justificatif">
+          <label for="justificatifFile">Justificatif File :</label>
+          <input type="file" id="justificatifFile" formControlName="justificatifFile"  class="form-control" (change)="onFileChange($event)" accept=".pdf, .doc, .docx">
         </div>
       </div>
       <div class="col-md-6 col-12">
