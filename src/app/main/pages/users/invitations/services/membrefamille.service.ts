@@ -14,6 +14,8 @@ import { CoreMenu } from '@core/types';
 export class InvitationsService {
 
   private apiUrl = 'http://localhost:8080/api/v1/collaborateur/membres';
+  private apiURL = 'http://localhost:8080/api/v1/collaborateur/situation-familiale';
+
   constructor(private http: HttpClient) { }
   private menu: CoreMenu[] = [
     {
@@ -68,9 +70,26 @@ export class InvitationsService {
   
   
   
-  
-  
+  creerDemandeSituationFamiliale(demande: any): Observable<HttpResponse<any>> {
+    const token = localStorage.getItem('token');
+    const formData = new FormData();
 
+    for (const key in demande) {
+      if (demande.hasOwnProperty(key)) {
+        formData.append(key, demande[key]);
+      }
+    }
+
+    const headers = new HttpHeaders({
+      'Authorization': 'Bearer ' + token,
+    });
+
+    return this.http.post<any>(
+      'http://localhost:8080/api/v1/collaborateur/creer-demande-situation-familiale',
+      formData,
+      { headers, observe: 'response' }
+    );
+  }
 
  
   
@@ -94,6 +113,17 @@ export class InvitationsService {
     });
 
     return this.http.get<any>(`${this.apiUrl}/${membreId}`, { headers });
+  }
+ 
+  getSituationFamiliale(): Observable<string> {
+    const token = localStorage.getItem('token');
+  
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + token,
+    });
+
+    return this.http.get(this.apiURL, { headers, responseType: 'text' });
   }
   modifierMembreEtCreerDemandeModification(membreId: number, demande: any): Observable<HttpResponse<any>> {
     const token = localStorage.getItem('token');

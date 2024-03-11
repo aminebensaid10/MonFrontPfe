@@ -24,7 +24,8 @@ export class InviteUserComponent {
     lienParente: '',
     justificatif: '',
     commentaire: '',
-    justificatifFile: null  
+    justificatifFile: null  ,
+    imageMembre : null
   };
   isFormInvalid = false;
 
@@ -61,6 +62,8 @@ export class InviteUserComponent {
         dateNaissance: ['', Validators.required],
         lienParente: ['', Validators.required],
         justificatifFile: ['', Validators.required],
+        imageMembre: ['', Validators.required],
+
         commentaire: [''],      });
   }
 
@@ -136,7 +139,10 @@ export class InviteUserComponent {
   
   
   
-  
+  onImageChange(event: any): void {
+    const file = event.target.files[0];
+    this.demandeDTO.imageMembre = file;
+  }
   
 
 
@@ -150,7 +156,8 @@ resetForm() {
     lienParente: '',
     justificatif: '',
     commentaire: '',
-    justificatifFile: null  // Ajout de la propriété justificatifFile
+    justificatifFile: null ,
+    imageMembre : null 
 
   };
 }

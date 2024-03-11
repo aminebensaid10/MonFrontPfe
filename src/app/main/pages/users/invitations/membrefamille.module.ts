@@ -6,6 +6,7 @@ import { SharedModule } from 'app/shared/shared.module';
 import { InvitationsService } from './services/membrefamille.service';
 import { Ng2FlatpickrModule } from 'ng2-flatpickr';
 import { UpdateUserComponent } from './update-user/update-user.component';
+import { AjoutSituationFamilialeComponent } from '../ajout-situation-familiale/ajout-situation-familiale.component';
 
 const routes: Routes = [
   {
@@ -31,7 +32,7 @@ const routes: Routes = [
   declarations: [
     InvitationsListComponent,
     InviteUserComponent,
-    UpdateUserComponent
+    UpdateUserComponent,
   ],
   imports: [
     SharedModule,

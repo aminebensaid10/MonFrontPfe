@@ -76,6 +76,13 @@
           <input type="file" id="justificatifFile" formControlName="justificatifFile"  class="form-control" (change)="onFileChange($event)" accept=".pdf, .doc, .docx">
         </div>
       </div>
+<div class="col-md-6 col-12">
+  <div class="form-group">
+    <label for="imageMembre">Image du membre :</label>
+    <input type="file" id="imageMembre" formControlName="imageMembre" class="form-control" (change)="onImageChange($event)" accept=".jpg, .jpeg, .png">
+  </div>
+</div>
+
       <div class="col-md-6 col-12">
         <div class="form-group">
           <label for="commentaire">Commentaire :</label>

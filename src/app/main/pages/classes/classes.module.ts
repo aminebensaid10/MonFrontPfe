@@ -21,6 +21,11 @@ const routes: Routes = [
     path: 'demandes-detail/:id',  
     component: DetailComponent,
   },
+  {
+    path: 'Demandes-situation-familiale',  
+    component: AddEditClassComponent,
+  },
+  
  
 ]
 
@@ -28,12 +33,14 @@ const routes: Routes = [
   declarations: [
     ClassesListComponent,
     DetailComponent,
+    AddEditClassComponent
     
   ],
   imports: [
     SharedModule,
     RouterModule.forChild(routes),
-    Ng2FlatpickrModule
+    Ng2FlatpickrModule,
+    
   ],
   providers: [
     

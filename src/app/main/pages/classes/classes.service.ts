@@ -54,5 +54,15 @@ export class ClassesService {
     const url = `${this.apiUrl}/demandes/${demandeId}`;
     return this.http.get(url, { headers });
   }
+  getDemandesSituationFamiliale(): Observable<any[]> {
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + token,
+    });
+    const url = 'http://localhost:8080/api/v1/gestionnaireRH/demandes-situation-familiale';
+
+    return this.http.get<any[]>(url, { headers });
+  }
   
 }

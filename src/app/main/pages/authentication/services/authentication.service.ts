@@ -49,9 +49,10 @@ export class AuthenticationService   {
         },
       ],
     },
+   
     {
       id: 'family-requests',
-      title: 'Gérer Les Demandes de Composition Familiale',
+      title: 'Composition Familiale',
       type: 'collapsible',
       icon: 'file-text', 
       children: [
@@ -60,7 +61,45 @@ export class AuthenticationService   {
           icon: 'circle',
           title: 'Mes Demandes',
           type: 'item',
-          url: 'demandes/demandes-list'
+          url: 'GestionnaireRh/demandes-list'
+        },
+        
+      ],
+    },
+    {
+      id: 'Situationfamilialedemande',
+      title: 'Situation Familiale',
+      type: 'collapsible',
+      icon: 'users',
+      children: [
+        {
+          id: 'demandesSituation-list',
+          icon: 'circle',
+          title: 'Mes demandes',
+          type: 'item',
+          url: 'GestionnaireRh/Demandes-situation-familiale'
+        }
+      ],
+    },
+    {
+      id: 'situationfamililale',
+      title: 'Ma Situation Familiale',
+      type: 'collapsible',
+      icon: 'file-text', 
+      children: [
+        {
+          id: 'pending-requests',
+          icon: 'circle',
+          title: 'Ajouter Situation famililale',
+          type: 'item',
+          url: 'users/Add-situation'
+        },
+        {
+          id: 'pending-requests',
+          icon: 'circle',
+          title: 'Ma Situation famililale',
+          type: 'item',
+          url: 'users/My-situation'
         },
         
       ],
@@ -107,10 +146,10 @@ export class AuthenticationService   {
           console.log('Profil utilisateur récupéré avec succès. Role:', userRole);
     
           this.menu.forEach(x => {
-            if (x.id === 'collaborateur' && userRole === 'COLLABORATEUR') {
+            if ((x.id === 'collaborateur' && userRole === 'COLLABORATEUR')  || (x.id === 'situationfamililale'&& userRole === 'COLLABORATEUR' )){
               x.hidden = false;
               x.children.forEach(child => (child.hidden = false));
-            } else if (x.id === 'family-requests' && userRole === 'GESTIONNAIRERH') {
+            } else if ((x.id === 'family-requests' && userRole === 'GESTIONNAIRERH') || (x.id === 'Situationfamilialedemande'&& userRole === 'GESTIONNAIRERH' )) {
               x.hidden = false;
               x.children.forEach(child => (child.hidden = false));
             } else {

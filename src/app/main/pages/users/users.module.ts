@@ -6,6 +6,9 @@ import { Ng2FlatpickrModule } from 'ng2-flatpickr';
 import { UsersService } from './services/users-service.service';
 import { UsersListComponent } from './mes-demandes/demandes-list.component';
 import { NavbarComponent } from 'app/layout/components/navbar/navbar.component';
+import { AjoutSituationFamilialeComponent } from './ajout-situation-familiale/ajout-situation-familiale.component';
+import { InvitationsService } from './invitations/services/membrefamille.service';
+import { MaSituationFamilialeComponent } from './ma-situation-familiale/ma-situation-familiale.component';
 
 const routes: Routes = [
   {
@@ -16,6 +19,16 @@ const routes: Routes = [
   {
     path: 'users-list',
     component: UsersListComponent,
+    
+  },
+  {
+    path: 'Add-situation',
+    component: AjoutSituationFamilialeComponent,
+    
+  },
+  {
+    path: 'My-situation',
+    component: MaSituationFamilialeComponent,
     
   },
   {
@@ -31,6 +44,8 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     UsersListComponent,
+    AjoutSituationFamilialeComponent,
+    MaSituationFamilialeComponent,
   ],
   imports: [
     SharedModule,
@@ -38,7 +53,8 @@ const routes: Routes = [
     Ng2FlatpickrModule
   ],
   providers: [
-    UsersService
+    UsersService,
+    InvitationsService
   ]
 })
 export class UsersModule { }

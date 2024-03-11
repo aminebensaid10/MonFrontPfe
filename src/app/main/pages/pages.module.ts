@@ -20,7 +20,7 @@ const appRoutes: Routes = [
       },
     },
     {
-      path: 'demandes',
+      path: 'GestionnaireRh',
       loadChildren: () => import('../pages/classes/classes.module').then(m => m.ClassesModule),
       data: {
         role: {
@@ -37,7 +37,7 @@ const appRoutes: Routes = [
 
 @NgModule({
   declarations: [
-    MainLayoutPageComponent
+    MainLayoutPageComponent,
     
   ],
   imports: [

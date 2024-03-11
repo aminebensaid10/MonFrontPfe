@@ -12,7 +12,10 @@ import { ContentHeader } from 'app/layout/components/content-header/content-head
 })
 export class UpdateUserComponent implements OnInit {
   membreId: any;
-  formulaireMembre: any = {};
+  formulaireMembre: any = {
+    urlImageMembre: null  
+
+  };
   contentHeader: ContentHeader = {
     headerTitle: 'Composition Familiale',
     actionButton: false,
@@ -38,6 +41,15 @@ export class UpdateUserComponent implements OnInit {
       }
     });
   }
+  onImageChange(event: any): void {
+    const fileInput = event.target;
+    const file = fileInput.files?.[0];
+  
+    if (file) {
+      // Mettez à jour le chemin de l'image dans le formulaire
+      this.formulaireMembre.imagePath = URL.createObjectURL(file);
+    }
+  }
   
   chargerDonneesMembre() {
     this.invitationService.getMembreParId(this.membreId)
@@ -45,6 +57,8 @@ export class UpdateUserComponent implements OnInit {
         response => {
 
           this.formulaireMembre = response; 
+          this.formulaireMembre.urlImageMembre = 'http://localhost:8080/fichiers/' + response.imagePath;
+
         },
         error => {
           console.error('Erreur lors du chargement des données du membre', error);
