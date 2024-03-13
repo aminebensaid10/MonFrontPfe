@@ -1,24 +1,53 @@
 <div class="content-wrapper container-xxl p-0">
-    <div class="content-body">
-      <app-content-header [contentHeader]="contentHeader"></app-content-header>
-  
-      <div class="row mb-3">
-        <!-- Ajoutez ici d'autres éléments si nécessaire -->
-      </div>
-  
-      <div class="card mb-3">
-        <div class="card-body d-flex justify-content-between align-items-center">
-          <div>
-            <h5 class="card-title m-0">Votre situation familiale actuelle</h5>
-          </div>
-          <p class="card-text h4 m-0">{{ situationFamiliale }}</p>
-  
-          <div>
-            <button class="btn btn-primary" >Modifier</button>
-            <button class="btn btn-danger" >Supprimer</button>
-          </div>
+  <div class="content-body">
+    <app-content-header [contentHeader]="contentHeader"></app-content-header>
+
+    <div class="row mb-3">
+    </div>
+
+    <div class="card mb-3">
+      <div class="card-body d-flex justify-content-between align-items-center">
+        <div>
+          <h5 class="card-title m-0">Votre situation familiale actuelle :</h5>
+        </div>
+        <p class="card-text h4 m-0">{{ situationFamiliale }}</p>
+
+        <div>
+          <button class="btn btn-danger" (click)="confirmerDemandeSuppression()">Supprimer</button>
         </div>
       </div>
     </div>
+
+    <div>
+      <form class="mb-3" enctype="multipart/form-data" (ngSubmit)="onSubmit()" [formGroup]="demandeForm">
+        <div class="mb-3">
+          <h3>Modifier la situation familiale :</h3>
+        </div>
+        <div class="mb-3 form-group">
+          <label for="newSituationFamiliale" class="form-label" style="display: block; margin-bottom: 0.5rem;">Nouvelle situation familiale:</label>
+          <select id="newSituationFamiliale" class="form-control" style="max-width: 900px; width: 100%;" formControlName="nouvelleSituation" [(ngModel)]="demandeObject.nouvelleSituation" required>
+            <option value="" disabled selected>Choisissez une option</option>
+            <option value="CELIBATAIRE">Célibataire</option>
+            <option value="MARIE">Marié</option>
+            <option value="DIVORCE">Divorcé</option>
+            <option value="VEUF">Veuf</option>
+            <option value="AUTRE">Autre</option>
+          </select>
+        </div>
+        
+        <div class="mb-3 form-group">
+          <label for="justificatifSituationFamiliale" class="form-label">Justificatif de situation familiale:</label>
+          <input type="file" id="justificatifSituationFamiliale" name="justificatifSituationFamiliale" class="form-control" style="max-width: 900px;" formControlName="justificatifSituationFamiliale" class="form-control" name="justificatifSituationFamiliale" (change)="onFileChange($event)" accept=".pdf, .doc, .docx" required>
+        </div>
+        
+        <div class="mb-3 form-group">
+          <button type="submit" class="btn btn-primary"[disabled]="!demandeForm.valid">Enregistrer</button>
+          <button type="button" class="btn btn-secondary ms-2">Annuler</button>
+        </div>
+        
+      </form>
+      
+      
+    </div>
   </div>
-  
+</div>

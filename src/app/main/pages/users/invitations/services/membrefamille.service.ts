@@ -90,8 +90,40 @@ export class InvitationsService {
       { headers, observe: 'response' }
     );
   }
+  creerDemandeModificationSituationFamiliale(demande: any): Observable<HttpResponse<any>> {
+    const token = localStorage.getItem('token');
+    const formData = new FormData();
 
- 
+    for (const key in demande) {
+      if (demande.hasOwnProperty(key)) {
+        formData.append(key, demande[key]);
+      }
+    }
+
+    const headers = new HttpHeaders({
+      'Authorization': 'Bearer ' + token,
+    });
+
+    return this.http.post<any>(
+      'http://localhost:8080/api/v1/collaborateur/creer-demande-modification-situation-familiale',
+      formData,
+      { headers, observe: 'response' }
+    );
+  }
+
+  creerDemandeSuppressionSituationFamiliale(): Observable<HttpResponse<any>> {
+    const token = localStorage.getItem('token');
+
+    const headers = new HttpHeaders({
+      'Authorization': 'Bearer ' + token,
+    });
+
+    return this.http.post<any>(
+      'http://localhost:8080/api/v1/collaborateur/creer-demande-suppression-situation-familiale',
+      {}, 
+      { headers, observe: 'response' }
+    );
+  }
   
 
   getMembres(): Observable<any> {
