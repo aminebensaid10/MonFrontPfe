@@ -9,6 +9,7 @@ import { NavbarComponent } from 'app/layout/components/navbar/navbar.component';
 import { AjoutSituationFamilialeComponent } from './ajout-situation-familiale/ajout-situation-familiale.component';
 import { InvitationsService } from './invitations/services/membrefamille.service';
 import { MaSituationFamilialeComponent } from './ma-situation-familiale/ma-situation-familiale.component';
+import { MesDemandesSituationFamilialeComponent } from './mes-demandes-situation-familiale/mes-demandes-situation-familiale.component';
 
 const routes: Routes = [
   {
@@ -32,6 +33,11 @@ const routes: Routes = [
     
   },
   {
+    path: 'my-requests',
+    component: MesDemandesSituationFamilialeComponent,
+    
+  },
+  {
     path: 'invitations',
     loadChildren: () => import('./invitations/membrefamille.module').then(m => m.InvitationsModule),
   },
@@ -46,6 +52,7 @@ const routes: Routes = [
     UsersListComponent,
     AjoutSituationFamilialeComponent,
     MaSituationFamilialeComponent,
+    MesDemandesSituationFamilialeComponent,
   ],
   imports: [
     SharedModule,

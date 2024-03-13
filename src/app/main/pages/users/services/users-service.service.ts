@@ -23,6 +23,15 @@ export class UsersService {
     });
     return this.http.get<any[]>(`${this.apiURL}/demandes`, { headers});
   }
+  getDemandesSituation(): Observable<any[]> {
+    const token = localStorage.getItem('token');
+  
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + token,
+    });
+    return this.http.get<any[]>(`${this.apiURL}/demandes-situation`, { headers});
+  }
   // get all users on the plateform
   // getUsers() {
   //   return this.http.get<UserCard[]>(environment.apiUrl + '/api/users/getUsers');

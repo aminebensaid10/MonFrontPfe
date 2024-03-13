@@ -1,0 +1,41 @@
+<div *ngIf="demande" class="card">
+    <div class="card-header">
+      <h2 class="card-title">Détails de la demande</h2>
+    </div>
+    <div class="card-body">
+      <dl class="row">
+        <dt class="col-sm-4">ID :</dt>
+        <dd class="col-sm-8">{{ demande.id }}</dd>
+  
+        <dt class="col-sm-4">Nom collaborateur :</dt>
+        <dd class="col-sm-8">{{ demande.collaborateur.nom }}</dd>
+  
+        <dt class="col-sm-4">Prénom collaborateur :</dt>
+        <dd class="col-sm-8">{{ demande.collaborateur.prenom }}</dd>
+  
+        <dt class="col-sm-4">Type de Demande :</dt>
+        <dd class="col-sm-8">{{ demande.typeDemande }}</dd>
+  
+        <dt class="col-sm-4">État de Demande :</dt>
+        <dd class="col-sm-8">{{ demande.etat }}</dd>
+  
+        <dt class="col-sm-4">Nouvelle Situation :</dt>
+        <dd class="col-sm-8">{{ demande.nouvelleSituation }}</dd>
+  
+        <dt class="col-sm-4">Justificatif :</dt>
+        <dd class="col-sm-8">
+          <ng-container *ngIf="demande.justificatifPath">
+            <a [href]="'http://localhost:8080/fichiers/' + demande.justificatifPath" target="_blank">Voir le fichier PDF</a>
+          </ng-container>
+        </dd>
+      </dl>
+    </div>
+    <div class="card-footer">
+      <a routerLink="../../demandes-list" class="btn btn-outline-secondary">Retour à la liste des demandes</a>
+    </div>
+  </div>
+  
+  <div *ngIf="!demande">
+    <p class="alert alert-warning">Aucune demande trouvée avec l'ID {{ demandeId }}</p>
+  </div>
+  

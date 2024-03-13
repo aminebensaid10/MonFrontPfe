@@ -1,12 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ClassesListComponent } from './demande-list/demande-list.component';
-import { AddEditClassComponent } from './situation-familiale/add-edit-class.component';
+import { AddEditClassComponent } from './gerer-situation-familiale/add-edit-class.component';
 import { RouterModule, Routes } from '@angular/router';
 import { SharedModule } from 'app/shared/shared.module';
 import { Ng2FlatpickrModule } from 'ng2-flatpickr';
 import { InvitationsService } from '../users/invitations/services/membrefamille.service';
 import { DetailComponent } from './detail/detail.component';
+import { DetailDemandeSituationComponent } from './detail-demande-situation/detail-demande-situation.component';
 
 const routes: Routes = [
   // {
@@ -25,6 +26,11 @@ const routes: Routes = [
     path: 'Demandes-situation-familiale',  
     component: AddEditClassComponent,
   },
+  {
+    path: 'detail-demande-situation-familiale/:id',  
+    component: DetailDemandeSituationComponent,
+  },
+  
   
  
 ]
@@ -33,7 +39,8 @@ const routes: Routes = [
   declarations: [
     ClassesListComponent,
     DetailComponent,
-    AddEditClassComponent
+    AddEditClassComponent,
+    DetailDemandeSituationComponent,    
     
   ],
   imports: [

@@ -32,6 +32,16 @@ export class ClassesService {
     const url = `${this.apiUrl}/valider-demande/${demandeId}`;
     return this.http.post(url, {}, { headers });
   }
+  validateRequestSituation(demandesituationfamiliale_id: number): Observable<any> {
+    const token = localStorage.getItem('token');
+
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + token,
+    });
+    const url = `${this.apiUrl}/valider-demande-situation/${demandesituationfamiliale_id}`;
+    return this.http.post(url, {}, { headers });
+  }
   rejectRequest(demandeId: number): Observable<any> {
     const token = localStorage.getItem('token');
 
@@ -43,6 +53,17 @@ export class ClassesService {
     const url = `${this.apiUrl}/rejeter-demande/${demandeId}`;
     return this.http.post(url, {}, { headers });
   }
+  rejectRequestsituation(demandesituationfamiliale_id: number): Observable<any> {
+    const token = localStorage.getItem('token');
+
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + token,
+    });
+    
+    const url = `${this.apiUrl}/rejeter-demande-situation/${demandesituationfamiliale_id}`;
+    return this.http.post(url, {}, { headers });
+  }
   getDemandeById(demandeId: string): Observable<any> {
     const token = localStorage.getItem('token');
 
@@ -52,6 +73,17 @@ export class ClassesService {
     });
     
     const url = `${this.apiUrl}/demandes/${demandeId}`;
+    return this.http.get(url, { headers });
+  }
+  getDemandeSituationById(demandesituationfamiliale_id: string): Observable<any> {
+    const token = localStorage.getItem('token');
+
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + token,
+    });
+    
+    const url = `${this.apiUrl}/demandes-situation/${demandesituationfamiliale_id}`;
     return this.http.get(url, { headers });
   }
   getDemandesSituationFamiliale(): Observable<any[]> {

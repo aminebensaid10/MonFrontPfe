@@ -31,19 +31,19 @@
               <td>{{ demande.collaborateur.prenom }}</td>
               <td>{{ demande.nouvelleSituation }}</td>
               <td>{{ demande.typeDemande }}</td>
-              <td>{{ demande.etat }}</td>
+              <td [ngClass]="{'text-success': demande.etat === 'Valide', 'text-danger': demande.etat === 'Invalide', 'text-warning': demande.etat === 'En cours'}">{{ demande.etat }}</td>
               <td>
                 <ng-container *ngIf="demande.etat === 'En cours'; else otherContent">
-                  <button class="btn btn-success" >Valider</button>
-                  <button class="btn btn-danger" >Rejeter</button>
+                  <button class="btn btn-success" (click)="validateRequest(demande.id)">Valider</button>
+                  <button class="btn btn-danger" (click)="rejectRequest(demande.id)">Rejeter</button>
                 </ng-container>
                 <ng-template #otherContent>
-                  <span  class="text-success">La demande est déjà valide.</span>
-                  <span  class="text-danger">La demande est déjà invalide.</span>
+                  <span *ngIf="demande.etat === 'Valide'" class="text-success">La demande est déjà valide.</span>
+                  <span *ngIf="demande.etat === 'Invalide'" class="text-danger">La demande est déjà invalide.</span>
                 </ng-template>
               </td>
               <td>
-                <a class="btn btn-info" >Détails</a>
+                <a class="btn btn-info" [routerLink]="['../../GestionnaireRh/detail-demande-situation-familiale', demande.id]">Détails</a>
               </td>
             </tr>
           </tbody>

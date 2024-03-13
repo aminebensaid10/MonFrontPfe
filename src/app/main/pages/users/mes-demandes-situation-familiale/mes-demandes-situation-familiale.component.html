@@ -1,0 +1,81 @@
+<div class="content-wrapper container-xxl p-0">
+    <div class="content-body">
+      <app-content-header [contentHeader]="contentHeader"></app-content-header>
+      
+
+  
+      <div class="row mb-1">
+        <div class="col-12">
+          <div class="input-group input-group-merge">
+            <input
+              class="form-control"
+              [(ngModel)]="searchQuery" (input)="filter(searchQuery)"              placeholder="Recherche"
+            />
+            <div class="input-group-append">
+              <span class="input-group-text">
+                <i class="feather icon-search"></i>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <!-- <div class="card-header">
+              <h4 class="card-title">Liste des Demandes</h4>
+            </div> -->
+            <div class="card-content">
+              <div class="card-body">
+                <div class="table-responsive">
+                  <table class="table table-striped">
+                    <thead>
+                      <tr>
+                        <th>Nom</th>
+                        <th>Prénom</th>
+                        <th>Type de demande</th>
+                        <th>Nouvelle Situation</th>
+
+                        <th>État</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let demande of demandes">
+                        <td>{{ demande.collaborateur.nom }}</td>
+                        <td>{{ demande.collaborateur.prenom }}</td>
+                        <td>{{ demande.typeDemande }}</td>
+                        <td>{{ demande.nouvelleSituation }}</td>
+
+                        <td [ngClass]="{'text-success': demande.etat === 'Valide', 'text-warning': demande.etat === 'En cours', 'text-danger': demande.etat === 'Invalide'}">
+                          {{ demande.etat }}
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <ngb-alert type="secondary" *ngIf="demandes.length == 0">
+                <div class="alert-body">
+                  <strong>Pas de demandes! </strong> Il n'y a aucune demande à afficher pour le moment.
+                </div>
+              </ngb-alert>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+  
+  
+      <ngb-alert
+        type="secondary"
+        [dismissible]="false"
+        class="m-1"
+      >
+       
+      </ngb-alert>
+  
+   
+    </div>
+  </div>
+  

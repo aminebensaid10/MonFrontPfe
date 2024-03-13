@@ -101,6 +101,13 @@ export class AuthenticationService   {
           type: 'item',
           url: 'users/My-situation'
         },
+        {
+          id: 'pending-requests',
+          icon: 'circle',
+          title: 'Mes demandes',
+          type: 'item',
+          url: 'users/my-requests'
+        },
         
       ],
     },
