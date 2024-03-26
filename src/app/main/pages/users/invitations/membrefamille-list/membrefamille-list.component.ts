@@ -15,7 +15,7 @@ export class InvitationsListComponent implements OnInit {
   
   membres: any[];
 
-  
+  searchTerm: string = ''
   contentHeader: ContentHeader = {
     headerTitle: 'Composition Familiale',
     actionButton: false,
@@ -53,57 +53,23 @@ export class InvitationsListComponent implements OnInit {
       );
     }
   }
+ 
   
   
 
-  // filter($event) {
-  //   this.filteredInvitations = this.invitations;
-  //   if($event != '') {
-  //     this.filteredInvitations = this.invitations.filter(x => (x.email + x.lastname + ' ' + x.firstname).toLowerCase().includes($event.toLowerCase()));
-  //   }
-  // }
-
-  // getInvitations() {
-  //   this.invitationsService.getInvitations().subscribe(data => {
-  //     this.invitations = data;
-  //     this.filteredInvitations = data;
-  //     this.loadingInvitations = false;
-  //   },
-  //   (error) => {
-  //     this.toastr.error('On n\'a pas pu charger vos invitations', 'Échec');
-  //     this.loadingInvitations = false;
-  //   });
-  // }
-
-  // deleteInvitation(id) {
-  //   this.modalsSerivce.openConfirmationModal('Voulez-vous vraiment supprimer cette invitation?', 'danger', 'Supprimer').then(result => {
-  //     if (result == 'confirmed') {
-  //       this.invitationsService.deleteInvitation(id).subscribe(data => {
-  //         if (data) {
-  //           const indexToRemove = this.invitations.findIndex(x => x._id == id);
-  //           this.invitations.splice(indexToRemove, 1);
-  //           this.toastr.success('Invitation supprimée', 'Succès');
-  //         } else {
-  //           this.toastr.error('Opération échouée', 'Échec');
-  //         }
-  //       });
-  //     }
-  //   });
-    
-  // }
-
-  // resendInvitation(user) {
-  //   this.modalsSerivce.openConfirmationModal('Voulez-vous vraiment réenvoyer cette invitation?', 'warning', 'Réenvoyer').then(result => {
-  //     if (result == 'confirmed') {
-  //       this.invitationsService.resendInvitation(user).subscribe(data => {
-  //         this.toastr.success('Email envoyée', 'Succès');
-  //       },
-  //       (error) => {
-  //         this.toastr.error('Opération échouée', 'Échec');
-  //       });
-  //     }
-  //   });
-    
-  // }
+ 
+  applyFilter() {
+    if (!this.searchTerm) {
+      return this.membres;
+    }
+    const lowerCaseSearchTerm = this.searchTerm.toLowerCase();
+    return this.membres.filter(membre =>
+      (membre.nomMembre && membre.nomMembre.toLowerCase().includes(lowerCaseSearchTerm)) ||
+      (membre.prenomMembre && membre.prenomMembre.toLowerCase().includes(lowerCaseSearchTerm)) ||
+      (membre.lienParente && membre.lienParente.toLowerCase().includes(lowerCaseSearchTerm)) ||
+      (membre.sexe && membre.sexe.toLowerCase().includes(lowerCaseSearchTerm)) ||
+      (membre.dateNaissance && membre.dateNaissance.toLowerCase().includes(lowerCaseSearchTerm))
+    );
+  }
 
 }

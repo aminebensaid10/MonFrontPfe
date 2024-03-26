@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ContentHeader } from 'app/layout/components/content-header/content-header.component';
 import { UserInscription, CurrentUser } from 'app/main/models/users';
 import { AuthenticationService } from 'app/main/pages/authentication/services/authentication.service';
+import { UsersService } from '../../../services/users-service.service';
 
 
 @Component({
@@ -12,8 +13,7 @@ import { AuthenticationService } from 'app/main/pages/authentication/services/au
 })
 export class EditProfileComponent implements OnInit {
 
-  user = new UserInscription();
-  currentUser = new CurrentUser()
+
 
 
   contentHeader: ContentHeader = {
@@ -33,13 +33,12 @@ export class EditProfileComponent implements OnInit {
     }
   };
   
-  
-  constructor(private authServices: AuthenticationService,
-    private route: ActivatedRoute) { 
-      this.user._id = this.route.snapshot.params.id;
-      this.currentUser = this.authServices.currentUserValue;
+ 
+  constructor(private authServices: UsersService,
+    private route: ActivatedRoute,) { 
+     
   }
-
+  
 
   ngOnInit(): void {
   }

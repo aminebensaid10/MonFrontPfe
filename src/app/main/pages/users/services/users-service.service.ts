@@ -32,6 +32,24 @@ export class UsersService {
     });
     return this.http.get<any[]>(`${this.apiURL}/demandes-situation`, { headers});
   }
+  getDemandesDemenagement(): Observable<any[]> {
+    const token = localStorage.getItem('token');
+  
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + token,
+    });
+    return this.http.get<any[]>(`${this.apiURL}/demandes-demenagement`, { headers});
+  }
+  getcollaborateur(): Observable<any[]> {
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + token,
+    });
+    return this.http.get<any[]>('http://localhost:8080/api/v1/gestionnaireRH/situation-familiale', { headers });
+  }
+  
   // get all users on the plateform
   // getUsers() {
   //   return this.http.get<UserCard[]>(environment.apiUrl + '/api/users/getUsers');
@@ -42,6 +60,15 @@ export class UsersService {
     });
 
     return this.http.get<any>(`${this.apiUrl}/profile`, { headers });
+  }
+  updateProfile(profileData: any): Observable<any> {
+    const token = localStorage.getItem('token'); // Récupérer le jeton d'authentification depuis le stockage local
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + token // Ajouter le jeton d'authentification à l'en-tête de la requête
+    });
+    return this.http.put<any>(`${this.apiUrl}/update`, profileData, { headers });
+     
   }
   // get user data (for user profile)
   getUserData(id) {

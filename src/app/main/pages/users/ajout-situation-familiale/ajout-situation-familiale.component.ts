@@ -3,6 +3,7 @@ import { InvitationsService } from '../invitations/services/membrefamille.servic
 import { ToastrService } from 'ngx-toastr';
 import { ContentHeader } from 'app/layout/components/content-header/content-header.component';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-ajout-situation-familiale',
@@ -27,7 +28,7 @@ export class AjoutSituationFamilialeComponent implements OnInit {
   };
   isFormInvalid = false;
 
-  constructor(private situationfamilialeservice: InvitationsService, private toastr: ToastrService ,private formBuilder: FormBuilder) {
+  constructor(private situationfamilialeservice: InvitationsService, private toastr: ToastrService ,private formBuilder: FormBuilder, private router : Router) {
     this.demandeForm = this.formBuilder.group({
       nouvelleSituation: ['', Validators.required],
       
@@ -45,6 +46,8 @@ export class AjoutSituationFamilialeComponent implements OnInit {
       .subscribe(
         response => {
           this.toastr.success('Demande de situation familiale créée avec succès', 'Succès');
+          this.router.navigate(['/pages/users/my-requests']);
+
         },
         error => {
           this.toastr.error('La situation familiale est déjà définie pour le collaborateur.', 'Erreur');

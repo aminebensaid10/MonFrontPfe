@@ -19,14 +19,14 @@
         </ng-template>
       </li>
 
-      <li ngbNavItem *ngIf="currentUser.id == user._id">
+      <li ngbNavItem >
         <a ngbNavLink><i class="feather icon-lock mr-1 font-medium-3"></i>Modifier mot de passe</a>
         <ng-template ngbNavContent>
           <app-change-password></app-change-password>
         </ng-template>
       </li>
 
-      <li ngbNavItem *ngIf="currentUser.access_rights.users == 'write'">
+      <li ngbNavItem >
         <a ngbNavLink><i class="feather icon-mail mr-1 font-medium-3"></i>Modifier adresse email</a>
         <ng-template ngbNavContent>
           <app-change-email></app-change-email>

@@ -1,0 +1,34 @@
+<div class="content-wrapper container-xxl p-0">
+    <div class="content-body">
+      <app-content-header [contentHeader]="contentHeader"></app-content-header>
+      
+    <div class="card">
+      <div class="card-header">
+          <div class="card-title">
+              <h4>Ajouter mon adresse principal</h4>
+          </div>
+          <div class="container mt-4">
+            <h2 class="mb-4">Créer Demande Adresse principal</h2>
+          
+            <form (ngSubmit)="onSubmit()" [formGroup]="demandeForm">
+                <div class="mb-3 row">
+                    <label for="situationFamiliale" class="form-label col-2">Adresse Principal</label>
+                    <div class="col-6">
+                        <input type="text" id="nouvelleAdresse" formControlName="nouvelleAdresse" [(ngModel)]="demandeObject.nouvelleAdresse" class="form-control" placeholder="Entrez votre adresse principale" required>
+                    </div>
+                    
+                  </div>
+          
+              <div class="mb-3 row">
+                <label for="justificatifAdressePrincipale" class="form-label col-2">Justificatif Adresse Principale:</label>
+                <div class="col-6">
+                  <input type="file" id="justificatifAdressePrincipale" formControlName="justificatifAdressePrincipale" class="form-control" name="justificatifSituationFamiliale" (change)="onFileChange($event)" required>
+                </div>
+              </div>
+          
+              <button type="submit" class="btn btn-primary"[disabled]="!demandeForm.valid">Créer Demande</button>
+            </form>
+          </div>
+          
+          
+  

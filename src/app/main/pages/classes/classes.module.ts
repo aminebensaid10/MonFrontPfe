@@ -8,6 +8,9 @@ import { Ng2FlatpickrModule } from 'ng2-flatpickr';
 import { InvitationsService } from '../users/invitations/services/membrefamille.service';
 import { DetailComponent } from './detail/detail.component';
 import { DetailDemandeSituationComponent } from './detail-demande-situation/detail-demande-situation.component';
+import { GererDemandesDemenagementsComponent } from './gerer-demandes-demenagements/gerer-demandes-demenagements.component';
+import { DetailDemandeDemenagementComponent } from './detail-demande-demenagement/detail-demande-demenagement.component';
+import { MembreFamilleComponent } from './membre-famille/membre-famille.component';
 
 const routes: Routes = [
   // {
@@ -27,10 +30,21 @@ const routes: Routes = [
     component: AddEditClassComponent,
   },
   {
+    path: 'Demandes-demenagements',  
+    component: GererDemandesDemenagementsComponent,
+  },
+  {
+    path: 'Membres-familles',  
+    component: MembreFamilleComponent,
+  },
+  {
     path: 'detail-demande-situation-familiale/:id',  
     component: DetailDemandeSituationComponent,
   },
-  
+  {
+    path: 'detail-demande-demenagement/:id',  
+    component: DetailDemandeDemenagementComponent,
+  },
   
  
 ]
@@ -40,7 +54,10 @@ const routes: Routes = [
     ClassesListComponent,
     DetailComponent,
     AddEditClassComponent,
-    DetailDemandeSituationComponent,    
+    DetailDemandeSituationComponent,
+    GererDemandesDemenagementsComponent,
+    DetailDemandeDemenagementComponent,
+    MembreFamilleComponent,    
     
   ],
   imports: [

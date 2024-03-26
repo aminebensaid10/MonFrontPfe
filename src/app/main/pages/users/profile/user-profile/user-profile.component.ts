@@ -34,7 +34,7 @@ export class UserProfileComponent implements OnInit {
   
   constructor(private usersService: UsersService, private route: ActivatedRoute,
     private sharedModals: SharedModalsService, private toastr: ToastrService, private authService: AuthenticationService) {
-      this.currentUser = authService.currentUserValue;
+      // this.currentUser = authService.currentUserValue;
       this.user._id = this.route.snapshot.params.id;
       this.isMyProfile = this.currentUser.id == this.user._id;
   }

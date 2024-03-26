@@ -46,7 +46,6 @@ export class UpdateUserComponent implements OnInit {
     const file = fileInput.files?.[0];
   
     if (file) {
-      // Mettez à jour le chemin de l'image dans le formulaire
       this.formulaireMembre.imagePath = URL.createObjectURL(file);
     }
   }

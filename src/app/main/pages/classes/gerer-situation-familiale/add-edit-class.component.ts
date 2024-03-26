@@ -10,6 +10,9 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class AddEditClassComponent implements OnInit {
   demandesSituationFamiliale: any[] = [];
+  searchTerm: string = '';
+
+  
   contentHeader: ContentHeader = {
     headerTitle: 'Situation Familiale',
     actionButton: false,
@@ -34,6 +37,8 @@ export class AddEditClassComponent implements OnInit {
           console.log('Demande validée avec succès :', response);
           this.toastr.success('Demande validée avec succès', 'Succès');
           this.refreshDemandes();
+          window.location.reload();
+
         },
         error => {
           console.error('Erreur lors de la validation de la demande :', error);
@@ -70,6 +75,8 @@ export class AddEditClassComponent implements OnInit {
         console.log('Demande rejetée avec succès :', response);
         this.toastr.success('Demande rejetée avec succès', 'Succès');
         this.refreshDemandes();
+        window.location.reload();
+
       },
       error => {
         console.error('Erreur lors du rejet de la demande :', error);
@@ -77,5 +84,18 @@ export class AddEditClassComponent implements OnInit {
       }
     );
   }
+  }
+  applyFilter() {
+    if (!this.searchTerm) {
+      return this.demandesSituationFamiliale;
+    }
+    const lowerCaseSearchTerm = this.searchTerm.toLowerCase();
+    return this.demandesSituationFamiliale.filter(demande =>
+      (demande.collaborateur.nom && demande.collaborateur.nom.toLowerCase().includes(lowerCaseSearchTerm)) ||
+      (demande.collaborateur.prenom && demande.collaborateur.prenom.toLowerCase().includes(lowerCaseSearchTerm)) ||
+      (demande.nouvelleSituation && demande.nouvelleSituation.toLowerCase().includes(lowerCaseSearchTerm)) ||
+      (demande.typeDemande && demande.typeDemande.toLowerCase().includes(lowerCaseSearchTerm)) ||
+      (demande.etat && demande.etat.toLowerCase().includes(lowerCaseSearchTerm))
+    );
   }
 }

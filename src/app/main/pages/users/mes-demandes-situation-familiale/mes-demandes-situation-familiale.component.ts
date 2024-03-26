@@ -8,12 +8,10 @@ import { ContentHeader } from 'app/layout/components/content-header/content-head
   styleUrls: ['./mes-demandes-situation-familiale.component.scss']
 })
 export class MesDemandesSituationFamilialeComponent implements OnInit {
-  filteredDemandes: any[] = [];
-  demandesInitiales: any[] = [];
 
   demandes: any[] = [];
   private userProfile: any;
-  searchQuery: string = '';
+  searchTerm: string = '';
 
   contentHeader: ContentHeader = {
     headerTitle: 'Situation Familiale',
@@ -43,13 +41,17 @@ export class MesDemandesSituationFamilialeComponent implements OnInit {
       }
     );
   }
-  filter($event: string): void {
-  
-    if ($event !== '') {
-      this.demandes = this.demandes.filter(demande =>
-        (demande.membreFamille.nomMembre + ' ' + demande.membreFamille.prenomMembre + ' ' + demande.typeDemande + ' ' + demande.etat)
-          .toLowerCase().includes($event.toLowerCase())
-      );
+  applyFilter() {
+    if (!this.searchTerm) {
+      return this.demandes;
     }
+    const lowerCaseSearchTerm = this.searchTerm.toLowerCase();
+    return this.demandes.filter(demande =>
+      (demande.collaborateur.nom && demande.collaborateur.nom.toLowerCase().includes(lowerCaseSearchTerm)) ||
+      (demande.collaborateur.prenom && demande.collaborateur.prenom.toLowerCase().includes(lowerCaseSearchTerm)) ||
+      (demande.typeDemande && demande.typeDemande.toLowerCase().includes(lowerCaseSearchTerm)) ||
+      (demande.nouvelleSituation && demande.nouvelleSituation.toLowerCase().includes(lowerCaseSearchTerm)) ||
+      (demande.etat && demande.etat.toLowerCase().includes(lowerCaseSearchTerm))
+    );
   }
 }

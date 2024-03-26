@@ -5,7 +5,7 @@
       <div class="row mb-3">
         <div class="col-12">
           <div class="input-group input-group-merge">
-            <input class="form-control" placeholder="Recherche" />
+            <input class="form-control" placeholder="Recherche" [(ngModel)]="searchTerm" />
             <div class="input-group-append">
               <span class="input-group-text"><i class="feather icon-search"></i></span>
             </div>
@@ -26,7 +26,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let demande of demandesSituationFamiliale">
+            <tr *ngFor="let demande of applyFilter()">
               <td>{{ demande.collaborateur.nom }}</td>
               <td>{{ demande.collaborateur.prenom }}</td>
               <td>{{ demande.nouvelleSituation }}</td>

@@ -63,6 +63,13 @@ export class AuthenticationService   {
           type: 'item',
           url: 'GestionnaireRh/demandes-list'
         },
+        {
+          id: 'pending-requests',
+          icon: 'circle',
+          title: 'Liste des membres',
+          type: 'item',
+          url: 'GestionnaireRh/Membres-familles'
+        },
         
       ],
     },
@@ -78,14 +85,44 @@ export class AuthenticationService   {
           title: 'Mes demandes',
           type: 'item',
           url: 'GestionnaireRh/Demandes-situation-familiale'
+        },
+        {
+          id: 'collaborateur-situation',
+          icon: 'circle',
+          title: 'Liste des situations',
+          type: 'item',
+          url: 'users/Collaborateur-situation'
         }
+      ],
+    },
+    {
+      id: 'demenagementGestionnaireRH',
+      title: 'Déménagement',
+      type: 'collapsible',
+      icon: 'file-text', 
+      children: [
+        {
+          id: 'pending-requests',
+          icon: 'circle',
+          title: 'Mes Demandes',
+          type: 'item',
+          url: 'GestionnaireRh/Demandes-demenagements'
+        },
+        {
+          id: 'pending-requests',
+          icon: 'circle',
+          title: 'Liste des adresses principale',
+          type: 'item',
+          url: 'users/Collaborateur-adresse'
+        },
+        
       ],
     },
     {
       id: 'situationfamililale',
       title: 'Ma Situation Familiale',
       type: 'collapsible',
-      icon: 'file-text', 
+      icon: 'heart', 
       children: [
         {
           id: 'pending-requests',
@@ -110,6 +147,40 @@ export class AuthenticationService   {
         },
         
       ],
+      
+      
+    },
+    {
+      id: 'demenagement',
+      title: 'Mon déménagement',
+      type: 'collapsible',
+      icon: 'home', 
+      children: [
+        {
+          id: 'pending-requestss',
+          icon: 'circle',
+          title: 'Ajouter Mon Adresse Principale',
+          type: 'item',
+          url: 'users/Add-address'
+        },
+        {
+          id: 'pending-requestss',
+          icon: 'circle',
+          title: 'Mon Adresse Principale',
+          type: 'item',
+          url: 'users/My-address'
+        },
+        {
+          id: 'pending-requestss',
+          icon: 'circle',
+          title: 'Mes demandes',
+          type: 'item',
+          url: 'users/my-requests-moving'
+        },
+        
+      ],
+      
+      
     },
   ];
   
@@ -153,10 +224,10 @@ export class AuthenticationService   {
           console.log('Profil utilisateur récupéré avec succès. Role:', userRole);
     
           this.menu.forEach(x => {
-            if ((x.id === 'collaborateur' && userRole === 'COLLABORATEUR')  || (x.id === 'situationfamililale'&& userRole === 'COLLABORATEUR' )){
+            if ((x.id === 'collaborateur' && userRole === 'COLLABORATEUR')  || (x.id === 'situationfamililale'&& userRole === 'COLLABORATEUR' )|| (x.id === 'demenagement'&& userRole === 'COLLABORATEUR' )){
               x.hidden = false;
               x.children.forEach(child => (child.hidden = false));
-            } else if ((x.id === 'family-requests' && userRole === 'GESTIONNAIRERH') || (x.id === 'Situationfamilialedemande'&& userRole === 'GESTIONNAIRERH' )) {
+            } else if ((x.id === 'family-requests' && userRole === 'GESTIONNAIRERH') || (x.id === 'Situationfamilialedemande'&& userRole === 'GESTIONNAIRERH' )|| (x.id === 'demenagementGestionnaireRH'&& userRole === 'GESTIONNAIRERH' )) {
               x.hidden = false;
               x.children.forEach(child => (child.hidden = false));
             } else {

@@ -10,6 +10,11 @@ import { AjoutSituationFamilialeComponent } from './ajout-situation-familiale/aj
 import { InvitationsService } from './invitations/services/membrefamille.service';
 import { MaSituationFamilialeComponent } from './ma-situation-familiale/ma-situation-familiale.component';
 import { MesDemandesSituationFamilialeComponent } from './mes-demandes-situation-familiale/mes-demandes-situation-familiale.component';
+import { MonAdressePrincipalComponent } from './ajout-adresse-principal/mon-adresse-principal.component';
+import { MonAdressePrincipaleComponent } from './mon-adresse-principale/mon-adresse-principale.component';
+import { MesDemandesDemenagementComponent } from './mes-demandes-demenagement/mes-demandes-demenagement.component';
+import { CollaborateurSituationFamilialeComponent } from './collaborateur-situation-familiale/collaborateur-situation-familiale.component';
+import { CollaborateurAdressePrinicpalComponent } from './collaborateur-adresse-prinicpal/collaborateur-adresse-prinicpal.component';
 
 const routes: Routes = [
   {
@@ -33,8 +38,33 @@ const routes: Routes = [
     
   },
   {
+    path: 'Collaborateur-situation',
+    component: CollaborateurSituationFamilialeComponent,
+    
+  },
+  {
+    path: 'Collaborateur-adresse',
+    component: CollaborateurAdressePrinicpalComponent,
+    
+  },
+  {
+    path: 'Add-address',
+    component: MonAdressePrincipalComponent,
+    
+  },
+  {
+    path: 'My-address',
+    component: MonAdressePrincipaleComponent,
+    
+  },
+  {
     path: 'my-requests',
     component: MesDemandesSituationFamilialeComponent,
+    
+  },
+  {
+    path: 'my-requests-moving',
+    component: MesDemandesDemenagementComponent,
     
   },
   {
@@ -53,6 +83,11 @@ const routes: Routes = [
     AjoutSituationFamilialeComponent,
     MaSituationFamilialeComponent,
     MesDemandesSituationFamilialeComponent,
+    MonAdressePrincipalComponent,
+    MonAdressePrincipaleComponent,
+    MesDemandesDemenagementComponent,
+    CollaborateurSituationFamilialeComponent,
+    CollaborateurAdressePrinicpalComponent,
   ],
   imports: [
     SharedModule,

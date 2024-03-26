@@ -90,6 +90,47 @@ export class InvitationsService {
       { headers, observe: 'response' }
     );
   }
+  creerDemandeAddressPrincipal(demande: any): Observable<HttpResponse<any>> {
+    const token = localStorage.getItem('token');
+    const formData = new FormData();
+
+    for (const key in demande) {
+      if (demande.hasOwnProperty(key)) {
+        formData.append(key, demande[key]);
+      }
+    }
+
+    const headers = new HttpHeaders({
+      'Authorization': 'Bearer ' + token,
+    });
+
+    return this.http.post<any>(
+      'http://localhost:8080/api/v1/collaborateur/creer-demande-demenagement',
+      formData,
+      { headers, observe: 'response' }
+    );
+  }
+  declarerDemenagement(demande: any): Observable<HttpResponse<any>> {
+    const token = localStorage.getItem('token');
+    const formData = new FormData();
+
+    for (const key in demande) {
+      if (demande.hasOwnProperty(key)) {
+        formData.append(key, demande[key]);
+      }
+    }
+
+    const headers = new HttpHeaders({
+      'Authorization': 'Bearer ' + token,
+    });
+
+    return this.http.post<any>(
+      'http://localhost:8080/api/v1/collaborateur/declarer-demenagement',
+      formData,
+      { headers, observe: 'response' }
+    );
+  }
+ 
   creerDemandeModificationSituationFamiliale(demande: any): Observable<HttpResponse<any>> {
     const token = localStorage.getItem('token');
     const formData = new FormData();
@@ -120,6 +161,19 @@ export class InvitationsService {
 
     return this.http.post<any>(
       'http://localhost:8080/api/v1/collaborateur/creer-demande-suppression-situation-familiale',
+      {}, 
+      { headers, observe: 'response' }
+    );
+  }
+  creerDemandeSuppressionAdressPrincipal(): Observable<HttpResponse<any>> {
+    const token = localStorage.getItem('token');
+
+    const headers = new HttpHeaders({
+      'Authorization': 'Bearer ' + token,
+    });
+
+    return this.http.post<any>(
+      'http://localhost:8080/api/v1/collaborateur/creer-demande-suppression-demenagement',
       {}, 
       { headers, observe: 'response' }
     );
@@ -156,6 +210,16 @@ export class InvitationsService {
     });
 
     return this.http.get(this.apiURL, { headers, responseType: 'text' });
+  }
+  getAddressPrincipal(): Observable<string> {
+    const token = localStorage.getItem('token');
+  
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + token,
+    });
+
+    return this.http.get('http://localhost:8080/api/v1/collaborateur/adress-principal', { headers, responseType: 'text' });
   }
   modifierMembreEtCreerDemandeModification(membreId: number, demande: any): Observable<HttpResponse<any>> {
     const token = localStorage.getItem('token');

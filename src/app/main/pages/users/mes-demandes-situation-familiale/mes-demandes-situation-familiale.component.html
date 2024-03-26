@@ -9,7 +9,7 @@
           <div class="input-group input-group-merge">
             <input
               class="form-control"
-              [(ngModel)]="searchQuery" (input)="filter(searchQuery)"              placeholder="Recherche"
+              [(ngModel)]="searchTerm"           placeholder="Recherche"
             />
             <div class="input-group-append">
               <span class="input-group-text">
@@ -41,7 +41,7 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr *ngFor="let demande of demandes">
+                      <tr *ngFor="let demande of  applyFilter()">
                         <td>{{ demande.collaborateur.nom }}</td>
                         <td>{{ demande.collaborateur.prenom }}</td>
                         <td>{{ demande.typeDemande }}</td>

@@ -4,6 +4,7 @@ import { ContentHeader } from 'app/layout/components/content-header/content-head
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { ConfirmationModalComponent } from 'app/shared/modals/confirmation-modal/confirmation-modal.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-ma-situation-familiale',
@@ -32,7 +33,7 @@ export class MaSituationFamilialeComponent implements OnInit {
   };
 
   constructor(private situationfamiliale : InvitationsService ,private formBuilder: FormBuilder,
-    private toastr: ToastrService) {
+    private toastr: ToastrService , private router: Router) {
     this.demandeForm = this.formBuilder.group({
       nouvelleSituation: ['', Validators.required],
       
@@ -44,14 +45,13 @@ export class MaSituationFamilialeComponent implements OnInit {
     const confirmation = window.confirm('Êtes-vous sûr de vouloir créer cette demande de suppression ?');
 
     if (confirmation) {
-      // L'utilisateur a cliqué sur "OK"
       this.situationfamiliale.creerDemandeSuppressionSituationFamiliale().subscribe(
         response => {
-          // Afficher un toast de succès
           this.toastr.success('Demande de suppression créée avec succès.', 'Succès');
+          this.router.navigate(['/pages/users/my-requests']);
+
         },
         error => {
-          // Afficher un toast d'erreur
           this.toastr.error('Erreur lors de la création de la demande de suppression.', 'Erreur');
         }
       );
@@ -73,6 +73,8 @@ export class MaSituationFamilialeComponent implements OnInit {
       .subscribe(
         response => {
           this.toastr.success('Demande de modification de situation familiale créée avec succès', 'Succès');
+          this.router.navigate(['/pages/users/my-requests']);
+
         },
         error => {
           this.toastr.error('Demande de modification de situation familiale est echoué', 'Erreur');

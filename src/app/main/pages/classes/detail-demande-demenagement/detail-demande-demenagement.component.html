@@ -1,0 +1,28 @@
+<div *ngIf="demande" class="card">
+    <div class="card-header">
+      <h2 class="card-title">Détails de la demande</h2>
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-sm-6">
+          <p><strong>ID :</strong> {{ demande.id }}</p>
+          <p><strong>Nom collaborateur :</strong> {{ demande.collaborateur.nom }}</p>
+          <p><strong>Prénom collaborateur :</strong> {{ demande.collaborateur.prenom }}</p>
+          <p><strong>Type de Demande :</strong> {{ demande.typeDemande }}</p>
+        </div>
+        <div class="col-sm-6">
+          <p><strong>État de Demande :</strong> {{ demande.etat }}</p>
+          <p><strong>Nouvelle Adresse :</strong> {{ demande.nouvelleAdresse }}</p>
+          <p *ngIf="demande.justificatifPath"><strong>Justificatif :</strong> <a [href]="'http://localhost:8080/fichiers/' + demande.justificatifPath" target="_blank">Voir le fichier PDF</a></p>
+        </div>
+      </div>
+    </div>
+    <div class="card-footer">
+      <a routerLink="../../Demandes-demenagements" class="btn btn-outline-secondary">Retour à la liste des demandes</a>
+    </div>
+  </div>
+  
+  <div *ngIf="!demande">
+    <p class="alert alert-warning">Aucune demande trouvée avec l'ID {{ demandeId }}</p>
+  </div>
+  

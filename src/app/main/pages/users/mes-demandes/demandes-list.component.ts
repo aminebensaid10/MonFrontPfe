@@ -23,7 +23,7 @@ export class UsersListComponent implements OnInit {
 
   demandes: any[] = [];
   private userProfile: any;
-  searchQuery: string = '';
+  searchTerm: string = '';
 
 
 
@@ -64,15 +64,15 @@ export class UsersListComponent implements OnInit {
   //   });
   // }
 
-  filter($event: string): void {
+  // filter($event: string): void {
   
-    if ($event !== '') {
-      this.demandes = this.demandes.filter(demande =>
-        (demande.membreFamille.nomMembre + ' ' + demande.membreFamille.prenomMembre + ' ' + demande.typeDemande + ' ' + demande.etat)
-          .toLowerCase().includes($event.toLowerCase())
-      );
-    }
-  }
+  //   if ($event !== '') {
+  //     this.demandes = this.demandes.filter(demande =>
+  //       (demande.membreFamille.nomMembre + ' ' + demande.membreFamille.prenomMembre + ' ' + demande.typeDemande + ' ' + demande.etat)
+  //         .toLowerCase().includes($event.toLowerCase())
+  //     );
+  //   }
+  // }
   
 
 
@@ -115,6 +115,18 @@ export class UsersListComponent implements OnInit {
 //   }
 //   });
 // }
+applyFilter() {
+  if (!this.searchTerm) {
+    return this.demandes;
+  }
+  const lowerCaseSearchTerm = this.searchTerm.toLowerCase();
+  return this.demandes.filter(demande =>
+    (demande.membreFamille.nomMembre && demande.membreFamille.nomMembre.toLowerCase().includes(lowerCaseSearchTerm)) ||
+    (demande.membreFamille.prenomMembre && demande.membreFamille.prenomMembre.toLowerCase().includes(lowerCaseSearchTerm)) ||
+    (demande.typeDemande && demande.typeDemande.toLowerCase().includes(lowerCaseSearchTerm)) ||
+    (demande.etat && demande.etat.toLowerCase().includes(lowerCaseSearchTerm)) 
+  );
+}
 loadDemandes(): void {
   this.usersService.getDemandes().subscribe(
     (data: any[]) => {
