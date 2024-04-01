@@ -1,0 +1,63 @@
+<div class="content-wrapper container-xxl p-0">
+    <div class="content-body">
+      <app-content-header [contentHeader]="contentHeader"></app-content-header>
+  
+      <div class="row mb-3">
+        <div class="col-12">
+          <div class="input-group input-group-merge">
+            <input class="form-control" [(ngModel)]="searchTerm"  placeholder="Recherche" />
+            <div class="input-group-append">
+              <span class="input-group-text"><i class="feather icon-search"></i></span>
+            </div>
+          </div>
+        </div>
+      </div>
+<div *ngIf="collaborateurs">
+    <div class="collaborateurs-container">
+      <div *ngFor="let collaborateur of applyFilter()" class="collaborateur-card">
+        <img [src]="'http://localhost:8080/fichiers/' + collaborateur.imagePath" alt="Photo de profil" class="profil-image">
+        <div class="collaborateur-details">
+          <p>{{ collaborateur.nom }} {{ collaborateur.prenom }}</p>
+          <p>{{ collaborateur.email }}</p>
+          <p><strong>Mode du transport : {{ collaborateur.modeDeTransport || 'Non définie' }}</strong></p>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div *ngIf="!collaborateurs">
+    <p>Aucun collaborateur trouvé.</p>
+  </div>
+  
+  <style>
+    .collaborateurs-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      margin-top: 20px;
+    }
+  
+    .collaborateur-card {
+      width: 200px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      padding: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+  
+    .profil-image {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      margin-bottom: 10px;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  
+    .collaborateur-details {
+      text-align: center;
+    }
+  </style>
+  

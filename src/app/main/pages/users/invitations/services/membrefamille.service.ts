@@ -110,6 +110,26 @@ export class InvitationsService {
       { headers, observe: 'response' }
     );
   }
+  creerDemandeModeTransport(demande: any): Observable<HttpResponse<any>> {
+    const token = localStorage.getItem('token');
+    const formData = new FormData();
+
+    for (const key in demande) {
+      if (demande.hasOwnProperty(key)) {
+        formData.append(key, demande[key]);
+      }
+    }
+
+    const headers = new HttpHeaders({
+      'Authorization': 'Bearer ' + token,
+    });
+
+    return this.http.post<any>(
+      'http://localhost:8080/api/v1/collaborateur/creer-demande-mode-transport',
+      formData,
+      { headers, observe: 'response' }
+    );
+  }
   declarerDemenagement(demande: any): Observable<HttpResponse<any>> {
     const token = localStorage.getItem('token');
     const formData = new FormData();
@@ -126,6 +146,26 @@ export class InvitationsService {
 
     return this.http.post<any>(
       'http://localhost:8080/api/v1/collaborateur/declarer-demenagement',
+      formData,
+      { headers, observe: 'response' }
+    );
+  }
+  creerDemandeModificationTransport(demande: any): Observable<HttpResponse<any>> {
+    const token = localStorage.getItem('token');
+    const formData = new FormData();
+
+    for (const key in demande) {
+      if (demande.hasOwnProperty(key)) {
+        formData.append(key, demande[key]);
+      }
+    }
+
+    const headers = new HttpHeaders({
+      'Authorization': 'Bearer ' + token,
+    });
+
+    return this.http.post<any>(
+      'http://localhost:8080/api/v1/collaborateur/modifier-mode-transport',
       formData,
       { headers, observe: 'response' }
     );
@@ -178,6 +218,20 @@ export class InvitationsService {
       { headers, observe: 'response' }
     );
   }
+  creerDemandeSuppressionModeTransport(): Observable<HttpResponse<any>> {
+    const token = localStorage.getItem('token');
+
+    const headers = new HttpHeaders({
+      'Authorization': 'Bearer ' + token,
+    });
+
+    return this.http.post<any>(
+      'http://localhost:8080/api/v1/collaborateur/creer-demande-suppression-mode-transport',
+      {}, 
+      { headers, observe: 'response' }
+    );
+  }
+  
   
 
   getMembres(): Observable<any> {
@@ -220,6 +274,16 @@ export class InvitationsService {
     });
 
     return this.http.get('http://localhost:8080/api/v1/collaborateur/adress-principal', { headers, responseType: 'text' });
+  }
+  getModeTransport(): Observable<string> {
+    const token = localStorage.getItem('token');
+  
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + token,
+    });
+
+    return this.http.get('http://localhost:8080/api/v1/collaborateur/mode-transport', { headers, responseType: 'text' });
   }
   modifierMembreEtCreerDemandeModification(membreId: number, demande: any): Observable<HttpResponse<any>> {
     const token = localStorage.getItem('token');

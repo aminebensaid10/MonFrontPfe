@@ -5,7 +5,7 @@
       <div class="row mb-3">
         <div class="col-12">
           <div class="input-group input-group-merge">
-            <input class="form-control" placeholder="Recherche" [(ngModel)]="searchTerm" />
+            <input class="form-control" [(ngModel)]="searchTerm" placeholder="Recherche"  />
             <div class="input-group-append">
               <span class="input-group-text"><i class="feather icon-search"></i></span>
             </div>
@@ -18,7 +18,7 @@
             <tr>
               <th>Nom collaborateur</th>
               <th>Prénom collaborateur</th>
-              <th>Nouvelle Situation</th>
+              <th>Mode du transport</th> 
               <th>Type de Demande</th>
               <th>État</th>
               <th>Action</th>
@@ -26,10 +26,10 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let demande of applyFilter()">
+            <tr *ngFor="let demande of applyFilter()"> 
               <td>{{ demande.collaborateur.nom }}</td>
               <td>{{ demande.collaborateur.prenom }}</td>
-              <td>{{ demande.nouvelleSituation }}</td>
+              <td>{{ demande.typeTransport }}</td> 
               <td>{{ demande.typeDemande }}</td>
               <td [ngClass]="{'text-success': demande.etat === 'Valide', 'text-danger': demande.etat === 'Invalide', 'text-warning': demande.etat === 'En cours'}">{{ demande.etat }}</td>
               <td>
@@ -43,7 +43,7 @@
                 </ng-template>
               </td>
               <td>
-                <a class="btn btn-info" [routerLink]="['../../Gestionnaire/detail-demande-situation-familiale', demande.id]">Détails</a>
+                <a class="btn btn-info" [routerLink]="['../../Gestionnaire/detail-demande-mode-transport', demande.id]">Détails</a> 
               </td>
             </tr>
           </tbody>

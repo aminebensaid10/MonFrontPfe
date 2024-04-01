@@ -15,6 +15,10 @@ import { MonAdressePrincipaleComponent } from './mon-adresse-principale/mon-adre
 import { MesDemandesDemenagementComponent } from './mes-demandes-demenagement/mes-demandes-demenagement.component';
 import { CollaborateurSituationFamilialeComponent } from './collaborateur-situation-familiale/collaborateur-situation-familiale.component';
 import { CollaborateurAdressePrinicpalComponent } from './collaborateur-adresse-prinicpal/collaborateur-adresse-prinicpal.component';
+import { AjoutModeTransportComponent } from './ajout-mode-transport/ajout-mode-transport.component';
+import { MonModeTransportComponent } from './mon-mode-transport/mon-mode-transport.component';
+import { MesDemandesModeTransportComponent } from './mes-demandes-mode-transport/mes-demandes-mode-transport.component';
+import { CollaborateurModeTransportComponent } from './collaborateur-mode-transport/collaborateur-mode-transport.component';
 
 const routes: Routes = [
   {
@@ -33,8 +37,18 @@ const routes: Routes = [
     
   },
   {
+    path: 'mode-of-transport',
+    component: AjoutModeTransportComponent,
+    
+  },
+  {
     path: 'My-situation',
     component: MaSituationFamilialeComponent,
+    
+  },
+  {
+    path: 'My-transport-mode',
+    component: MonModeTransportComponent,
     
   },
   {
@@ -45,6 +59,11 @@ const routes: Routes = [
   {
     path: 'Collaborateur-adresse',
     component: CollaborateurAdressePrinicpalComponent,
+    
+  },
+  {
+    path: 'Collaborateur-mode-transport',
+    component: CollaborateurModeTransportComponent,
     
   },
   {
@@ -68,6 +87,11 @@ const routes: Routes = [
     
   },
   {
+    path: 'my-requests-transport-mode',
+    component: MesDemandesModeTransportComponent,
+    
+  },
+  {
     path: 'invitations',
     loadChildren: () => import('./invitations/membrefamille.module').then(m => m.InvitationsModule),
   },
@@ -88,6 +112,10 @@ const routes: Routes = [
     MesDemandesDemenagementComponent,
     CollaborateurSituationFamilialeComponent,
     CollaborateurAdressePrinicpalComponent,
+    AjoutModeTransportComponent,
+    MonModeTransportComponent,
+    MesDemandesModeTransportComponent,
+    CollaborateurModeTransportComponent,
   ],
   imports: [
     SharedModule,

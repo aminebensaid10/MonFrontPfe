@@ -1,33 +1,40 @@
 <div class="container">
     <div class="row">
-        <div class="col-md-12">
-            <app-content-header [contentHeader]="contentHeader"></app-content-header>
-            <div class="card">
+        <div class="col-md-6">
+            <div class="card mb-4">
                 <div class="card-body">
-                    <h4 class="card-title">Votre adresse principale</h4>
-                    <div class="d-flex justify-content-between align-items-center mb-4">
-                        <p class="mb-0" style="font-weight: bold;">{{ adressprincipal }}</p>
-                        <button *ngIf="adressprincipal && adressprincipal !== 'Non disponible pour le moment'" class="btn btn-danger" (click)="confirmerDemandeSuppression()">Demander la suppression</button>
-                    </div>
+                    <h2 class="card-title">Votre adresse principale :</h2>
+                    <hr>
+                    <p class="mb-3" style="font-weight: bold;">Votre adresse principale est : {{ adressprincipal }}</p>
+                    <button *ngIf="adressprincipal && adressprincipal !== 'Non disponible pour le moment'" class="btn btn-danger" (click)="confirmerDemandeSuppression()">Demander la suppression</button>
                 </div>
             </div>
-           <div class="card mt-4">
-    <div class="card-body">
-        <h4 class="card-title">Créer un déménagement</h4>
-        <form (ngSubmit)="creerDemandeDemenagement()" enctype="multipart/form-data" [formGroup]="demandeForm">
-            <div class="mb-3">
-                <label for="nouvelleAdresse" class="form-label">Nouvelle adresse</label>
-                <input type="text" class="form-control" id="nouvelleAdresse" formControlName="nouvelleAdresse" [(ngModel)]="demandeObject.nouvelleAdresse" placeholder="Entrez votre nouvelle adresse " required>
-            </div>
-            <div class="mb-3">
-                <label for="justificatifAdressePrincipale" class="form-label">Justificatif de l'adresse principale</label>
-                <input type="file" id="justificatifAdressePrincipale" formControlName="justificatifAdressePrincipale" class="form-control" name="justificatifSituationFamiliale" (change)="onFileChange($event)" required>
-            </div>
-            <button type="submit" class="btn btn-primary">Créer</button>
-        </form>
-    </div>
-</div>
 
+            <div class="card ">
+                <div class="card-body">
+                    <h2 class="card-title">Créer un déménagement</h2>
+                    <hr>
+                    <form (ngSubmit)="creerDemandeDemenagement()" enctype="multipart/form-data" [formGroup]="demandeForm">
+                        <div class="mb-3">
+                            <label for="nouvelleAdresse" class="form-label">Nouvelle adresse</label>
+                            <input type="text" class="form-control" id="nouvelleAdresse" formControlName="nouvelleAdresse" [(ngModel)]="demandeObject.nouvelleAdresse" placeholder="Entrez votre nouvelle adresse" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="justificatifAdressePrincipale" class="form-label">Justificatif de l'adresse principale</label>
+                            <input type="file" id="justificatifAdressePrincipale" formControlName="justificatifAdressePrincipale" class="form-control" name="justificatifSituationFamiliale" (change)="onFileChange($event)" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-plus-circle"></i> Créer
+                        </button>
+                                        </form>
+                </div>
+            </div>
         </div>
+        <div class="col-md-6">
+            <img src="assets/images/logo/maison.jpg" alt="demenagement" class="card-img-top custom-image mb-2" style="height: 250px; width: 550px;">
+            <img src="assets/images/logo/Demenagementt.jpg" alt="demenagement" class="card-img-top custom-image" style="height:320px; width: 550px;">
+        </div>
+        
+      
     </div>
 </div>

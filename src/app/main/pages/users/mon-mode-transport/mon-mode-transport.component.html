@@ -1,0 +1,48 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h2 class="card-title">Votre mode de transport actuel</h2>
+                    <hr>
+                    <p class="mb-3" style="font-weight: bold;">Votre mode de transport est : {{ typeTransport }}</p>
+                    <button *ngIf="typeTransport && typeTransport !== 'Non disponible pour le moment'" class="btn btn-danger" (click)="confirmerDemandeSuppression()">
+                        <i class="fas fa-trash-alt"></i> Demander la suppression
+                    </button>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-body">
+                    <h2 class="card-title">Créer une demande de modification du mode de transport</h2>
+                    <hr>
+                    <form (ngSubmit)="creerDemandeModifciationModeTransport()" enctype="multipart/form-data" [formGroup]="demandeForm">
+                        <div class="mb-3">
+                            <label for="nouvelleAdresse" class="form-label">Nouveau mode de transport</label>
+                            <select class="form-select form-control" id="typeTransport" formControlName="typeTransport" [(ngModel)]="demandeObject.typeTransport" placeholder="Entrez votre nouveau mode de transport" required>
+                                <option value="" disabled selected>Choisissez votre nouveau mode de transport</option>
+                                <option value="Voiture">Voiture</option>
+                                <option value="Train">Train</option>
+                                <option value="Taxi">Taxi</option>
+                                <option value="Bus">Bus</option>
+                                <option value="Vélo">Vélo</option>
+                                <option value="Marche">Marche</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="justificatifModeTransport" class="form-label">Justificatif de mode de transport</label>
+                            <input type="file" id="justificatifModeTransport" formControlName="justificatifModeTransport" class="form-control" name="justificatifModeTransport" (change)="onFileChange($event)" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-plus-circle"></i> Créer
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <img src="assets/images/logo/ModeTransport.jpg" alt="ModeTransport" class="card-img-top custom-image mb-2" style="height: 250px; width: 550px;">
+            <img src="assets/images/logo/modetransport2.jpg" alt="ModeTransport" class="card-img-top custom-image" style="height:310px; width: 550px;">
+        </div>
+    </div>
+</div>

@@ -8,6 +8,8 @@ import { map } from 'rxjs/operators';
 })
 export class ClassesService {
   private apiUrl = 'http://localhost:8080/api/v1/gestionnaireRH';
+  private api = 'http://localhost:8080/api/v1/gestionnairePAIE';
+
 
 
   constructor(private http: HttpClient) {
@@ -52,6 +54,16 @@ export class ClassesService {
     const url = `${this.apiUrl}/valider-demande-demenagement/${demandeDemenagementId}`;
     return this.http.post(url, {}, { headers });
   }
+  validateRequestModeTransport(demandeModeTransportId: number): Observable<any> {
+    const token = localStorage.getItem('token');
+
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + token,
+    });
+    const url = `${this.api}/valider-demande-mode-transport/${demandeModeTransportId}`;
+    return this.http.post(url, {}, { headers });
+  }
   rejectRequest(demandeId: number): Observable<any> {
     const token = localStorage.getItem('token');
 
@@ -83,6 +95,17 @@ export class ClassesService {
     });
     
     const url = `${this.apiUrl}/rejeter-demande-demenagement/${demandeDemenagementId}`;
+    return this.http.post(url, {}, { headers });
+  }
+  rejectRequestModeTransport(demandeModeTransportId: number): Observable<any> {
+    const token = localStorage.getItem('token');
+
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + token,
+    });
+    
+    const url = `${this.api}/rejeter-demande-mode-transport/${demandeModeTransportId}`;
     return this.http.post(url, {}, { headers });
   }
   getDemandeById(demandeId: string): Observable<any> {
@@ -147,5 +170,26 @@ export class ClassesService {
     const url = 'http://localhost:8080/api/v1/gestionnaireRH/membres-tous';
 
     return this.http.get<any[]>(url, { headers });
+  }
+  getDemandesModeTransport(): Observable<any[]> {
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + token,
+    });
+    const url = 'http://localhost:8080/api/v1/gestionnairePAIE/demandes-modes-transports';
+
+    return this.http.get<any[]>(url, { headers });
+  }
+  getDemandeModeTransportById(demandeModeTransportId: string): Observable<any> {
+    const token = localStorage.getItem('token');
+
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + token,
+    });
+    
+    const url = `${this.api}/demande-mode-transport/${demandeModeTransportId}`;
+    return this.http.get(url, { headers });
   }
 }

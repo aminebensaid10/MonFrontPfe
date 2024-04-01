@@ -20,7 +20,7 @@ const appRoutes: Routes = [
       },
     },
     {
-      path: 'GestionnaireRh',
+      path: 'Gestionnaire',
       loadChildren: () => import('../pages/classes/classes.module').then(m => m.ClassesModule),
       data: {
         role: {

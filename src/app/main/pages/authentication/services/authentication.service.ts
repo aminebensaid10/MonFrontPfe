@@ -54,21 +54,21 @@ export class AuthenticationService   {
       id: 'family-requests',
       title: 'Composition Familiale',
       type: 'collapsible',
-      icon: 'file-text', 
+      icon: 'users', 
       children: [
         {
           id: 'pending-requests',
           icon: 'circle',
           title: 'Mes Demandes',
           type: 'item',
-          url: 'GestionnaireRh/demandes-list'
+          url: 'Gestionnaire/demandes-list'
         },
         {
           id: 'pending-requests',
           icon: 'circle',
           title: 'Liste des membres',
           type: 'item',
-          url: 'GestionnaireRh/Membres-familles'
+          url: 'Gestionnaire/Membres-familles'
         },
         
       ],
@@ -77,14 +77,14 @@ export class AuthenticationService   {
       id: 'Situationfamilialedemande',
       title: 'Situation Familiale',
       type: 'collapsible',
-      icon: 'users',
+      icon: 'heart',
       children: [
         {
           id: 'demandesSituation-list',
           icon: 'circle',
           title: 'Mes demandes',
           type: 'item',
-          url: 'GestionnaireRh/Demandes-situation-familiale'
+          url: 'Gestionnaire/Demandes-situation-familiale'
         },
         {
           id: 'collaborateur-situation',
@@ -99,14 +99,14 @@ export class AuthenticationService   {
       id: 'demenagementGestionnaireRH',
       title: 'Déménagement',
       type: 'collapsible',
-      icon: 'file-text', 
+      icon: 'home', 
       children: [
         {
           id: 'pending-requests',
           icon: 'circle',
           title: 'Mes Demandes',
           type: 'item',
-          url: 'GestionnaireRh/Demandes-demenagements'
+          url: 'Gestionnaire/Demandes-demenagements'
         },
         {
           id: 'pending-requests',
@@ -181,6 +181,59 @@ export class AuthenticationService   {
       ],
       
       
+      
+    },
+    {
+      id: 'modeTransport',
+      title: 'Mon mode du transport',
+      type: 'collapsible',
+      icon: 'users',
+      children: [
+        {
+          id: 'users-list',
+          icon: 'circle',
+          title: 'Mes demandes',
+          type: 'item',
+          url: 'users/my-requests-transport-mode'
+        },
+        {
+          id: 'mon-mode-du-transport',
+          icon: 'circle',
+          title: 'Mon mode du transport',
+          type: 'item',
+          url: 'users/My-transport-mode'
+        },
+        {
+          id: 'add-mode-transport',
+          icon: 'circle',
+          title: 'Ajouter mon mode du transport',
+          type: 'item',
+          url: 'users/mode-of-transport'
+        },
+      ],
+    },
+    {
+      id: 'mode-of-transport-requests',
+      title: 'Mode du transport',
+      type: 'collapsible',
+      icon: 'users', 
+      children: [
+        {
+          id: 'pending-requests',
+          icon: 'circle',
+          title: 'Mes Demandes',
+          type: 'item',
+          url: 'Gestionnaire/demandes-mode-transport'
+        },
+        {
+          id: 'pending-requests',
+          icon: 'circle',
+          title: 'Liste des collaborateurs avec leurs modes du transport',
+          type: 'item',
+          url: 'users/Collaborateur-mode-transport'
+        },
+        
+      ],
     },
   ];
   
@@ -224,13 +277,17 @@ export class AuthenticationService   {
           console.log('Profil utilisateur récupéré avec succès. Role:', userRole);
     
           this.menu.forEach(x => {
-            if ((x.id === 'collaborateur' && userRole === 'COLLABORATEUR')  || (x.id === 'situationfamililale'&& userRole === 'COLLABORATEUR' )|| (x.id === 'demenagement'&& userRole === 'COLLABORATEUR' )){
+            if ((x.id === 'collaborateur' && userRole === 'COLLABORATEUR')  || (x.id === 'situationfamililale'&& userRole === 'COLLABORATEUR' )|| (x.id === 'demenagement'&& userRole === 'COLLABORATEUR' )|| (x.id === 'situationfamililale'&& userRole === 'COLLABORATEUR' )|| (x.id === 'modeTransport'&& userRole === 'COLLABORATEUR' )){
               x.hidden = false;
               x.children.forEach(child => (child.hidden = false));
             } else if ((x.id === 'family-requests' && userRole === 'GESTIONNAIRERH') || (x.id === 'Situationfamilialedemande'&& userRole === 'GESTIONNAIRERH' )|| (x.id === 'demenagementGestionnaireRH'&& userRole === 'GESTIONNAIRERH' )) {
               x.hidden = false;
               x.children.forEach(child => (child.hidden = false));
-            } else {
+            }
+            else if ((x.id === 'mode-of-transport-requests' && userRole === 'GESTIONNAIREPAIE')) {
+              x.hidden = false;
+              x.children.forEach(child => (child.hidden = false));}
+             else {
               x.hidden = true;
             }
           });

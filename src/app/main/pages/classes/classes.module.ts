@@ -11,6 +11,8 @@ import { DetailDemandeSituationComponent } from './detail-demande-situation/deta
 import { GererDemandesDemenagementsComponent } from './gerer-demandes-demenagements/gerer-demandes-demenagements.component';
 import { DetailDemandeDemenagementComponent } from './detail-demande-demenagement/detail-demande-demenagement.component';
 import { MembreFamilleComponent } from './membre-famille/membre-famille.component';
+import { GererDemandesModeTransportComponent } from './gerer-demandes-mode-transport/gerer-demandes-mode-transport.component';
+import { DetailDemandeModeDuTransportComponent } from './detail-demande-mode-du-transport/detail-demande-mode-du-transport.component';
 
 const routes: Routes = [
   // {
@@ -34,6 +36,10 @@ const routes: Routes = [
     component: GererDemandesDemenagementsComponent,
   },
   {
+    path: 'demandes-mode-transport',  
+    component: GererDemandesModeTransportComponent,
+  },
+  {
     path: 'Membres-familles',  
     component: MembreFamilleComponent,
   },
@@ -44,6 +50,10 @@ const routes: Routes = [
   {
     path: 'detail-demande-demenagement/:id',  
     component: DetailDemandeDemenagementComponent,
+  },
+  {
+    path: 'detail-demande-mode-transport/:id',  
+    component: DetailDemandeModeDuTransportComponent,
   },
   
  
@@ -57,7 +67,9 @@ const routes: Routes = [
     DetailDemandeSituationComponent,
     GererDemandesDemenagementsComponent,
     DetailDemandeDemenagementComponent,
-    MembreFamilleComponent,    
+    MembreFamilleComponent,
+    GererDemandesModeTransportComponent,
+    DetailDemandeModeDuTransportComponent,    
     
   ],
   imports: [

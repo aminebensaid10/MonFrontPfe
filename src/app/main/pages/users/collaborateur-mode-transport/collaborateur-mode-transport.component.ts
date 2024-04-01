@@ -3,36 +3,35 @@ import { ContentHeader } from 'app/layout/components/content-header/content-head
 import { UsersService } from '../services/users-service.service';
 
 @Component({
-  selector: 'app-collaborateur-adresse-prinicpal',
-  templateUrl: './collaborateur-adresse-prinicpal.component.html',
-  styleUrls: ['./collaborateur-adresse-prinicpal.component.scss']
+  selector: 'app-collaborateur-mode-transport',
+  templateUrl: './collaborateur-mode-transport.component.html',
+  styleUrls: ['./collaborateur-mode-transport.component.scss']
 })
-export class CollaborateurAdressePrinicpalComponent implements OnInit {
+export class CollaborateurModeTransportComponent implements OnInit {
   collaborateurs: any[];
   searchTerm: string = '';
 
   contentHeader: ContentHeader = {
-    headerTitle: 'Déménagement',
+    headerTitle: 'Mode du transport',
     actionButton: false,
     breadcrumb: {
       links: [
-        {name: 'Liste des collaborateur avec leur adresse principale'}
+        {name: 'Liste des collaborateur avec leur mode du transport'}
       ]
     }
   };
-
-  constructor(private gestionnairerhservice: UsersService) { }
+  constructor(private gestionnairePaieService: UsersService) { }
 
   ngOnInit(): void {
-    this.loadAdressePrincipale();
+    this.loadModeTransport();
   }
-  loadAdressePrincipale() {
-    this.gestionnairerhservice.getcollaborateur().subscribe(
+  loadModeTransport() {
+    this.gestionnairePaieService.getcollaborateur().subscribe(
       data => {
         this.collaborateurs = data;
       },
       error => {
-        console.log('Une erreur est survenue lors du chargement des adresses principal : ', error);
+        console.log('Une erreur est survenue lors du chargement des modes du transport : ', error);
       }
     );
   }
@@ -46,7 +45,7 @@ export class CollaborateurAdressePrinicpalComponent implements OnInit {
       (collaborateur.prenom && collaborateur.prenom.toLowerCase().includes(lowerCaseSearchTerm)) ||
 
       (collaborateur.email && collaborateur.email.toLowerCase().includes(lowerCaseSearchTerm)) ||
-      (collaborateur.adressePrincipale && collaborateur.adressePrincipale.toLowerCase().includes(lowerCaseSearchTerm)) 
+      (collaborateur.modeDeTransport && collaborateur.modeDeTransport.toLowerCase().includes(lowerCaseSearchTerm)) 
     );
   }
 }

@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { UserInscription } from 'app/main/models/users';
 import { environment } from 'environments/environment';
@@ -41,6 +41,15 @@ export class UsersService {
     });
     return this.http.get<any[]>(`${this.apiURL}/demandes-demenagement`, { headers});
   }
+  getDemandesModeTransport(): Observable<any[]> {
+    const token = localStorage.getItem('token');
+  
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + token,
+    });
+    return this.http.get<any[]>(`${this.apiURL}/demandes-mode-transport`, { headers});
+  }
   getcollaborateur(): Observable<any[]> {
     const token = localStorage.getItem('token');
     const headers = new HttpHeaders({
@@ -69,6 +78,15 @@ export class UsersService {
     });
     return this.http.put<any>(`${this.apiUrl}/update`, profileData, { headers });
      
+  }
+  changePassword(passwordData: any): Observable<HttpResponse<any>> {
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + token
+    });
+
+    return this.http.post<any>(`${this.apiUrl}/change-password`, passwordData, { headers, observe: 'response'  });
   }
   // get user data (for user profile)
   getUserData(id) {
