@@ -1,40 +1,57 @@
 <div class="content-wrapper container-xxl p-0">
-    <div class="content-body">
+  <div class="content-body">
       <app-content-header [contentHeader]="contentHeader"></app-content-header>
-      
-    <div class="card">
-      <div class="card-header">
-          <div class="card-title">
-              <h4>Ajouter ma situation familiale</h4>
-          </div>
-          <div class="container mt-4">
-            <h2 class="mb-4">Créer Demande Situation Familiale</h2>
-          
-            <form (ngSubmit)="onSubmit()" [formGroup]="demandeForm">
-                <div class="mb-3 row">
-                    <label for="situationFamiliale" class="form-label col-2">Situation Familiale:</label>
-                    <div class="col-6">
-                      <select id="situationFamiliale" formControlName="nouvelleSituation"[(ngModel)]="demandeObject.nouvelleSituation" class="form-control" required>
-                        <option value="" disabled selected>Choisissez la situation familiale</option>
-                        <option value="CELIBATAIRE"> Celibataire</option>
-                        <option value="MARIE">Marié</option>
-                        <option value="DIVORCE">Divorcé</option>
-                        <option value="VEUF">Veuf</option>
-                        <option value="AUTRE">Autre</option>
-                      </select>
-                    </div>
+
+      <div class="row">
+          <!-- Première carte -->
+          <div class="col-md-6">
+              <div class="card">
+                  <div class="card-header">
+                      <div class="card-title">
+                          <h4>Ajouter ma situation familiale</h4>
+                      </div>
                   </div>
-          
-              <div class="mb-3 row">
-                <label for="justificatifSituationFamiliale" class="form-label col-2">Justificatif Situation Familiale:</label>
-                <div class="col-6">
-                  <input type="file" id="justificatifSituationFamiliale" formControlName="justificatifSituationFamiliale" class="form-control" name="justificatifSituationFamiliale" (change)="onFileChange($event)" required>
-                </div>
+                  <div class="card-body">
+                      <div class="container mt-4">
+                          <h2 class="mb-4">Créer Demande Situation Familiale</h2>
+                          <form (ngSubmit)="onSubmit()" [formGroup]="demandeForm">
+                              <div class="mb-3 row">
+                                  <label for="situationFamiliale" class="form-label col-4">Situation Familiale:</label>
+                                  <div class="col-8">
+                                      <select id="situationFamiliale" formControlName="nouvelleSituation" [(ngModel)]="demandeObject.nouvelleSituation" class="form-control" required>
+                                          <option value="" disabled selected>Choisissez la situation familiale</option>
+                                          <option value="CELIBATAIRE">Celibataire</option>
+                                          <option value="MARIE">Marié</option>
+                                          <option value="DIVORCE">Divorcé</option>
+                                          <option value="VEUF">Veuf</option>
+                                          <option value="AUTRE">Autre</option>
+                                      </select>
+                                  </div>
+                              </div>
+
+                              <div class="mb-3 row">
+                                  <label for="justificatifSituationFamiliale" class="form-label col-4">Justificatif Situation Familiale:</label>
+                                  <div class="col-8">
+                                      <input type="file" id="justificatifSituationFamiliale" formControlName="justificatifSituationFamiliale" class="form-control" name="justificatifSituationFamiliale" (change)="onFileChange($event)" required>
+                                  </div>
+                              </div>
+
+                              <button type="submit" class="btn btn-primary" [disabled]="!demandeForm.valid">Créer Demande</button>
+                          </form>
+                      </div>
+                  </div>
               </div>
-          
-              <button type="submit" class="btn btn-primary"[disabled]="!demandeForm.valid">Créer Demande</button>
-            </form>
           </div>
-          
-          
-  
+
+          <!-- Deuxième carte -->
+          <div class="col-md-6">
+              <div class="card">
+                  <div class="card-body p-0">
+                      
+                      <img src="assets/images/logo/happy.jpg" alt=" image" class="card-img-top w-100" style="height: 415px; border-radius: 30px;">
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>

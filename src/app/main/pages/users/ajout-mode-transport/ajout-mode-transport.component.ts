@@ -43,7 +43,7 @@ export class AjoutModeTransportComponent implements OnInit {
       .subscribe(
         response => {
           this.toastr.success('Demande du mode de transport créée avec succès', 'Succès');
-          // this.router.navigate(['/pages/users/my-requests-moving']);
+          this.router.navigate(['/pages/users/my-requests-transport-mode']);
 
         },
         error => {

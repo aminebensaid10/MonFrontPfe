@@ -28,6 +28,16 @@ const appRoutes: Routes = [
         }
       },
       
+    },
+    {
+      path: 'Home',
+      loadChildren: () => import('../sample/sample.module').then(m => m.SampleModule),
+      data: {
+        role: {
+          page: 'sample',
+        }
+      },
+      
     }
     
     ]

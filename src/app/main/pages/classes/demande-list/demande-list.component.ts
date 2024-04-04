@@ -63,6 +63,8 @@ export class ClassesListComponent implements OnInit {
           console.log('Demande validée avec succès :', response);
           this.toastr.success('Demande validée avec succès', 'Succès');
           this.refreshDemandes();
+          window.location.reload();
+
         },
         error => {
           console.error('Erreur lors de la validation de la demande :', error);
@@ -80,6 +82,8 @@ export class ClassesListComponent implements OnInit {
         console.log('Demande rejetée avec succès :', response);
         this.toastr.success('Demande rejetée avec succès', 'Succès');
         this.refreshDemandes();
+        window.location.reload();
+
       },
       error => {
         console.error('Erreur lors du rejet de la demande :', error);

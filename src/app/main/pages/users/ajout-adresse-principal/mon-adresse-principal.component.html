@@ -1,34 +1,93 @@
 <div class="content-wrapper container-xxl p-0">
     <div class="content-body">
-      <app-content-header [contentHeader]="contentHeader"></app-content-header>
-      
-    <div class="card">
-      <div class="card-header">
-          <div class="card-title">
-              <h4>Ajouter mon adresse principal</h4>
-          </div>
-          <div class="container mt-4">
-            <h2 class="mb-4">Créer Demande Adresse principal</h2>
-          
-            <form (ngSubmit)="onSubmit()" [formGroup]="demandeForm">
-                <div class="mb-3 row">
-                    <label for="situationFamiliale" class="form-label col-2">Adresse Principal</label>
-                    <div class="col-6">
-                        <input type="text" id="nouvelleAdresse" formControlName="nouvelleAdresse" [(ngModel)]="demandeObject.nouvelleAdresse" class="form-control" placeholder="Entrez votre adresse principale" required>
+        <app-content-header [contentHeader]="contentHeader"></app-content-header>
+  
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">
+                            <h4>Ajouter mon adresse principal</h4>
+                        </div>
                     </div>
-                    
-                  </div>
-          
-              <div class="mb-3 row">
-                <label for="justificatifAdressePrincipale" class="form-label col-2">Justificatif Adresse Principale:</label>
-                <div class="col-6">
-                  <input type="file" id="justificatifAdressePrincipale" formControlName="justificatifAdressePrincipale" class="form-control" name="justificatifSituationFamiliale" (change)="onFileChange($event)" required>
+                    <div class="card-body">
+                        <div class="container mt-4">
+                            <h2 class="mb-4">Créer Demande Adresse principal</h2>
+  
+                            <form (ngSubmit)="onSubmit()" [formGroup]="demandeForm">
+                                <div class="mb-3 row">
+                                    <label for="gouvernorat" class="form-label col-md-4">Gouvernorat :</label>
+                                    <div class="col-md-8"> 
+                                        <select id="gouvernorat" formControlName="gouvernorat" [(ngModel)]="demandeObject.gouvernorat" class="form-control">
+                                            <option value="" disabled selected>Choisissez le gouvernorat</option>
+                                            <option value="Ariana">Ariana</option>
+                                            <option value="Béja">Béja</option>
+                                            <option value="Ben Arous">Ben Arous</option>
+                                            <option value="Bizerte">Bizerte</option>
+                                            <option value="Gabès">Gabès</option>
+                                            <option value="Gafsa">Gafsa</option>
+                                            <option value="Jendouba">Jendouba</option>
+                                            <option value="Kairouan">Kairouan</option>
+                                            <option value="Kasserine">Kasserine</option>
+                                            <option value="Kébili">Kébili</option>
+                                            <option value="Kef">Le Kef</option>
+                                            <option value="Mahdia">Mahdia</option>
+                                            <option value="Manouba">Manouba</option>
+                                            <option value="Médenine">Médenine</option>
+                                            <option value="Monastir">Monastir</option>
+                                            <option value="Nabeul">Nabeul</option>
+                                            <option value="Sfax">Sfax</option>
+                                            <option value="Sidi Bouzid">Sidi Bouzid</option>
+                                            <option value="Siliana">Siliana</option>
+                                            <option value="Sousse">Sousse</option>
+                                            <option value="Tataouine">Tataouine</option>
+                                            <option value="Tozeur">Tozeur</option>
+                                            <option value="Tunis">Tunis</option>
+                                            <option value="Zaghouan">Zaghouan</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                
+                                <div class="mb-3 row">
+                                    <label for="ville" class="form-label col-4">Ville :</label>
+                                    <div class="col-8"> 
+                                        <input type="text" id="ville" formControlName="ville" class="form-control" [(ngModel)]="demandeObject.ville" placeholder="Entrez votre ville" required>
+                                    </div>
+                                </div>
+                              <div class="mb-3 row">
+                                <label for="rue" class="form-label col-4">Rue :</label>
+                                <div class="col-8"> 
+                                    <input type="text" id="rue" formControlName="rue" class="form-control" placeholder="Entrez votre rue" required>
+                                </div>
+                            </div>
+  
+                            
+  
+                          
+  
+                            <div class="mb-3 row">
+                                <label for="justificatifAdressePrincipale" class="form-label col-4">Justificatif adresse principale:</label>
+                                <div class="col-8">
+                                  <input type="file" id="justificatifAdressePrincipale" formControlName="justificatifAdressePrincipale" class="form-control" name="justificatifAdressePrincipale" (change)="onFileChange($event)" required>
+                                </div>
+                              </div>
+              
+  
+                            <button type="submit" class="btn btn-primary"[disabled]="demandeForm.invalid">Créer Demande</button>
+                            </form>
+                        </div>
+                    </div>
                 </div>
-              </div>
-          
-              <button type="submit" class="btn btn-primary"[disabled]="!demandeForm.valid">Créer Demande</button>
-            </form>
-          </div>
-          
-          
+            </div>
+  
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body p-0">
+                        <img src="assets/images/logo/adress principal.jpg" alt="image" class="card-img-top w-100" style="height: 415px; border-radius: 30px;">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
   

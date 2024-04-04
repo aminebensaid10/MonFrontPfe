@@ -58,6 +58,24 @@ export class UsersService {
     });
     return this.http.get<any[]>('http://localhost:8080/api/v1/gestionnaireRH/situation-familiale', { headers });
   }
+  getmodetransport(): Observable<any[]> {
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + token,
+    });
+    return this.http.get<any[]>('http://localhost:8080/api/v1/collaborateur/mode-transport', { headers });
+  }
+  getUsersByFamilySituation(): Observable<any> {
+    const token = localStorage.getItem('token');
+
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + token
+    });
+
+    return this.http.get<any>('http://localhost:8080/api/v1/gestionnaireRH/family-situation', { headers: headers });
+  }
   
   // get all users on the plateform
   // getUsers() {

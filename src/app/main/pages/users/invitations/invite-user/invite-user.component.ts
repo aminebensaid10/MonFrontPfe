@@ -7,6 +7,7 @@ import French from 'flatpickr/dist/l10n/fr.js';
 import { FlatpickrOptions } from 'ng2-flatpickr';
 import { InvitationsService } from '../services/membrefamille.service';
 import { UsersService } from '../../services/users-service.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-invite-user',
@@ -54,7 +55,7 @@ export class InviteUserComponent {
   
   
   constructor(private formBuilder: FormBuilder, private invitationsService: InvitationsService,
-    private toastr: ToastrService, private usersService: UsersService) { 
+    private toastr: ToastrService, private usersService: UsersService, private router : Router) { 
       this.demandeForm = this.formBuilder.group({
         nomMembre: ['', Validators.required],
         prenomMembre: ['', Validators.required],
@@ -95,6 +96,8 @@ export class InviteUserComponent {
             toastClass: 'toast ngx-toastr',
             closeButton: true
           });
+          this.router.navigate(['/pages/users/users-list']);
+
           this.resetForm();
         } else {
           console.error("La réponse de l'API n'a pas le statut 200 ou est vide");

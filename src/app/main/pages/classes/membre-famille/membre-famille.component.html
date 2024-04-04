@@ -18,7 +18,8 @@
                 <ng-container *ngFor="let membre of applyFilter()">
                     <div class="col">
                         <div class="card">
-                            <img [src]="'http://localhost:8080/fichiers/' + membre.imagePath" class="card-img-top img-fluid rounded-circle mx-auto d-block" alt="Membre" style="max-width: 60%; height: auto;">
+                            <h6 class="text-center">Image du Membre</h6> <!-- Ajout du titre pour l'image du membre -->
+                            <img [src]="'http://localhost:8080/fichiers/' + membre.imagePath" class="card-img-top img-fluid rounded-circle mx-auto d-block card-image" alt="Membre">
                             <div class="card-body">
                                 <h5 class="card-title">{{ membre.nomMembre }} {{ membre.prenomMembre }}</h5>
                                 <p class="card-text">
@@ -27,7 +28,8 @@
                                     <strong>Lien Parenté:</strong> {{ membre.lienParente }} <br>
                                     <strong>Collaborateur:</strong> {{ membre.collaborateur.nom }} {{ membre.collaborateur.prenom }}
                                 </p>
-                                <img [src]="'http://localhost:8080/fichiers/' + membre.collaborateur.imagePath"  alt="Collaborateur" style="max-width: 40%; height: auto;">
+                                <h6 class="text-center">Image du Collaborateur</h6> 
+                                <img [src]="'http://localhost:8080/fichiers/' + membre.collaborateur.imagePath"  alt="Collaborateur" class="card-img-bottom img-fluid card-image">
                             </div>
                         </div>
                     </div>
@@ -37,9 +39,11 @@
     </div>
 </div>
 
+
 <style>
     .card {
-        max-width: 18rem; 
+        width: 18rem;
+        height: 100%; /* Hauteur fixe pour toutes les cartes */
         margin-bottom: 20px;
         border: 1px solid #ccc;
         border-radius: 10px;
@@ -52,8 +56,18 @@
         padding: 1rem;
     }
 
-    .card-img-top {
-        max-width: 100%; 
-        height: auto;
+    .card-img-top,
+    .card-img-bottom {
+        max-width: 100%; /* Pour que les images ne dépassent pas de la carte */
+        height: 200px; /* Hauteur fixe pour les images */
+        object-fit: cover; /* Pour que les images s'adaptent à la hauteur fixe */
+        border-radius: 50%; /* Pour les images rondes */
+    }
+
+    .card-image {
+        width: 150px; 
+        height: 150px;
+        object-fit: cover; 
+        border-radius: 50%; 
     }
 </style>

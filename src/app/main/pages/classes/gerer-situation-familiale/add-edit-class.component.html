@@ -12,6 +12,8 @@
           </div>
         </div>
       </div>
+      <div *ngIf="demandesSituationFamiliale.length > 0; else noData">
+
       <div class="table-responsive">
         <table class="table table-bordered">
           <thead class="thead-dark">
@@ -51,4 +53,7 @@
       </div>
     </div>
   </div>
+  <ng-template #noData>
+    <p>Aucune demande disponible.</p>
+  </ng-template>
   

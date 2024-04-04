@@ -24,12 +24,17 @@ export class MonAdressePrincipalComponent implements OnInit {
 
   demandeObject: any = {
     nouvelleAdresse: '',
-    justificatifAdressePrincipale: null
-  };
+    justificatifAdressePrincipale: null,
+    rue: '',
+    ville: '',
+    gouvernorat: ''
+};
   isFormInvalid = false;
   constructor(private adressprincipalservice: InvitationsService, private toastr: ToastrService ,private formBuilder: FormBuilder, private route: ActivatedRoute, private router: Router) {
     this.demandeForm = this.formBuilder.group({
-      nouvelleAdresse: ['', Validators.required],
+      rue: ['', Validators.required],
+      ville: ['', Validators.required],
+      gouvernorat: ['', Validators.required],
       
       justificatifAdressePrincipale: ['', Validators.required],
 
@@ -39,18 +44,26 @@ export class MonAdressePrincipalComponent implements OnInit {
   ngOnInit(): void {
   }
   onSubmit() {
-    this.adressprincipalservice.creerDemandeAddressPrincipal(this.demandeObject)
-      .subscribe(
-        response => {
-          this.toastr.success('Demande de adresse principale créée avec succès', 'Succès');
-          this.router.navigate(['/pages/users/my-requests-moving']);
-
-        },
-        error => {
-          this.toastr.error('L adresse principale est déjà définie pour le collaborateur.', 'Erreur');
-        }
-      );
+    if (this.demandeForm.valid) {
+      const adressePrincipale = `${this.demandeForm.value.rue}, ${this.demandeForm.value.ville}, ${this.demandeForm.value.gouvernorat}`;
+  
+      this.demandeObject.nouvelleAdresse = adressePrincipale;
+  
+      this.adressprincipalservice.creerDemandeAddressPrincipal(this.demandeObject)
+        .subscribe(
+          response => {
+            this.toastr.success('Demande d adresse principale créée avec succès', 'Succès');
+            this.router.navigate(['/pages/users/my-requests-moving']);
+          },
+          error => {
+            this.toastr.error('L adresse principale est déjà définie pour le collaborateur.', 'Erreur');
+          }
+        );
+    } else {
+      this.isFormInvalid = true;
+    }
   }
+  
 
   onFileChange(event: any) {
     const file = event.target.files[0];

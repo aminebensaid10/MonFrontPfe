@@ -22,7 +22,7 @@ export class MembreFamilleComponent implements OnInit {
     actionButton: false,
     breadcrumb: {
       links: [
-        {name: 'Listes des membres'}
+        {name: 'Liste des membres'}
       ]
     }
   };

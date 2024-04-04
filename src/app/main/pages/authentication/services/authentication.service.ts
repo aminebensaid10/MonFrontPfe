@@ -21,6 +21,22 @@ export class AuthenticationService   {
 
   private menu: CoreMenu[] = [
     {
+      id: 'home',
+      title: 'Home',
+      type: 'collapsible',
+      icon: 'home',
+      children: [
+        {
+          id: 'statisque',
+          icon: 'circle',
+          title: 'Mes statisque',
+          type: 'item',
+          url: 'Home/home'
+        },
+        
+      ],
+    },
+    {
       id: 'collaborateur',
       title: 'Ma Composition Familiale',
       type: 'collapsible',
@@ -49,6 +65,7 @@ export class AuthenticationService   {
         },
       ],
     },
+   
    
     {
       id: 'family-requests',
@@ -280,7 +297,7 @@ export class AuthenticationService   {
             if ((x.id === 'collaborateur' && userRole === 'COLLABORATEUR')  || (x.id === 'situationfamililale'&& userRole === 'COLLABORATEUR' )|| (x.id === 'demenagement'&& userRole === 'COLLABORATEUR' )|| (x.id === 'situationfamililale'&& userRole === 'COLLABORATEUR' )|| (x.id === 'modeTransport'&& userRole === 'COLLABORATEUR' )){
               x.hidden = false;
               x.children.forEach(child => (child.hidden = false));
-            } else if ((x.id === 'family-requests' && userRole === 'GESTIONNAIRERH') || (x.id === 'Situationfamilialedemande'&& userRole === 'GESTIONNAIRERH' )|| (x.id === 'demenagementGestionnaireRH'&& userRole === 'GESTIONNAIRERH' )) {
+            } else if ((x.id === 'family-requests' && userRole === 'GESTIONNAIRERH') || (x.id === 'Situationfamilialedemande'&& userRole === 'GESTIONNAIRERH' )|| (x.id === 'demenagementGestionnaireRH'&& userRole === 'GESTIONNAIRERH' )|| (x.id === 'home'&& userRole === 'GESTIONNAIRERH' )) {
               x.hidden = false;
               x.children.forEach(child => (child.hidden = false));
             }

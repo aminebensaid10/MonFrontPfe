@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
-
 import { CoreCommonModule } from '@core/common.module';
 
 import { ContentHeaderModule } from 'app/layout/components/content-header/content-header.module';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 import { SampleComponent } from './sample.component';
 import { HomeComponent } from './home.component';
@@ -24,7 +24,8 @@ const routes = [
 
 @NgModule({
   declarations: [SampleComponent, HomeComponent],
-  imports: [RouterModule.forChild(routes), ContentHeaderModule, TranslateModule, CoreCommonModule],
+  imports: [RouterModule.forChild(routes), ContentHeaderModule, TranslateModule, CoreCommonModule,NgxChartsModule
+  ],
   exports: [SampleComponent, HomeComponent]
 })
 export class SampleModule {}
