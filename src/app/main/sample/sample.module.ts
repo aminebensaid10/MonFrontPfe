@@ -8,6 +8,7 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 import { SampleComponent } from './sample.component';
 import { HomeComponent } from './home.component';
+import { TableauBordDemandesComponent } from './tableau-bord-demandes/tableau-bord-demandes.component';
 
 const routes = [
   {
@@ -19,11 +20,16 @@ const routes = [
     path: 'home',
     component: HomeComponent,
     data: { animation: 'home' }
+  },
+  {
+    path: 'demandes',
+    component: TableauBordDemandesComponent,
+    data: { animation: 'home' }
   }
 ];
 
 @NgModule({
-  declarations: [SampleComponent, HomeComponent],
+  declarations: [SampleComponent, HomeComponent, TableauBordDemandesComponent],
   imports: [RouterModule.forChild(routes), ContentHeaderModule, TranslateModule, CoreCommonModule,NgxChartsModule
   ],
   exports: [SampleComponent, HomeComponent]

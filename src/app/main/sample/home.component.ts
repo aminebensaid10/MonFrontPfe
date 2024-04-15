@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core'
 import { UsersService } from '../pages/users/services/users-service.service';
 import { Chart } from 'chart.js';
 import { ContentHeader } from 'app/layout/components/content-header/content-header.component';
@@ -9,6 +9,8 @@ import { ContentHeader } from 'app/layout/components/content-header/content-head
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
+  @ViewChild('etatChart') etatChartElement: ElementRef;
+
   constructor(private dashboardService : UsersService) {}
 
   contentHeader: ContentHeader = {
@@ -23,7 +25,10 @@ export class HomeComponent implements OnInit {
     }
   };  public contentFooter: object;
   public chartData: any[];
-  public view: any[] = [700, 400];
+  chartDataFamilyMembers: any[];
+
+
+  public view: any[] = [500, 400];
   public showLegend = true;
   public legendPosition = 'right';
   public explodeSlices = false;
@@ -40,7 +45,14 @@ export class HomeComponent implements OnInit {
 
     this.dashboardService.getUsersByFamilySituation().subscribe(data => {
       this.chartData = this.transformData(data);
+      
     });
+    this.dashboardService.getFamilyMembersStatistics().subscribe(chartDataFamilyMembers => {
+      this.chartDataFamilyMembers = this.transformData(chartDataFamilyMembers);
+      
+    });
+   
+
   }
   onSelect(event: any): void {
     console.log(event);
@@ -50,35 +62,30 @@ export class HomeComponent implements OnInit {
     const result = [];
     for (const key in data) {
       if (Object.prototype.hasOwnProperty.call(data, key)) {
-        result.push({ name: key, value: data[key] });
+        let color;
+        switch (key.toLowerCase()) {
+          case 'valide':
+            color = 'rgba(0, 255, 0, 0.7)'; // Vert pour Valide
+            break;
+          case 'invalide':
+            color = 'rgba(255, 0, 0, 0.7)'; // Rouge pour Invalide
+            break;
+          case 'en cours':
+            color = 'rgba(255, 255, 0, 0.7)'; // Jaune pour En cours
+            break;
+          default:
+            color = 'rgba(0, 0, 0, 0.7)'; // Couleur par défaut
+            break;
+        }
+        result.push({ name: key, value: data[key], color: color });
       }
     }
     return result;
   }
-  renderSituationFamilialeChart(data: any): void {
-    const labels = Object.keys(data);
-    const values = Object.values(data);
+  
+  
 
-    new Chart('situationFamilialeChart', {
-      type: 'pie',
-      data: {
-        labels: labels,
-        datasets: [{
-          data: values,
-          backgroundColor: [
-            'rgba(255, 99, 132, 0.7)',
-            'rgba(54, 162, 235, 0.7)',
-            'rgba(255, 206, 86, 0.7)',
-            'rgba(75, 192, 192, 0.7)',
-            'rgba(153, 102, 255, 0.7)',
-            'rgba(255, 159, 64, 0.7)'
-          ]
-        }]
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false
-      }
-    });
-  }
+// 
+
+
 }

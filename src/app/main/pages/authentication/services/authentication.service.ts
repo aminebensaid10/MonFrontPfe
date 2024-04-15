@@ -33,6 +33,13 @@ export class AuthenticationService   {
           type: 'item',
           url: 'Home/home'
         },
+        {
+          id: 'statisque demande',
+          icon: 'circle',
+          title: 'Statistique Demande',
+          type: 'item',
+          url: 'Home/demandes'
+        },
         
       ],
     },

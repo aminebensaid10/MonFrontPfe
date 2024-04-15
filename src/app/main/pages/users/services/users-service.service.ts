@@ -76,6 +76,30 @@ export class UsersService {
 
     return this.http.get<any>('http://localhost:8080/api/v1/gestionnaireRH/family-situation', { headers: headers });
   }
+  getFamilyMembersStatistics(): Observable<any> {
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + token
+    });
+    return this.http.get<any>('http://localhost:8080/api/v1/gestionnaireRH/family-members-statistics', { headers: headers });
+  }
+  getRequestsFamily(): Observable<any> {
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + token
+    });
+    return this.http.get<any>('http://localhost:8080/api/v1/gestionnaireRH/countByEtat', { headers: headers });
+  }
+  getRequestsSituation(): Observable<any> {
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + token
+    });
+    return this.http.get<any>('http://localhost:8080/api/v1/gestionnaireRH/countRequestsSituationByEtat', { headers: headers });
+  }
   
   // get all users on the plateform
   // getUsers() {
