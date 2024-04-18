@@ -25,10 +25,11 @@ export class TableauBordDemandesComponent implements OnInit {
   constructor(private dashboardService : UsersService) {}
   public chartDataEtat: any[];
   public chartSituationEtat: any[];
+  public chartDemenagementEtat: any[];
 
   public view: any[] = [500, 400];
   public showLegend = true;
-  public legendPosition = 'right';
+  public legendPosition = 'below';
   public explodeSlices = false;
   public colorScheme: string[] = [];
 
@@ -45,6 +46,14 @@ export class TableauBordDemandesComponent implements OnInit {
 
       // this.renderEtatChart(); 
     });
+    this.dashboardService.getRequestsDemenagement().subscribe(data => {
+      this.chartDemenagementEtat = this.transformData(data);
+      this.colorScheme = this.chartDemenagementEtat.map(item => item.color);
+
+      // this.renderEtatChart(); 
+    });
+    
+    
   }
   onSelect(event: any): void {
     console.log(event);

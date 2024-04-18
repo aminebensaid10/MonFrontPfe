@@ -76,6 +76,36 @@ export class UsersService {
 
     return this.http.get<any>('http://localhost:8080/api/v1/gestionnaireRH/family-situation', { headers: headers });
   }
+  getUsersByModeTransport(): Observable<any> {
+    const token = localStorage.getItem('token');
+
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + token
+    });
+
+    return this.http.get<any>('http://localhost:8080/api/v1/gestionnairePAIE/countByTransportMode', { headers: headers });
+  }
+  gePecrentageModeTransport(): Observable<any> {
+    const token = localStorage.getItem('token');
+
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + token
+    });
+
+    return this.http.get<any>('http://localhost:8080/api/v1/gestionnairePAIE/percentageModeTransport', { headers: headers });
+  }
+  gePecrentageSituationFamiliale(): Observable<any> {
+    const token = localStorage.getItem('token');
+
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + token
+    });
+
+    return this.http.get<any>('http://localhost:8080/api/v1/gestionnaireRH/percentageSituationFamiliale', { headers: headers });
+  }
   getFamilyMembersStatistics(): Observable<any> {
     const token = localStorage.getItem('token');
     const headers = new HttpHeaders({
@@ -99,6 +129,14 @@ export class UsersService {
       'Authorization': 'Bearer ' + token
     });
     return this.http.get<any>('http://localhost:8080/api/v1/gestionnaireRH/countRequestsSituationByEtat', { headers: headers });
+  }
+  getRequestsDemenagement(): Observable<any> {
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + token
+    });
+    return this.http.get<any>('http://localhost:8080/api/v1/gestionnaireRH/countRequestsDemenagementByEtat', { headers: headers });
   }
   
   // get all users on the plateform

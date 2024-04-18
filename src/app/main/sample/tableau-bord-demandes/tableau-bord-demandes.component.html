@@ -1,59 +1,45 @@
-<div class="content-wrapper container-fluid p-0">
-    <div class="content-body">
-      <app-content-header [contentHeader]="contentHeader"></app-content-header>
-  
-      <div class="row">
-        <div class="col-md-6">
-          <div class="dashboard-container bg-light p-3 rounded shadow-sm">
-            <h4 class="mb-3">Statistiques d'état des demandes de composition familiale:</h4>
-            <div class="chart-container">
-              <ngx-charts-pie-chart
-                [results]="chartDataEtat"
-                [view]="view"
-                [legend]="showLegend"
-                [legendPosition]="legendPosition"
-                [explodeSlices]="explodeSlices"
-                (select)="onSelect($event)">
-              </ngx-charts-pie-chart>
-            </div>
+<div class="container-fluid">
+  <!-- Première ligne de graphiques -->
+  <div class="row mt-4">
+    <!-- Premier Graphique (Composition Familiale) -->
+    <div class="col-md-6">
+      <div class="dashboard-container bg-light p-4 rounded shadow-sm text-center">
+        <h4 class="mb-4">Statistiques d'état des demandes de composition familiale :</h4>
+        <div class="chart-container">
+          <div class="d-flex justify-content-center align-items-center" style="height: 200px;">
+            <ngx-charts-advanced-pie-chart [results]="chartDataEtat" [view]="[500, 400]" (select)="onSelect($event)"></ngx-charts-advanced-pie-chart>
           </div>
+          <ngx-charts-legend *ngIf="showLegend && legendPosition === 'below'" class="ngx-charts-legend mt-4 mb-0" [data]="chartDataEtat"></ngx-charts-legend>
         </div>
-  
-        <div class="col-md-6">
-          <div class="dashboard-container bg-light p-3 rounded shadow-sm">
-            <h4 class="mb-3">Statistiques d'état des demandes de situation familiale:</h4>
-            <div class="chart-container">
-              <ngx-charts-pie-chart
-                [results]="chartSituationEtat"
-                [view]="view"
-                [legend]="showLegend"
-                [legendPosition]="legendPosition"
-                [explodeSlices]="explodeSlices"
-                (select)="onSelect($event)">
-              </ngx-charts-pie-chart>
-            </div>
+      </div>
+    </div>
+
+    <!-- Deuxième Graphique (Situation Familiale) -->
+    <div class="col-md-6">
+      <div class="dashboard-container bg-light p-4 rounded shadow-sm text-center">
+        <h4 class="mb-4">Statistiques d'état des demandes de situation familiale :</h4>
+        <div class="chart-container">
+          <div class="d-flex justify-content-center align-items-center" style="height: 200px;">
+            <ngx-charts-advanced-pie-chart [results]="chartSituationEtat" [view]="[500, 400]" (select)="onSelect($event)"></ngx-charts-advanced-pie-chart>
           </div>
+          <ngx-charts-legend *ngIf="showLegend && legendPosition === 'below'" class="ngx-charts-legend mt-4 mb-0" [data]="chartSituationEtat"></ngx-charts-legend>
         </div>
       </div>
     </div>
   </div>
-  
-  <style>
-    .dashboard-container {
-      background-color: #f8f9fa;
-      padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    }
-  
-    .dashboard-container h4 {
-      color: #333;
-      font-size: 20px;
-      margin-bottom: 15px;
-    }
-    .ngx-charts-legend-wrapper {
-  width: 1000%;
-}
-   
-  </style>
-  
+
+  <!-- Deuxième ligne de graphiques -->
+  <div class="row mt-4">
+    <div class="col-md-10 offset-md-1">
+      <div class="dashboard-container bg-light p-4 rounded shadow-sm text-center">
+        <h4 class="mb-4">Statistiques d'état des demandes de déménagement :</h4>
+        <div class="chart-container">
+          <div class="d-flex justify-content-center align-items-center" style="height: 200px;">
+            <ngx-charts-advanced-pie-chart [results]="chartDemenagementEtat" [view]="[800, 400]" (select)="onSelect($event)"></ngx-charts-advanced-pie-chart>
+          </div>
+          <ngx-charts-legend *ngIf="showLegend && legendPosition === 'below'" class="ngx-charts-legend mt-4 mb-0" [data]="chartDemenagementEtat"></ngx-charts-legend>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

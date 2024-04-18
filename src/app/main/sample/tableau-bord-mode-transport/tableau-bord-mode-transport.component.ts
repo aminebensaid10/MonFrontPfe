@@ -1,16 +1,13 @@
-import { Component, ElementRef, OnInit, ViewChild, ViewEncapsulation } from '@angular/core'
-import { UsersService } from '../pages/users/services/users-service.service';
-import { Chart } from 'chart.js';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ContentHeader } from 'app/layout/components/content-header/content-header.component';
+import { UsersService } from 'app/main/pages/users/services/users-service.service';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
-
+  selector: 'app-tableau-bord-mode-transport',
+  templateUrl: './tableau-bord-mode-transport.component.html',
+  styleUrls: ['./tableau-bord-mode-transport.component.scss']
 })
-
-export class HomeComponent implements OnInit {
+export class TableauBordModeTransportComponent implements OnInit {
   @ViewChild('etatChart') etatChartElement: ElementRef;
 
 
@@ -28,41 +25,21 @@ export class HomeComponent implements OnInit {
     }
   };  public contentFooter: object;
   public chartData: any[];
-  chartDataFamilyMembers: any[];
-  chartDataDemenagement: any[];
+  chartDataTransportMode: any[];
   percentageData: { [key: string]: number };
 
-
-
-
-  public view: any[] = [500, 400];
+  public view: any[] = [800, 400];
   public showLegend = true;
   public legendPosition = 'right';
   public explodeSlices = false;
-  // Lifecycle Hooks
-  // -----------------------------------------------------------------------------------------------------
-
-  /**
-   * On init
-   */
   ngOnInit(): void {
-   
-
-   
-
-    this.dashboardService.getUsersByFamilySituation().subscribe(data => {
-      this.chartData = this.transformData(data);
+    this.dashboardService.getUsersByModeTransport().subscribe(data => {
+      this.chartDataTransportMode = this.transformData(data);
       
     });
-    this.dashboardService.getFamilyMembersStatistics().subscribe(chartDataFamilyMembers => {
-      this.chartDataFamilyMembers = this.transformData(chartDataFamilyMembers);
-      
-    });
-    this.dashboardService.gePecrentageSituationFamiliale().subscribe(percentageData => {
+    this.dashboardService.gePecrentageModeTransport().subscribe(percentageData => {
       this.percentageData = percentageData;
     });
-   
-   
 
   }
   onSelect(event: any): void {
@@ -76,16 +53,16 @@ export class HomeComponent implements OnInit {
         let color;
         switch (key.toLowerCase()) {
           case 'valide':
-            color = 'rgba(0, 255, 0, 0.7)'; // Vert pour Valide
+            color = 'rgba(0, 255, 0, 0.7)'; 
             break;
           case 'invalide':
-            color = 'rgba(255, 0, 0, 0.7)'; // Rouge pour Invalide
+            color = 'rgba(255, 0, 0, 0.7)'; 
             break;
           case 'en cours':
-            color = 'rgba(255, 255, 0, 0.7)'; // Jaune pour En cours
+            color = 'rgba(255, 255, 0, 0.7)'; 
             break;
           default:
-            color = 'rgba(0, 0, 0, 0.7)'; // Couleur par défaut
+            color = 'rgba(0, 0, 0, 0.7)'; 
             break;
         }
         result.push({ name: key, value: data[key], color: color });
@@ -93,9 +70,6 @@ export class HomeComponent implements OnInit {
     }
     return result;
   }
-  
-  
-
   getPercentageDataKeys(): string[] {
     if (this.percentageData) {
       return Object.keys(this.percentageData);
@@ -103,6 +77,5 @@ export class HomeComponent implements OnInit {
       return [];
     }
   }  
-
 
 }

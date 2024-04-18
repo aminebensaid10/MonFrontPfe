@@ -2,39 +2,166 @@
   <div class="content-body">
     <app-content-header [contentHeader]="contentHeader"></app-content-header>
 
-    <div class="row">
-      <div class="col-md-6">
-        <div class="dashboard-container bg-light p-3">
-          <h4 class="mb-3">Statistiques de Situation Familiale</h4>
-          <div class="chart-container">
-            <ngx-charts-bar-vertical
-              [results]="chartData"
-              [yAxis]="true"
-              [legend]="showLegend"
-              [legendPosition]="legendPosition"
-              (select)="onSelect($event)">
-            </ngx-charts-bar-vertical>
-          </div>
-        </div>
-      </div>
-
-      <!-- Deuxième colonne -->
-      <div class="col-md-6">
-        <div class="dashboard-container bg-light p-3">
-          <h4 class="mb-3">Statistiques des membres de famille</h4>
-          <div class="chart-container">
-            <ngx-charts-bar-vertical
-              [results]="chartDataFamilyMembers"
-              [yAxis]="true"
-              [legend]="showLegend"
-              [legendPosition]="legendPosition"
-              (select)="onSelect($event)">
-            </ngx-charts-bar-vertical>
+    <div class="row mt-2">
+      <div class="col-md-12">
+        <div class="dashboard-container bg-light p-3 rounded shadow-sm">
+          <h4 class="mb-3">Pourcentages des situations familiales</h4>
+          <div class="d-flex justify-content-center flex-wrap percentage-container">
+            <div class="card mb-3 mx-2" *ngFor="let situation of getPercentageDataKeys()">
+              <div class="card-body text-center">
+                <h5 class="card-title">{{ situation }}</h5>
+                <p class="card-text percentage">{{ percentageData[situation] }}%</p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
+    
+
+    <!-- Section des graphiques -->
+    <div class="row mt-4">
+      <div class="col-md-12">
+        <!-- Statistiques de Situation Familiale -->
+        <div class="dashboard-container bg-light p-3 rounded shadow-sm">
+          <h4 class="mb-3">Statistiques de Situation Familiale</h4>
+          
+          <!-- Une seule ligne pour les deux graphiques -->
+          <div class="row">
+            <div class="col-md-4">
+              <div class="chart-container">
+                <!-- Graphique à barres -->
+                <ngx-charts-bar-vertical
+                  [results]="chartData"
+                  [yAxis]="true"
+                  [xAxis]="true"
+                  [legend]="false"
+
+                  (select)="onSelect($event)">
+                </ngx-charts-bar-vertical>
+              </div>
+            </div>
+            
+            <div class="col-md-8">
+              <div class="chart-container">
+                <!-- Diagramme circulaire -->
+                <ngx-charts-pie-chart
+                  [results]="chartData"
+                  [legend]="showLegend" 
+
+                  [explodeSlices]="false"
+                  [doughnut]="false"
+                  [legendPosition]="legendPosition"
+                  (select)="onSelect($event)">
+                </ngx-charts-pie-chart>
+              </div>
+            </div>
+          </div>
+    
+          <!-- Légende en dessous des graphiques -->
+          <ngx-charts-legend
+            *ngIf="showLegend && legendPosition === 'bottom'"
+            class="ngx-charts-legend mt-3 mb-3"
+            [data]="chartData"
+          ></ngx-charts-legend>
+          
+        </div>
+      </div>
+    </div>
+    
+
+    <!-- Autres statistiques -->
+    <div class="row mt-4">
+      <div class="col-md-12">
+        <!-- Statistiques des membres de la famille -->
+        <div class="dashboard-container bg-light p-3 rounded shadow-sm">
+          <h4 class="mb-3">Statistiques des membres de famille</h4>
+          
+          <!-- Une seule ligne pour les deux graphiques -->
+          <div class="row">
+            <div class="col-md-7">
+              <div class="chart-container">
+                <!-- Graphique à barres pour les membres de famille -->
+                <ngx-charts-bar-vertical
+                  [results]="chartDataFamilyMembers"
+                  [yAxis]="true"
+                  [xAxis]="true"
+                  [legend]="false"
+                  (select)="onSelect($event)">
+                </ngx-charts-bar-vertical>
+              </div>
+            </div>
+            
+            <div class="col-md-5">
+              <div class="chart-container">
+                <!-- Diagramme circulaire pour les membres de famille -->
+                <ngx-charts-pie-chart
+                  [results]="chartDataFamilyMembers"
+                  [legend]="showLegend" 
+                  [explodeSlices]="false"
+                  [doughnut]="false"
+                  [legendPosition]="legendPosition"
+                  (select)="onSelect($event)">
+                </ngx-charts-pie-chart>
+              </div>
+            </div>
+          </div>
+    
+          <!-- Légende en dessous des graphiques -->
+          <ngx-charts-legend
+            *ngIf="showLegend && legendPosition === 'bottom'"
+            class="ngx-charts-legend mt-3 mb-3"
+            [data]="chartDataFamilyMembers"
+          ></ngx-charts-legend>
+          
+        </div>
+      </div>
+    </div>
+    
   </div>
-
-
 </div>
+
+<style>.dashboard-container {
+  margin-bottom: 20px;
+}
+
+.dashboard-container h4 {
+  color: #333;
+  font-size: 20px;
+  margin-bottom: 15px;
+}
+
+.card {
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  transition: box-shadow 0.3s ease;
+  width: 190px; 
+  margin-bottom: 15px;
+}
+
+.card:hover {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.card-title {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.card-text.percentage {
+  font-size: 24px;
+  color: #007bff;
+  margin-top: 10px;
+}
+
+.chart-container {
+  height: 300px; 
+}
+
+
+.dashboard-container {
+  margin-bottom: 20px;
+  margin-top: -65px; 
+}
+
+
+</style>

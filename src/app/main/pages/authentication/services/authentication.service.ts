@@ -208,6 +208,22 @@ export class AuthenticationService   {
       
     },
     {
+      id: 'dashboard-gestionnairepaie',
+      title: 'Home',
+      type: 'collapsible',
+      icon: 'home',
+      children: [
+        {
+          id: 'mode-transport-statistique',
+          icon: 'circle',
+          title: 'Dashboard',
+          type: 'item',
+          url: 'Home/mode-transport-dashboard'
+        }
+       
+      ],
+    },
+    {
       id: 'modeTransport',
       title: 'Mon mode du transport',
       type: 'collapsible',
@@ -308,7 +324,7 @@ export class AuthenticationService   {
               x.hidden = false;
               x.children.forEach(child => (child.hidden = false));
             }
-            else if ((x.id === 'mode-of-transport-requests' && userRole === 'GESTIONNAIREPAIE')) {
+            else if ((x.id === 'mode-of-transport-requests' && userRole === 'GESTIONNAIREPAIE')|| (x.id === 'dashboard-gestionnairepaie'&& userRole === 'GESTIONNAIREPAIE' )) {
               x.hidden = false;
               x.children.forEach(child => (child.hidden = false));}
              else {
