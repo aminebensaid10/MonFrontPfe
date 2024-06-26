@@ -8,8 +8,8 @@ WORKDIR /app
 COPY package*.json ./
 
 # Supprimer le cache npm et le fichier package-lock.json (optionnel)
-RUN npm cache clean --force && \
-    rm -f package-lock.json
+# RUN npm cache clean --force && \
+#     rm -f package-lock.json
 
 # Mettre à jour npm à la dernière version
 # RUN npm install -g npm@latest
