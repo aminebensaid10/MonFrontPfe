@@ -7,8 +7,16 @@ WORKDIR /app
 # Copier les fichiers de l'application (package.json, package-lock.json, etc.)
 COPY package*.json ./
 
-# Installer les dépendances
-RUN npm install --force
+# Supprimer le cache npm et le fichier package-lock.json (optionnel)
+RUN npm cache clean --force && \
+    rm -f package-lock.json
+
+# Mettre à jour npm à la dernière version
+RUN npm install -g npm@latest
+
+# Installer les dépendances avec l'option --legacy-peer-deps
+RUN npm install --legacy-peer-deps
+
 # Copier le reste des fichiers de l'application
 COPY . .
 
