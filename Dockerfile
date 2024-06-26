@@ -12,7 +12,7 @@ RUN npm cache clean --force && \
     rm -f package-lock.json
 
 # Mettre à jour npm à la dernière version
-RUN npm install -g npm@latest
+# RUN npm install -g npm@latest
 
 # Installer les dépendances avec l'option --legacy-peer-deps
 RUN npm install --legacy-peer-deps
